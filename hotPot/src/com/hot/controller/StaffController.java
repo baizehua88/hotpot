@@ -1,5 +1,7 @@
 package com.hot.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,15 @@ public class StaffController {
 			mv.setViewName("redirect:/jsp/login.jsp");
 		}
 		return mv;
+	}
+	
+	@RequestMapping("/staffList.do")
+	public ModelAndView staffList(){
+		ModelAndView mv = new ModelAndView();
+		List<Staff> staffList = staffService.getStaff();
+		System.out.println(staffList);
+		mv.addObject("staffList", staffList);
+		mv.setViewName("employees");
+		return mv;	
 	}
 }

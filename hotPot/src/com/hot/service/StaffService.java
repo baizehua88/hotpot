@@ -1,7 +1,10 @@
 package com.hot.service;
 
+import java.util.List;
+
 import com.hot.model.Staff;
 
 public interface StaffService {
 	public Staff login(Staff staff);
+	public List<Staff> getStaff();
 }

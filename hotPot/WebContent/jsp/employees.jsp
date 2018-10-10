@@ -5,6 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -335,16 +336,16 @@
 										<thead>
 											<tr>
 												<th>ID</th>
-												<th>职位</th>
 												<th>名称</th>
 												<th>性别</th>
 												<th>电话</th>
+												<th>职位</th>
 												<th>薪资</th>
 												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="gradeX">
+											<!-- <tr class="gradeX">
 												<td>6</td>
 												<td>经理</td>
 												<td>张三</td>
@@ -361,14 +362,15 @@
                                                         </a>
                                                     </div>
                                                 </td>
-											</tr>
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
+											</tr> -->
+											<c:forEach var="staff" items="${staffList}">
+												<tr class="gradeX">
+												<td>${staff.sid}</td>
+												<td>${staff.sname}</td>
+												<td>${staff.ssex}</td>
+												<td>${staff.sphone}</td>
+												<td>${staff.sposition}</td>												
+												<td>${staff.salary}</td>
 												<td class="am-text-middle">
                                                     <div class="tpl-table-black-operation">
                                                         <a href="javascript:;">
@@ -380,79 +382,7 @@
                                                     </div>
                                                 </td>
 											</tr>
-											<tr class="gradeX">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-												<td class="am-text-middle">
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 编辑
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 删除
-                                                        </a>
-                                                    </div>
-                                                </td>
-											</tr>
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-												<td class="am-text-middle">
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 编辑
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 删除
-                                                        </a>
-                                                    </div>
-                                                </td>
-											</tr>
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-												<td class="am-text-middle">
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 编辑
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 删除
-                                                        </a>
-                                                    </div>
-                                                </td>
-											</tr>
-
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-												<td class="am-text-middle">
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 编辑
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 删除
-                                                        </a>
-                                                    </div>
-                                                </td>
-											</tr>
+											</c:forEach>
 											<!-- more data -->
 										</tbody>
 									</table>

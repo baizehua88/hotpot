@@ -4,4 +4,7 @@
 	 <select id="login" parameterType="Staff" resultType="Staff">
 	 	select * from hp_staff where sname=#{sname} and spassword=#{spassword}
 	 </select>
+	 <select id="getStaff" resultType="Staff">
+	 	SELECT * FROM hp_staff;
+	 </select>
 </mapper>

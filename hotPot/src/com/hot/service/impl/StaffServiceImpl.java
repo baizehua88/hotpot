@@ -1,5 +1,7 @@
 package com.hot.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,12 @@ public class StaffServiceImpl implements StaffService{
 	@Override
 	public Staff login(Staff staff) {
 		return staffDao.login(staff);
+	}
+
+	@Override
+	public List<Staff> getStaff() {
+		// TODO Auto-generated method stub
+		return staffDao.getStaff();
 	}
 	
 }
