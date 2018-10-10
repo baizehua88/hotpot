@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hot.dao.CustomerDao">
+	<select id="getCustomers" resultType="Customer">
+		SELECT * FROM hp_customer;
+	</select>
+	<insert id="addMember" parameterType="Customer">
+		INSERT INTO hp_customer(cname,csex,cphone,cintegral,cbirthday,cjoin)
+		VALUES(#{cname},#{csex},#{cphone},#{cintegral},#{cbirthday},#{cjoin})
+	</insert>
+</mapper>
