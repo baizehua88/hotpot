@@ -17,9 +17,9 @@ public class RecipeServiceImpl implements RecipeService {
 	private RecipeDao recipeDao;
 	
 	@Override
-	public List<Recipe> getRecipes() {
+	public List<Recipe> getRecipes(Recipe recipe) {
 		// TODO Auto-generated method stub
-		return recipeDao.getRecipes();
+		return recipeDao.getRecipes(recipe);
 	}
 
 	@Override
@@ -38,5 +38,10 @@ public class RecipeServiceImpl implements RecipeService {
 	public int updateRecipe(Recipe recipe) {
 		// TODO Auto-generated method stub
 		return recipeDao.updateRecipe(recipe);
+	}
+
+	@Override
+	public int getConunt() {
+		return recipeDao.getConunt();
 	}
 }

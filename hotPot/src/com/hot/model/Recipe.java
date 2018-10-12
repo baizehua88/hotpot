@@ -9,6 +9,10 @@ public class Recipe {
 	private String rstate;
 	private Integer rstock;
 	private String rimage;
+	private Integer start;
+	private Integer rows;
+	private Integer page;
+	
 	public Integer getRid() {
 		return rid;
 	}
@@ -57,10 +61,29 @@ public class Recipe {
 	public void setRimage(String rimage) {
 		this.rimage = rimage;
 	}
+	public Integer getStart() {
+		return start;
+	}
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+	public Integer getRows() {
+		return rows;
+	}
+	public void setRows(Integer rows) {
+		this.rows = rows;
+	}
+	public Integer getPage() {
+		return page;
+	}
+	public void setPage(Integer page) {
+		this.page = page;
+	}
 	@Override
 	public String toString() {
 		return "Recipe [rid=" + rid + ", rname=" + rname + ", rbid=" + rbid + ", rsort=" + rsort + ", rprice=" + rprice
-				+ ", rstate=" + rstate + ", rstock=" + rstock + ", rimage=" + rimage + "]";
+				+ ", rstate=" + rstate + ", rstock=" + rstock + ", rimage=" + rimage + ", start=" + start + ", rows="
+				+ rows + ", page=" + page + "]";
 	}
 	
 }

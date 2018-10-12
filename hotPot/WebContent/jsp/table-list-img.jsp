@@ -5,7 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() 
 	                   + ":" + request.getServerPort() + path + "/";
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -222,7 +222,7 @@
             <!-- 菜单 -->
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-link">
-                    <a href="<%=basePath%>jsp/index.jsp" class="active">
+                    <a href="<%=basePath%>jsp/index.jsp">
                         <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
                     </a>
                 </li>
@@ -242,9 +242,9 @@
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 菜品管理
                         <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                     </a>
-                    <ul class="sidebar-nav sidebar-nav-sub">
+                    <ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
                         <li class="sidebar-nav-link">
-                            <a href="<%=basePath%>recipe/recipeList.do">
+                            <a href="<%=basePath%>recipe/recipeList.do" class="active">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 菜品列表
                             </a>
                         </li>
@@ -406,7 +406,7 @@
                                             <c:forEach var="recipe" items="${recipeList}">
                                             <tr class="gradeX">
                                                 <td>
-                                                    <img src="<%=basePath%>assets/img/${recipe.rimage}" class="tpl-table-line-img" alt="">
+                                                    <img src="<%=basePath%>assets/img/${recipe.rimage}" style="height: 90px;width: 100%" class="tpl-table-line-img" alt="">
                                                 </td>
                                                 <td class="am-text-middle">${recipe.rname}</td>
                                                 <td class="am-text-middle">${recipe.rsort}</td>
@@ -435,13 +435,36 @@
 
                                     <div class="am-fr">
                                         <ul class="am-pagination tpl-pagination">
-                                            <li class="am-disabled"><a href="#">«</a></li>
-                                            <li class="am-active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">»</a></li>
+                                        	<c:choose>
+                                        		<c:when test="${page == 1 }">
+                                        			<li class="am-disabled"><a href="#">«</a></li>
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        			<li><a href="recipeList.do?page=${page-1 }">«</a></li>
+                                        		</c:otherwise>
+                                        	</c:choose>
+                                            <c:forEach items="${pagelist }" var="item">
+                                            	<c:choose>
+                                            		<c:when test="${item == page }">
+                                            			<li  class="am-active">
+                                            				<a href="recipeList.do?page=${item }">${item }</a>
+                                            			</li>
+                                            		</c:when>
+                                            		<c:otherwise>
+                                            			<li>
+                                            				<a href="recipeList.do?page=${item }">${item }</a>
+                                            			</li>
+                                            		</c:otherwise>
+                                            	</c:choose>
+                                            </c:forEach>
+                                            <c:choose>
+                                        		<c:when test="${page == totalpage }">
+                                        			<li class="am-disabled"><a href="#">»</a></li>
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        			<li><a href="recipeList.do?page=${page+1 }">»</a></li>
+                                        		</c:otherwise>
+                                        	</c:choose>
                                         </ul>
                                     </div>
                                 </div>

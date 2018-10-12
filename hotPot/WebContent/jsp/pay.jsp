@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() 
@@ -209,12 +210,12 @@
             <!-- 菜单 -->
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-link">
-                    <a href="<%=basePath%>jsp/index.jsp" class="active">
+                    <a href="<%=basePath%>jsp/index.jsp" >
                         <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="<%=basePath%>jsp/pay.jsp">
+                    <a href="<%=basePath%>jsp/pay.jsp" class="active">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
                     </a>
                 </li>
@@ -389,126 +390,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="gradeX">
-                                                <td>1</td>
-                                                <td>2016-09-26</td>
-                                                <td>1</td>
-                                                <td>234</td>
-                                                <td>未付款</td>
-                                                <td>
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 结算
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-paint-brush"></i> 查看详情
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="even gradeC">
-                                                <td>1</td>
-                                                <td>2016-09-26</td>
-                                                <td>1</td>
-                                                <td>234</td>
-                                                <td>未付款</td>
-                                                <td>
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 结算
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-paint-brush"></i> 查看详情
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="gradeX">
-                                                <td>1</td>
-                                                <td>2016-09-26</td>
-                                                <td>1</td>
-                                                <td>234</td>
-                                                <td>未付款</td>
-                                                <td>
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 结算
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-paint-brush"></i> 查看详情
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="even gradeC">
-                                                <td>1</td>
-                                                <td>2016-09-26</td>
-                                                <td>1</td>
-                                                <td>234</td>
-                                                <td>未付款</td>
-                                                <td>
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 结算
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-paint-brush"></i> 查看详情
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="even gradeC">
-                                               <td>1</td>
-                                                <td>2016-09-26</td>
-                                                <td>1</td>
-                                                <td>234</td>
-                                                <td>已付款</td>
-                                                <td>
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 结算
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-paint-brush"></i> 查看详情
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-                                            <tr class="even gradeC">
-                                                <td>1</td>
-                                                <td>2016-09-26</td>
-                                                <td>1</td>
-                                                <td>234</td>
-                                                <td>未付款</td>
-                                                <td>
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 结算
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-paint-brush"></i> 查看详情
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <!-- more data -->
+                                           	<c:forEach var="order" items="${orderList }">
+	                                           	<c:choose>
+	                                           		<c:when test="${order.ostate == '未支付' }">
+	                                           			<tr>
+	                                           				<td>${order.oid }</td>
+	                                           				<td>${order.otime }</td>
+	                                           				<td>${order.did }</td>
+	                                           				<td>${order.oprice }</td>
+	                                           				<td>${order.ostate }</td>
+	                                           				<td>
+			                                                    <div class="tpl-table-black-operation">
+			                                                        <a href="javascript:void(0);" onclick="GetDateNow(${order.oid });" target="_blank">
+			                                                            <i class="am-icon-pencil"></i> 结算
+			                                                        </a>
+			                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
+			                                                            <i class="am-icon-paint-brush"></i> 查看详情
+			                                                        </a>
+			                                                    </div>
+                                                			</td>
+	                                           			</tr>
+	                                           		</c:when>
+	                                           	</c:choose>
+                                           	</c:forEach>
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="am-u-lg-12 am-cf">
-
-                                    <div class="am-fr">
-                                        <ul class="am-pagination tpl-pagination">
-                                            <li class="am-disabled"><a href="#">«</a></li>
-                                            <li class="am-active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">»</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -521,7 +427,19 @@
     <script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
     <script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
     <script src="<%=basePath%>assets/js/app.js"></script>
-
+    <script src="<%=basePath%>assets/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript">
+		function GetDateNow(data) {
+			$.ajax({
+				types: "POST",
+				url: "test.do",
+				data: "id="+data,
+				success: function (msg) {
+					window.location.href = "<%=basePath%>jsp/alipay.trade.page.pay.jsp";
+				}
+			});
+		}
+	</script>
 </body>
 
 </html>

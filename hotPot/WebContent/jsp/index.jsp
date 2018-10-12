@@ -197,7 +197,7 @@
 					href="<%=basePath%>jsp/index.jsp" class="active"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
-				<li class="sidebar-nav-link"><a href="<%=basePath%>jsp/pay.jsp">
+				<li class="sidebar-nav-link"><a href="<%=basePath%>order/getOrder.do">
 						<i class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
 				</a></li>
 				<li class="sidebar-nav-link"><a
@@ -264,7 +264,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/order.jsp"> <span
+							href="<%=basePath%>recipe/recipeListorder.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 在线订货
 						</a></li>
 

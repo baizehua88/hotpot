@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -194,7 +195,7 @@
 			<!-- 菜单 -->
 			<ul class="sidebar-nav">
 				<li class="sidebar-nav-link"><a
-					href="<%=basePath%>jsp/index.jsp" class="active"> <i
+					href="<%=basePath%>jsp/index.jsp"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
 				<li class="sidebar-nav-link"><a href="<%=basePath%>jsp/pay.jsp">
@@ -262,10 +263,9 @@
 						class="am-icon-table sidebar-nav-link-logo"></i> 库存管理 <span
 						class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
 				</a>
-					<ul class="sidebar-nav sidebar-nav-sub">
-						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/order.jsp"> <span
-								class="am-icon-angle-right sidebar-nav-link-logo"></span> 在线订货
+					<ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
+						<li class="sidebar-nav-link"><a href="<%=basePath%>jsp/order.jsp" class="active"> 
+						<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 在线订货
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
@@ -334,91 +334,66 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="gradeX">
+                                            <c:forEach var="recipe" items="${recipeList}">
+                                            <tr class="gradeX">
 											    <td><input type="checkbox"></td>
                                                 <td>
-                                                    <img src="<%=basePath%>assets/img/k.jpg" class="tpl-table-line-img" alt="">
+                                                    <img src="<%=basePath%>assets/img/${recipe.rimage}" style="height: 90px;width: 100%" class="tpl-table-line-img" alt="">
                                                 </td>
-                                                <td class="am-text-middle">羊肉卷</td>
-                                                <td class="am-text-middle">荤菜</td>
-                                                <td class="am-text-middle">15</td>
-                                                <td class="am-text-middle">100</td>
-                                                <td class="am-text-middle"><input type="text"></td>
+                                                <td class="am-text-middle">${recipe.rname}</td>
+                                                <td class="am-text-middle">${recipe.rsort}</td>
+                                                <td class="am-text-middle">${recipe.rbid}</td>
+                                                <td class="am-text-middle">${recipe.rstock}</td>
+                                                <td class="am-text-middle"><input type="hidden" name="rid" id="id" value="${recipe.rid}"></td>
+                                                <td class="am-text-middle">
+                                                    <div class="tpl-table-black-operation">
+                                                        
+                                                    </div>
+                                                </td>
                                             </tr>
-											<tr class="even gradeC">
-												<td><input type="checkbox"></td>
-                                                <td>
-                                                    <img src="<%=basePath%>assets/img/k.jpg" class="tpl-table-line-img" alt="">
-                                                </td>
-                                                <td class="am-text-middle">羊肉卷</td>
-                                                <td class="am-text-middle">荤菜</td>
-                                                <td class="am-text-middle">15</td>
-                                                <td class="am-text-middle">100</td>
-                                                <td class="am-text-middle"><input type="text"></td>
-											</tr>
-											<tr class="gradeX">
-												<td><input type="checkbox"></td>
-                                                <td>
-                                                    <img src="<%=basePath%>assets/img/k.jpg" class="tpl-table-line-img" alt="">
-                                                </td>
-                                                <td class="am-text-middle">羊肉卷</td>
-                                                <td class="am-text-middle">荤菜</td>
-                                                <td class="am-text-middle">15</td>
-                                                <td class="am-text-middle">100</td>
-                                                <td class="am-text-middle"><input type="text"></td>
-											</tr>
-											<tr class="even gradeC">
-												<td><input type="checkbox"></td>
-                                                <td>
-                                                    <img src="<%=basePath%>assets/img/k.jpg" class="tpl-table-line-img" alt="">
-                                                </td>
-                                                <td class="am-text-middle">羊肉卷</td>
-                                                <td class="am-text-middle">荤菜</td>
-                                                <td class="am-text-middle">15</td>
-                                                <td class="am-text-middle">100</td>
-                                                <td class="am-text-middle"><input type="text"></td>
-											</tr>
-											<tr class="even gradeC">
-												<td><input type="checkbox"></td>
-                                                <td>
-                                                    <img src="<%=basePath%>assets/img/k.jpg" class="tpl-table-line-img" alt="">
-                                                </td>
-                                                <td class="am-text-middle">羊肉卷</td>
-                                                <td class="am-text-middle">荤菜</td>
-                                                <td class="am-text-middle">15</td>
-                                                <td class="am-text-middle">100</td>
-                                                <td class="am-text-middle"><input type="text"></td>
-											</tr>
-
-											<tr class="even gradeC">
-												<td><input type="checkbox"></td>
-                                                <td>
-                                                    <img src="<%=basePath%>assets/img/k.jpg" class="tpl-table-line-img" alt="">
-                                                </td>
-                                                <td class="am-text-middle">羊肉卷</td>
-                                                <td class="am-text-middle">荤菜</td>
-                                                <td class="am-text-middle">15</td>
-                                                <td class="am-text-middle">100</td>
-                                                <td class="am-text-middle"><input type="text"></td>
-											</tr>
-											<!-- more data -->
+                                            </c:forEach>
+                                            <!-- more data -->
+                                            
 										</tbody>
 									</table>
 								</div>
 								<div class="am-u-lg-12 am-cf">
 
-									<div class="am-fr">
-										<ul class="am-pagination tpl-pagination">
-											<li class="am-disabled"><a href="#">«</a></li>
-											<li class="am-active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#">»</a></li>
-										</ul>
-									</div>
-								</div>
+                                    <div class="am-fr">
+                                        <ul class="am-pagination tpl-pagination">
+                                        	<c:choose>
+                                        		<c:when test="${page == 1 }">
+                                        			<li class="am-disabled"><a href="#">«</a></li>
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        			<li><a href="recipeListorder.do?page=${page-1 }">«</a></li>
+                                        		</c:otherwise>
+                                        	</c:choose>
+                                            <c:forEach items="${pagelist }" var="item">
+                                            	<c:choose>
+                                            		<c:when test="${item == page }">
+                                            			<li  class="am-active">
+                                            				<a href="recipeListorder.do?page=${item }">${item }</a>
+                                            			</li>
+                                            		</c:when>
+                                            		<c:otherwise>
+                                            			<li>
+                                            				<a href="recipeListorder.do?page=${item }">${item }</a>
+                                            			</li>
+                                            		</c:otherwise>
+                                            	</c:choose>
+                                            </c:forEach>
+                                            <c:choose>
+                                        		<c:when test="${page == totalpage }">
+                                        			<li class="am-disabled"><a href="#">»</a></li>
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        			<li><a href="recipeListorder.do?page=${page+1 }">»</a></li>
+                                        		</c:otherwise>
+                                        	</c:choose>
+                                        </ul>
+                                    </div>
+                                </div>
 							</div>
 						</div>
 					</div>

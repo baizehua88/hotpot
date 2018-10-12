@@ -2,6 +2,7 @@ package com.hot.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hot.model.Constant;
 import com.hot.model.Recipe;
 import com.hot.service.RecipeService;
+import com.hot.utils.DingZhi;
 
 
 @Controller
@@ -27,13 +29,88 @@ public class RecipeController {
 	private RecipeService recipeService;
 	
 	@RequestMapping("/recipeList.do")
-	public ModelAndView recipeList(HttpSession session){
+	public ModelAndView recipeList(HttpSession session,Recipe recipe){
+		
+		
+		//分页显示
+		int page = 1;
+		int start = 0;
+		if (recipe.getPage() != null) {
+			page = recipe.getPage();
+		}
+		//数据总条数
+		int total = recipeService.getConunt();
+		//总页数
+		int totalPage = total/DingZhi.rows;
+		Vector<Integer> pageArr = new Vector<Integer>();
+		if (total % DingZhi.rows != 0) {
+			totalPage += 1;
+		}
+		if (page >= DingZhi.page) {
+			start = page/DingZhi.page * DingZhi.rows; 
+		}
+		int num = start+1;
+		//页数列表
+		while(!(num > totalPage || num > start + DingZhi.page)) {
+			pageArr.add(new Integer(num));
+			++num;
+		}
+		start = (page - 1) * DingZhi.rows;
+		recipe.setStart(start);
+		recipe.setRows(DingZhi.rows);
+		
 		ModelAndView mv = new ModelAndView();
-		List<Recipe> recipeList = recipeService.getRecipes();
+		List<Recipe> recipeList = recipeService.getRecipes(recipe);
 		System.out.println(recipeList);
 		mv.addObject("recipeList", recipeList);
+		mv.addObject("pagelist",pageArr);
+		mv.addObject("page",page);
+		mv.addObject("totalpage",totalPage);
 		mv.setViewName("table-list-img");
 		session.setAttribute("recipeList", recipeList);
+		return mv;		
+	}
+	
+	
+	@RequestMapping("/recipeListorder.do")
+	public ModelAndView recipeListorder(HttpSession session,Recipe recipe){
+		
+		
+		//分页显示
+		int page = 1;
+		int start = 0;
+		if (recipe.getPage() != null) {
+			page = recipe.getPage();
+		}
+		//数据总条数
+		int total = recipeService.getConunt();
+		//总页数
+		int totalPage = total/DingZhi.rows;
+		Vector<Integer> pageArr = new Vector<Integer>();
+		if (total % DingZhi.rows != 0) {
+			totalPage += 1;
+		}
+		if (page >= DingZhi.page) {
+			start = page/DingZhi.page * DingZhi.rows; 
+		}
+		int num = start+1;
+		//页数列表
+		while(!(num > totalPage || num > start + DingZhi.page)) {
+			pageArr.add(new Integer(num));
+			++num;
+		}
+		start = (page - 1) * DingZhi.rows;
+		recipe.setStart(start);
+		recipe.setRows(DingZhi.rows);
+		
+		ModelAndView mv = new ModelAndView();
+		List<Recipe> recipeList = recipeService.getRecipes(recipe);
+		System.out.println(recipeList);
+		mv.addObject("recipeList", recipeList);
+		mv.addObject("pagelist",pageArr);
+		mv.addObject("page",page);
+		mv.addObject("totalpage",totalPage);
+		mv.setViewName("order");
 		return mv;		
 	}
 	

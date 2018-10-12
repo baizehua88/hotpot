@@ -5,4 +5,13 @@
 		INSERT INTO hp_order(otime,did,oprice,ostate)
 		VALUES(#{otime},#{did},#{oprice},#{ostate})
 	</insert>
+	<select id="getOrder" resultType="Order">
+		SELECT * FROM hp_order
+	</select>
+	<update id="zhiFu" parameterType="Order">
+		UPDATE hp_order SET ostate=#{ostate} WHERE otime=#{otime}
+	</update>
+	<select id="getOne" parameterType="Integer" resultType="Order">
+		SELECT * FROM hp_order WHERE oid = #{oid}
+	</select>
 </mapper>
