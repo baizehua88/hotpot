@@ -8,4 +8,12 @@
 		INSERT INTO hp_recipe(rname,rsort,rbid,rprice,rstock,rstate,rimage)
 		VALUES(#{rname},#{rsort},#{rbid},#{rprice},#{rstock},#{rstate},#{rimage})
 	</insert>
+	<select id="getRecipeById" parameterType="Recipe" resultType="Recipe">
+		SELECT * FROM hp_recipe WHERE rid= #{rid} ;
+	</select>
+	<update id="updateRecipe" parameterType="Recipe">
+		UPDATE hp_recipe SET rname=#{rname},rsort=#{rsort},rbid=#{rbid},
+		rprice=#{rprice},rstock=#{rstock},rstate=#{rstate},rimage=#{rimage}
+		where rid= #{rid}
+	</update>
 </mapper>

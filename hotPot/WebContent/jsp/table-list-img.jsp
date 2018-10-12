@@ -25,7 +25,20 @@
     <link rel="stylesheet" href="<%=basePath%>assets/css/amazeui.datatables.min.css" />
     <link rel="stylesheet" href="<%=basePath%>assets/css/app.css">
     <script src="<%=basePath%>assets/js/jquery.min.js"></script>
-
+	<script type="text/javascript" >
+	$(function() {
+		//点击courseimg文本框触发上传按钮
+		$("#rimage").click(function() {
+			$("#doc-form-file").trigger("click");
+		});
+		$("#doc-form-file").change(function(){
+			//获取FileUpload对象
+			var x = document.getElementById("doc-form-file").files;
+			$("#rimage").val(x[0].name);
+		})
+		
+	});
+	</script> 
 </head>
 
 <body data-type="widgets">
@@ -401,9 +414,10 @@
                                                 <td class="am-text-middle">${recipe.rprice}</td>
                                                 <td class="am-text-middle">${recipe.rstock}</td>
                                                 <td class="am-text-middle">${recipe.rstate}</td>
+                                                <td class="am-text-middle"><input type="hidden" name="rid" id="id" value="${recipe.rid}"></td>
                                                 <td class="am-text-middle">
                                                     <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;" id="modify">
+                                                        <a href="javascript:void(0);" id="${recipe.rid}"  onClick="GetRecipeId(this);">
                                                             <i class="am-icon-pencil"></i> 编辑
                                                         </a>
                                                         <a href="javascript:;" class="tpl-table-black-operation-del">
@@ -441,93 +455,111 @@
     
     <!-- 弹出层 -->
 
-		<div class="am-modal am-modal-no-btn" id="calendar-edit-box"
+		<div class="am-modal am-modal-no-btn" id="calendar-edit-box" 
 			style="width: 100%; margin: auto;">
-			<div class="am-modal-dialog tpl-model-dialog" style="width: 55%;">
+			<div class="am-modal-dialog tpl-model-dialog" style="width: 40%;">
 				<div class="am-modal-hd">
 					<a href="javascript: void(0)"
 						class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
 				</div>
 				<div class="widget-body am-fr">
 
-								<form class="am-form tpl-form-line-form">
+								<form class="am-form tpl-form-line-form"
+								action="<%=basePath%>recipe/updateRecipe.do" method="post" enctype="multipart/form-data">
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">菜品名称
-											<span class="tpl-form-line-small-title">Name</span>
+											<span class="tpl-form-line-small-title"></span>
 										</label>
 										<div class="am-u-sm-9">
-											<input type="text" class="tpl-form-input" id="user-name">
+											<input type="hidden" class="tpl-form-input" id="rid" name="rid" value="${recipeById.rid}">
+											<input type="text" class="tpl-form-input" id="rname" name="rname" value="${recipeById.rname}">
 										</div>
 									</div>
-
+<%-- 
 
 									<div class="am-form-group">
 										<label for="user-weibo" class="am-u-sm-3 am-form-label">菜品缩略图
-											<span class="tpl-form-line-small-title">Images</span>
+											<span class="tpl-form-line-small-title"></span>
 										</label>
 										<div class="am-u-sm-9">
 											<div class="am-form-group am-form-file">
 												<div class="tpl-form-file-img">
-													<img src="<%=basePath %>assets/img/image.jpg" alt="" style="width: 250px;height: 200px;">
+													<img src="<%=basePath %>assets/img/${recipeById.rimage}" alt="" style="width: 250px;height: 200px;">
 												</div>
 												<button type="button" class="am-btn am-btn-danger am-btn-sm">
-													<i class="am-icon-cloud-upload"></i> 添加封面图片
+													<i class="am-icon-cloud-upload"></i> 添加菜品图片
 												</button>
-												<input id="doc-form-file" type="file" multiple="">
+												<input id="doc-form-file" type="file" multiple="" name="rimage" >
+											</div>
+
+										</div>
+									</div> --%>
+									<div class="am-form-group">
+										<label for="user-weibo" class="am-u-sm-3 am-form-label">菜品缩略图
+											<span class="tpl-form-line-small-title"></span>
+										</label>
+										<div class="am-u-sm-9">
+											<div class="am-form-group am-form-file">
+												<div class="tpl-form-file-img" style="vertical-align: left;text-align: left;">
+													<img src="<%=basePath %>assets/img/${recipeById.rimage}" id="image" alt="" style="width: 250px;height: 200px;">
+												</div>
+												<button type="button" class="am-btn am-btn-danger am-btn-sm" style="float: left;">
+													<i class="am-icon-cloud-upload"></i> 更换菜品图片
+												</button>
+												<input id="doc-form-file" type="file" name="file" multiple="">
+												<input type="hidden" id="rimage" name="rimage" value="${recipeById.rimage}" style="width: 100%;height: 100%" >
 											</div>
 
 										</div>
 									</div>
-
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">进价
-											<span class="tpl-form-line-small-title">Purchase</span>
+											<span class="tpl-form-line-small-title"></span>
 										</label>
 										<div class="am-u-sm-9">
-											<input type="text" class="tpl-form-input" id="user-name">
+											<input type="text" class="tpl-form-input" id="rbid" name="rbid" value="${recipeById.rbid}">
 										</div>
 									</div>
 									
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">售价
-											<span class="tpl-form-line-small-title">Price</span>
+											<span class="tpl-form-line-small-title"></span>
 										</label>
 										<div class="am-u-sm-9">
-											<input type="text" class="tpl-form-input" id="user-name">
+											<input type="text" class="tpl-form-input" id="rprice" name="rprice" value="${recipeById.rprice}">
 										</div>
 									</div>
 									
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">类别
-											<span class="tpl-form-line-small-title">Type</span>
+											<span class="tpl-form-line-small-title"></span>
 										</label>
 										<div class="am-u-sm-9">
-											<input type="text" class="tpl-form-input" id="user-name">
+											<input type="text" class="tpl-form-input" id="rsort" name="rsort" value="${recipeById.rsort}">
 										</div>
 									</div>
 									
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">库存
-											<span class="tpl-form-line-small-title">Inventory</span>
+											<span class="tpl-form-line-small-title"></span>
 										</label>
 										<div class="am-u-sm-9">
-											<input type="text" class="tpl-form-input" id="user-name">
+											<input type="text" class="tpl-form-input" id="rstock" name="rstock" value="${recipeById.rstock}">
 										</div>
 									</div>
 									
-									<div class="am-form-group">
-										<label for="user-name" class="am-u-sm-3 am-form-label">热门
-											<span class="tpl-form-line-small-title">Hot</span>
+									<div class="am-form-group" hidden>
+										<label for="user-name" class="am-u-sm-3 am-form-label">热销
+											<span class="tpl-form-line-small-title"></span>
 										</label>
 										<div class="am-u-sm-9">
-											<input type="radio" value="热门" name="hot">热门
-											<input type="radio" value="普通" name="hot">普通
+										<input type="text" class="tpl-form-input" id="rstate" name="rstate" value="${recipeById.rstate}">										
 										</div>
 									</div>
 
 									<div class="am-form-group">
 										<div class="am-u-sm-9 am-u-sm-push-3">
-											<button type="button"
+											<button type="submit"
 												class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
 										</div>
 									</div>
@@ -538,16 +570,40 @@
     
     <script src="<%=basePath%>assets/js/amazeui.min.js"></script>
     <script src="<%=basePath%>assets/js/app.js"></script>
-    
+    <script type="text/javascript" src="assets/js/jquery-1.7.2.js"></script>
     <script type="text/javascript">
-    $(function() {
+    /* $(function() {
 		var editBox = $('#calendar-edit-box');
 		$("#modify").click(function() {
 			//  弹出框
 			editBox.modal();
 		});
 
-	});
+	}); */
+	var editBox = $('#calendar-edit-box');
+	function GetRecipeId(_this){
+		//  弹出框
+		//$('#rid').val(_this.id);
+		alert(_this.id);
+		$.post("<%=basePath%>recipe/getRecipeById.do",{
+			rid : _this.id
+			},
+			 function(data){
+				  editBox.modal();
+				 $("#rid").val(data.rid);
+			     $("#rname").val(data.rname);
+			     $("#rsort").val(data.rsort);
+			     $("#rbid").val(data.rbid);
+			     $("#rprice").val(data.rprice);
+			     $("#rstock").val(data.rstock);
+			     $("#rstate").val(data.rstate);
+			     $("#rimage").val(data.rimage);
+			     <%-- $("img").attr("src",<%=basePath %>assets/img/data.rimage); --%>
+			     document.getElementById('image').src = "<%=basePath %>assets/img/"+document.getElementById('rimage').value;
+			   },
+			"json");
+		
+	}
     </script>
 
 </body>

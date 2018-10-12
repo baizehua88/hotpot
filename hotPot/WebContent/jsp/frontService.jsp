@@ -561,7 +561,6 @@
 			});
 
 		}); */
-
 		var editBox = $('#calendar-edit-box');
 		function GetFolderId(_this){
 			//  弹出框

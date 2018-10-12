@@ -7,6 +7,7 @@ public class Staff {
 	private Integer sphone;
 	private String sposition;
 	private String spassword;
+	private Integer salary;
 	public Integer getSid() {
 		return sid;
 	}
@@ -47,5 +48,11 @@ public class Staff {
 	public String toString() {
 		return "Staff [sid=" + sid + ", sname=" + sname + ", ssex=" + ssex + ", sphone=" + sphone + ", sposition="
 				+ sposition + ", spassword=" + spassword + "]";
+	}
+	public Integer getSalary() {
+		return salary;
+	}
+	public void setSalary(Integer salary) {
+		this.salary = salary;
 	}
 }
