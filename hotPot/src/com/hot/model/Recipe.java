@@ -12,6 +12,7 @@ public class Recipe {
 	private Integer start;
 	private Integer rows;
 	private Integer page;
+	private Integer stock;
 	
 	public Integer getRid() {
 		return rid;
@@ -79,11 +80,16 @@ public class Recipe {
 	public void setPage(Integer page) {
 		this.page = page;
 	}
+	public Integer getStock() {
+		return stock;
+	}
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
 	@Override
 	public String toString() {
 		return "Recipe [rid=" + rid + ", rname=" + rname + ", rbid=" + rbid + ", rsort=" + rsort + ", rprice=" + rprice
 				+ ", rstate=" + rstate + ", rstock=" + rstock + ", rimage=" + rimage + ", start=" + start + ", rows="
-				+ rows + ", page=" + page + "]";
+				+ rows + ", page=" + page + ", stock=" + stock + "]";
 	}
-	
 }

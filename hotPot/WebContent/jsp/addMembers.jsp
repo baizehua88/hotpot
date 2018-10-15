@@ -197,9 +197,8 @@
 					href="<%=basePath%>jsp/index.jsp" class="active"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
-				<li class="sidebar-nav-link"><a
-					href="<%=basePath%>jsp/pay.jsp"> <i
-						class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
+				<li class="sidebar-nav-link"><a href="<%=basePath%>order/getOrder.do">
+						<i class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
 				</a></li>
 				<li class="sidebar-nav-link"><a
 					href="<%=basePath%>desk/deskList.do"> <i
@@ -227,14 +226,14 @@
 						class="am-icon-table sidebar-nav-link-logo"></i> 会员管理 <span
 						class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
 				</a>
-					<ul class="sidebar-nav sidebar-nav-sub">
+					<ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/members.jsp"> <span
+							href="<%=basePath%>customer/customerList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 会员列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/addMembers.jsp"> <span
+							href="<%=basePath%>jsp/addMembers.jsp" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加会员
 						</a></li>
 					</ul></li>
@@ -265,7 +264,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/order.jsp"> <span
+							href="<%=basePath%>recipe/recipeListorder.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 在线订货
 						</a></li>
 
@@ -281,7 +280,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/employees.jsp"> <span
+							href="<%=basePath%>staff/staffList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 员工列表
 						</a></li>
 

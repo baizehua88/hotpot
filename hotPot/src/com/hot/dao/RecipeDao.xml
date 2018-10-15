@@ -20,4 +20,8 @@
 		rprice=#{rprice},rstock=#{rstock},rstate=#{rstate},rimage=#{rimage}
 		where rid= #{rid}
 	</update>
+	
+	<update id="addStock" parameterType="Recipe">
+		UPDATE hp_recipe SET rstock = rstock+#{stock} WHERE rname=#{rname}
+	</update>
 </mapper>

@@ -44,4 +44,10 @@ public class RecipeServiceImpl implements RecipeService {
 	public int getConunt() {
 		return recipeDao.getConunt();
 	}
+
+	@Override
+	public int addStock(Recipe recipe) {
+		// TODO Auto-generated method stub
+		return recipeDao.addStock(recipe);
+	}
 }

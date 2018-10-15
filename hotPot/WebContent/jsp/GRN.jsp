@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -197,7 +198,7 @@
 					href="<%=basePath%>jsp/index.jsp" class="active"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
-				<li class="sidebar-nav-link"><a href="<%=basePath%>jsp/pay.jsp">
+				<li class="sidebar-nav-link"><a href="<%=basePath%>order/getOrder.do">
 						<i class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
 				</a></li>
 				<li class="sidebar-nav-link"><a
@@ -228,7 +229,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/members.jsp"> <span
+							href="<%=basePath%>customer/customerList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 会员列表
 						</a></li>
 
@@ -262,14 +263,14 @@
 						class="am-icon-table sidebar-nav-link-logo"></i> 库存管理 <span
 						class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
 				</a>
-					<ul class="sidebar-nav sidebar-nav-sub">
+					<ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/order.jsp"> <span
+							href="<%=basePath%>recipe/recipeListorder.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 在线订货
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/GRN.jsp"> <span
+							href="<%=basePath%>jsp/GRN.jsp" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 导入入库单
 						</a></li>
 					</ul></li>
@@ -280,7 +281,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/employees.jsp"> <span
+							href="<%=basePath%>staff/staffList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 员工列表
 						</a></li>
 
@@ -305,16 +306,16 @@
 						<div class="widget am-cf">
 							<div class="widget-body  am-fr">
 								<div style="float: left;">
-									<span style="float: left;">导入入库单</span><input type="file"
-										style="float: left; margin-left: 20px;">
+									<form action="<%=basePath%>recipe/load.do" enctype="multipart/form-data" id="form1" method="post" onsubmit="return checkData();">
+										<span style="float: left;">导入入库单</span>
+										<input type="file" id="upfile" name="upfile" style="float: left; margin-left: 20px;">
+										<input type="submit" value="搜索" >
+										<input type="hidden" id="total" value="${totallist }"/>
+									</form>
 								</div>
 								<div class="am-u-sm-12 am-u-md-6 am-u-lg-6" style="float: left;">
 									<div class="am-form-group">
 										<div class="am-btn-toolbar">
-											<div class="am-btn-group am-btn-group-xs">
-												<button type="button"
-													class="am-btn am-btn-default am-btn-success">搜索</button>
-											</div>
 										</div>
 									</div>
 								</div>
@@ -325,65 +326,27 @@
 										id="example-r">
 										<thead>
 											<tr>
-												<th><input type="checkbox"></th>
+												<th><input id="allAndNotAll" name="allAndNotAll" type="checkbox"></th>
 												<th>名称</th>
 												<th>数量</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="gradeX">
-												<td><input type="checkbox"></td>
-												<td class="am-text-middle">羊肉卷</td>
-												<td class="am-text-middle">100</td>
-											</tr>
-											<tr class="even gradeC">
-												<td><input type="checkbox"></td>
-												<td class="am-text-middle">羊肉卷</td>
-												<td class="am-text-middle">100</td>
-											</tr>
-											<tr class="gradeX">
-												<td><input type="checkbox"></td>
-												<td class="am-text-middle">羊肉卷</td>
-												<td class="am-text-middle">100</td>
-											</tr>
-											<tr class="even gradeC">
-												<td><input type="checkbox"></td>
-												<td class="am-text-middle">羊肉卷</td>
-												<td class="am-text-middle">100</td>
-											</tr>
-											<tr class="even gradeC">
-												<td><input type="checkbox"></td>
-												<td class="am-text-middle">羊肉卷</td>
-												<td class="am-text-middle">100</td>
-											</tr>
-
-											<tr class="even gradeC">
-												<td><input type="checkbox"></td>
-												<td class="am-text-middle">羊肉卷</td>
-												<td class="am-text-middle">100</td>
-											</tr>
+											<c:forEach items="${Dlist }" var="recipe" step="1" varStatus="statu">
+												<tr class="gradeX" id="mytr">
+													<td><input type="checkbox" id="check${statu.count }" name="checkitem"></td>
+													<td class="am-text-middle" id="rname${statu.count }">${recipe.rname }</td>
+													<td class="am-text-middle" id="stock${statu.count }">${recipe.stock }</td>
+												</tr>
+											</c:forEach>
 											<!-- more data -->
 										</tbody>
 									</table>
 								</div>
-								<div class="am-u-lg-12 am-cf">
-
-									<div class="am-fr">
-										<ul class="am-pagination tpl-pagination">
-											<li class="am-disabled"><a href="#">«</a></li>
-											<li class="am-active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#">»</a></li>
-										</ul>
-									</div>
-								</div>
 							</div>
 							<div class="am-form-group">
 									<button type="button" style="margin-left: 20px;"
-										class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+										class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="getInt();">入库</button>
 							</div>
 						</div>
 					</div>
@@ -395,6 +358,77 @@
 	<script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
 	<script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
 	<script src="<%=basePath%>assets/js/app.js"></script>
+	<script src="<%=basePath%>assets/js/jquery-3.1.1.min.js"></script>
+	<script src="<%=basePath%>assets/js/jquery.form.js"></script>
+	<script type="text/javascript">
+		//JS校验form表单信息
+		function checkData() {
+			var fileDir = $("#upfile").val();
+			var suffix = fileDir.substr(fileDir.lastIndexOf("."));
+			if("" == fileDir){
+				alert("选择需要导入的Excel文件！");
+				return false;
+			}else if (".xls" != suffix && ".xlsx" != suffix) {
+				alert("选择Excel格式的文件导入！");
+				return false;
+			}
+			return true;
+		}
+		
+		$("#allAndNotAll").click(function () {
+		    if ($("#allAndNotAll").prop('checked')) {
+		        $("#allAndNotAll").prop("checked", true);
+		        $("input[name=checkitem]:checkbox").prop("checked", true);
+		    } else {
+		        $("#allAndNotAll").prop("checked", false);
+		        $("input[name=checkitem]:checkbox").prop("checked", false);
+		    }
+		});
+				
+		//当其中不勾选某一个选项的时候,则去掉全选复选框
+		$(":checkbox[name=checkitem]").click(function () {
+		    $("#allAndNotAll").prop('checked',
+		        $(":checkbox[name=checkitem]").length == $(":checkbox[name='checkitem']:checked").length);
+		});
+		
+		function getInt() {
+			var total = $("#total").val();
+			var k;
+			var att= {};    //创建一个空的json
+			var rname,stock;
+			var Array = [];
+			$("#mytr").each(function(){
+				for(k=1;k<total+1;k++){
+					if($("#check"+k).prop('checked')){
+						rname = document.getElementById('rname'+k).innerText;
+						stock = document.getElementById('stock'+k).innerText;
+						att = {
+								'rname':rname,
+								'stock':stock,
+							};
+						Array.push(att);
+					}
+				}
+			})
+			console.log(Array);
+			$.ajax({
+				type: "POST",
+				url: "<%=basePath%>stock/addStock.do",
+				data: {
+					ds:JSON.stringify(Array)
+				},
+				//dataType: "json",
+				success: function(msg) {
+					if (msg == "OK") {
+						window.location.href = "<%=basePath%>recipe/load.do?";
+						alert("入库成功！");
+					}else {
+						alert("入库失败！");
+					}
+				}
+			});
+		}
+	</script>
 
 </body>
 
