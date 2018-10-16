@@ -11,8 +11,8 @@ import com.hot.model.Staff;
 import com.hot.service.StaffService;
 
 @Service("staffService")
-public class StaffServiceImpl implements StaffService{
-	
+public class StaffServiceImpl implements StaffService {
+
 	@Autowired
 	@Qualifier("staffDao")
 	private StaffDao staffDao;
@@ -27,5 +27,11 @@ public class StaffServiceImpl implements StaffService{
 		// TODO Auto-generated method stub
 		return staffDao.getStaff();
 	}
-	
+
+	@Override
+	public int addStaff(Staff staff) {
+		// TODO Auto-generated method stub
+		return staffDao.addStaff(staff);
+	}
+
 }

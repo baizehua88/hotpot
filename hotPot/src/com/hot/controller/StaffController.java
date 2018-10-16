@@ -16,34 +16,50 @@ import com.hot.service.StaffService;
 @Controller
 @RequestMapping("/staff")
 public class StaffController {
-	
+
 	@Autowired
 	@Qualifier("staffService")
 	private StaffService staffService;
-	
+
 	@RequestMapping("/login.do")
-	public ModelAndView login(Staff staff,HttpSession session) {
-		
+	public ModelAndView login(Staff staff, HttpSession session) {
+
 		ModelAndView mv = new ModelAndView();
 		Staff staff2 = staffService.login(staff);
 		if (staff2 != null) {
 			mv.setViewName("index");
 			session.setAttribute("staff", staff2);
 			session.setMaxInactiveInterval(-1);
-		}else {
-			
+		} else {
+
 			mv.setViewName("redirect:/jsp/login.jsp");
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping("/staffList.do")
-	public ModelAndView staffList(){
+	public ModelAndView staffList() {
 		ModelAndView mv = new ModelAndView();
 		List<Staff> staffList = staffService.getStaff();
-		System.out.println(staffList);
+		// System.out.println(staffList);
 		mv.addObject("staffList", staffList);
 		mv.setViewName("employees");
-		return mv;	
+		return mv;
+	}
+
+	/**
+	 * 添加员工
+	 * 
+	 * @param staff
+	 * @return
+	 */
+	@RequestMapping("/addStaff.do")
+	public ModelAndView addStaff(Staff staff) {
+		ModelAndView mView = new ModelAndView();
+
+		if (staffService.addStaff(staff) > 0) {
+			mView.setViewName("redirect:/staff/staffList.do");
+		}
+		return mView;
 	}
 }

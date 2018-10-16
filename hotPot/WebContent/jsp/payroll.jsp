@@ -326,7 +326,7 @@
 												<td>张三</td>
 												<td>男</td>
 												<td>23432122</td>
-												<td>50000</td>
+												<td><input type="text" name="salary"></td>
 											</tr>
 											<tr class="even gradeC">
 												<td>6</td>
@@ -334,7 +334,7 @@
 												<td>张三</td>
 												<td>男</td>
 												<td>23432122</td>
-												<td>50000</td>
+												<td><input type="text" name="salary"></td>
 											</tr>
 											<tr class="gradeX">
 												<td>6</td>

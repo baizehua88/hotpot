@@ -7,4 +7,8 @@
 	 <select id="getStaff" resultType="Staff">
 	 	SELECT * FROM hp_staff;
 	 </select>
+	 <insert id="addStaff" parameterType="Staff">
+		INSERT INTO hp_staff(sname,ssex,sphone,sposition,spassword)
+		VALUES(#{sname},#{ssex},#{sphone},#{sposition},#{spassword})
+	</insert>
 </mapper>

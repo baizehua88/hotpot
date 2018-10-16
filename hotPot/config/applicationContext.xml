@@ -19,7 +19,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/hotpot?useUnicode=true&amp;characterEncoding=utf8" />
 		<property name="username" value="root" />
-		<property name="password" value="111111" />
+		<property name="password" value="123456" />
 	</bean>
 
 	<!-- 2. mybatis的SqlSession的工厂 -->
