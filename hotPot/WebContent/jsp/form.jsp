@@ -207,7 +207,7 @@ $(function() {
 			<!-- 菜单 -->
 			<ul class="sidebar-nav">
 				<li class="sidebar-nav-link"><a
-					href="<%=basePath%>jsp/index.jsp" class="active"> <i
+					href="<%=basePath%>jsp/index.jsp"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
 				<li class="sidebar-nav-link"><a href="<%=basePath%>order/getOrder.do">
