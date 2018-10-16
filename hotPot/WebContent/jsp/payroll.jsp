@@ -5,6 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -197,8 +198,9 @@
 					href="<%=basePath%>jsp/index.jsp"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
-				<li class="sidebar-nav-link"><a href="<%=basePath%>order/getOrder.do">
-						<i class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
+				<li class="sidebar-nav-link"><a
+					href="<%=basePath%>order/getOrder.do"> <i
+						class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
 				</a></li>
 				<li class="sidebar-nav-link"><a
 					href="<%=basePath%>desk/deskList.do"> <i
@@ -289,7 +291,7 @@
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加员工
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/payroll.jsp" class="active"> <span
+							href="<%=basePath%>staff/payStaffList.do" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 发放薪资
 						</a></li>
 					</ul></li>
@@ -303,96 +305,59 @@
 				<div class="row">
 					<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
 						<div class="widget am-cf">
-							<div class="widget-body  am-fr">
+							<form action="<%=basePath %>staff/payroll.do" method="post">
+								<div class="widget-body  am-fr">
 
-								<div class="am-u-sm-12">
-									<table width="100%"
-										class="am-table am-table-compact am-table-striped tpl-table-black "
-										id="example-r">
-										<thead>
-											<tr>
-												<th>ID</th>
-												<th>职位</th>
-												<th>名称</th>
-												<th>性别</th>
-												<th>电话</th>
-												<th>薪资</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr class="gradeX">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td><input type="text" name="salary"></td>
-											</tr>
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td><input type="text" name="salary"></td>
-											</tr>
-											<tr class="gradeX">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
+									<div class="am-u-sm-12">
+										<table width="100%"
+											class="am-table am-table-compact am-table-striped tpl-table-black "
+											id="example-r">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>职位</th>
+													<th>名称</th>
+													<th>性别</th>
+													<th>电话</th>
+													<th>薪资</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${payStaffList }" var="staff">
+													<tr class="gradeX">
+														<td>${staff.sid }</td>
+														<td>${staff.sposition }</td>
+														<td>${staff.sname }</td>
+														<td>${staff.ssex }</td>
+														<td>${staff.sphone }</td>
+														<td><input type="text" name="salary"></td>
+													</tr>
+												</c:forEach>
+												<!-- more data -->
+											</tbody>
+										</table>
+									</div>
+									<div class="am-u-lg-12 am-cf">
 
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
-											<!-- more data -->
-										</tbody>
-									</table>
-								</div>
-								<div class="am-u-lg-12 am-cf">
-
-									<div class="am-fr">
-										<ul class="am-pagination tpl-pagination">
-											<li class="am-disabled"><a href="#">«</a></li>
-											<li class="am-active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#">»</a></li>
-										</ul>
+										<div class="am-fr">
+											<ul class="am-pagination tpl-pagination">
+												<li class="am-disabled"><a href="#">«</a></li>
+												<li class="am-active"><a href="#">1</a></li>
+												<li><a href="#">2</a></li>
+												<li><a href="#">3</a></li>
+												<li><a href="#">4</a></li>
+												<li><a href="#">5</a></li>
+												<li><a href="#">»</a></li>
+											</ul>
+										</div>
 									</div>
 								</div>
-							</div>
-							<hr style="border: ridge;margin-top: 30px;">
-							<div class="am-form-group">
-								<button type="button" style="float: right; margin-right: 20px;"
-									class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
-							</div>
+								<hr style="border: ridge; margin-top: 30px;">
+								<div class="am-form-group">
+									<button type="submit" style="float: right; margin-right: 20px;"
+										class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>

@@ -34,4 +34,25 @@ public class StaffServiceImpl implements StaffService {
 		return staffDao.addStaff(staff);
 	}
 
+	@Override
+	public boolean delStaff(int id) {
+		// TODO Auto-generated method stub
+		if (staffDao.delStaff(id) > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<Staff> getPayStaff() {
+		// TODO Auto-generated method stub
+		return staffDao.getPayStaff();
+	}
+
+	@Override
+	public int payroll(int salary) {
+		// TODO Auto-generated method stub
+		return staffDao.payroll(salary);
+	}
+
 }

@@ -62,4 +62,40 @@ public class StaffController {
 		}
 		return mView;
 	}
+
+	/**
+	 * 删除员工
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/delStaff.do")
+	public ModelAndView delStaff(int id) {
+		ModelAndView mView = new ModelAndView();
+
+		if (staffService.delStaff(id)) {
+			mView.setViewName("redirect:/staff/staffList.do");
+		}
+		return mView;
+	}
+
+	@RequestMapping("/payStaffList.do")
+	public ModelAndView payStaffList() {
+		ModelAndView mv = new ModelAndView();
+		List<Staff> payStaffList = staffService.getPayStaff();
+		// System.out.println(staffList);
+		mv.addObject("payStaffList", payStaffList);
+		mv.setViewName("payroll");
+		return mv;
+	}
+
+	@RequestMapping("/payroll.do")
+	public ModelAndView payroll(int salary) {
+		ModelAndView mView = new ModelAndView();
+
+		if (staffService.payroll(salary) > 0) {
+			mView.setViewName("redirect:/staff/staffList.do");
+		}
+		return mView;
+	}
 }
