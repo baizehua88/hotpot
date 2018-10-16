@@ -366,10 +366,10 @@
 												<td>${desk.dstate}</td>
 												<td>
 													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
+														<a href="javascript:void(0);" id="${desk.did}" name="${desk.dstate}" onClick="GetDetail(this);"> <i class="am-icon-pencil"></i>
 															查看订单
 														</a> <a href="javascript:void(0);"
-															class="tpl-table-black-operation-del" id="${desk.did}" onClick="GetFolderId(this);">
+															class="tpl-table-black-operation-del" id="${desk.did}" name="${desk.dstate}" onClick="GetFolderId(this);">
 															<i class="am-icon-paint-brush"></i> 使用
 														</a>
 													</div>
@@ -401,7 +401,85 @@
 		</div>
 	</div>
 
-	<!-- 弹出层 -->
+	<!-- 查看订单弹出层 -->
+
+	<div class="am-modal am-modal-no-btn" id="calendar-edit-box1"
+		style="width: 100%; margin: auto;">
+		<div class="am-modal-dialog tpl-model-dialog" style="width: 55%;">
+			<div class="am-modal-hd">
+				<a href="javascript: void(0)"
+					class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd tpl-am-model-bd am-cf">
+
+				<form class="am-form tpl-form-border-form" 
+				action="javascript: void(0);" method="post" enctype="multipart/form-data">			
+					<div >
+						<font style="float:left;font-size: 20px;">桌号</font>	
+						<div style="float: left; width: 20px; margin-left: 15px;">
+							<input type=text name="did" id="did">
+							<input type="hidden" id="oid" >
+						</div>
+					</div>
+					<div style="margin-top: 60px;">
+					<font style="text-align:center;font-size: 30px;">订单</font>
+					</div>
+					<div class="am-u-sm-12">
+						<table width="100%" id="table_details1"
+							class="am-table am-table-compact am-table-striped tpl-table-black ">
+							<thead>
+								<tr >
+									<th style="text-align: center;">名称</th>
+									<th style="text-align: center;">单价</th>
+									<th style="text-align: center;">数量</th>
+									<th style="text-align: center;">小计</th>
+								</tr>
+							</thead>
+							<tbody id="detail">
+								<%-- id="nm${recipe.rid}" rname="${recipe.rname}" rprice="${recipe.rprice}" rno="" rtotal="" --%>
+								
+								<!-- more data -->
+								
+							</tbody>
+						</table>				
+					</div>	
+					<!-- <div >
+						<font style="font-size: 20px;float: left;">总计：</font>						
+						<font style="font-size: 20px;margin-left: 20px;text-align: left;float: left;">用餐人数</font>
+						<div style="margin-left: 20px;">
+							<div style="float: left; width: 20px; font-size: 20px;">
+								<input type=button value="-" onClick="javascript:if(this.form.man.value>0) this.form.oprice.value =  Number(this.form.oprice.value) - Number(5);if(this.form.man.value>0) this.form.man.value--;">
+							</div>
+							<div style="float: left; width: 40px; margin-left: 15px;">
+								<input type=text value=0 name=man>
+							</div>
+							<div style="float: left; width: 20px; font-size: 20px; margin-left: 15px;">
+								<input type=button value="+" onClick="javascript:this.form.oprice.value =  Number(this.form.oprice.value) + Number(5);this.form.man.value++;">
+							</div>
+						</div>																		
+						<font style="font-size: 20px;margin-left: 60px;text-align: left;float: left;">数量</font>
+						<div style="float: left; width: 40px; margin-left: 15px;">
+							<input type=text value=0 name=count >
+						</div>										
+						<font style="font-size: 20px;margin-left: 60px;text-align: left;float: left;">总金额</font>
+						<div style="float: left; width: 40px; margin-left: 15px;">
+							<input type=text value=0 name=oprice id="oprice">
+						</div>
+					</div>
+					<div class="am-form-group" ">
+						<div class="am-u-sm-12 am-u-sm-push-12" style="margin-top: 60px;">
+							<button type="submit" onclick="Order(this)"
+								class="am-btn am-btn-primary tpl-btn-bg-color-success ">下单</button>
+						</div>
+					</div> -->
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+	
+		<!-- 使用弹出层 -->
 
 	<div class="am-modal am-modal-no-btn" id="calendar-edit-box"
 		style="width: 100%; margin: auto;">
@@ -413,7 +491,7 @@
 			<div class="am-modal-bd tpl-am-model-bd am-cf">
 
 				<form class="am-form tpl-form-border-form" 
-				action="<%=basePath%>order/addOrder.do" method="post" enctype="multipart/form-data">			
+				action="javascript: void(0);" method="post" enctype="multipart/form-data">			
 					<div >
 						<font style="float:left;font-size: 20px;">桌号</font>	
 						<div style="float: left; width: 20px; margin-left: 15px;">
@@ -424,7 +502,7 @@
 					<font style="text-align:center;font-size: 30px;">菜单</font>
 					</div>
 					<div class="am-u-sm-12">
-						<table width="100%"
+						<table width="100%" id="table_details"
 							class="am-table am-table-compact am-table-striped tpl-table-black ">
 							<thead>
 								<tr>
@@ -438,20 +516,24 @@
 							</thead>
 							<tbody>
 								<c:forEach var="recipe" items="${recipeList}">
-								<tr class="gradeX">
+								<%-- rname="${recipe.rname}" rprice="${recipe.rprice}" rno="" rtotal="" --%>
+								<tr class="gradeX" id="nm${recipe.rid}" rname="${recipe.rname}" rprice="${recipe.rprice}" rno="" rtotal="" >
+									<td class="am-text-middle" >
+										<input type="hidden" name="rid" value="${recipe.rid}">
+									</td>
 									<td>
                                         <img src="<%=basePath%>assets/img/${recipe.rimage}" class="tpl-table-line-img" alt="">
                                     </td>
                                     <td class="am-text-middle" >${recipe.rname}</td>
-                                    <td class="am-text-middle">${recipe.rsort}</td>
-                                    <td class="am-text-middle">${recipe.rprice}</td>
-                                    <td class="am-text-middle">${recipe.rstock}</td>
-                                    <td class="am-text-middle">
-									<div style="float: left; width: 40px; margin-left: 15px;">
-												<input type=text value=0 name=sum${recipe.rid}>
+                                    <td class="am-text-middle" >${recipe.rsort}</td>
+                                    <td class="am-text-middle" >${recipe.rprice}</td>
+                                    <td class="am-text-middle" >${recipe.rstock}</td>
+                                    <td class="am-text-middle" >
+										<div style="float: left; width: 40px; margin-left: 15px;">
+												<input type=text value=0 name=sum${recipe.rid} >																				
 											</div>
 									</td>
-									<td class="am-text-middle">
+									<td class="am-text-middle" >
 										<div>
 											<div style="float: left; width: 20px; font-size: 20px;">
 												<input type=button value="-" onClick="javascript:
@@ -459,55 +541,29 @@
 												if(this.form.num${recipe.rid}.value>0) this.form.oprice.value = this.form.oprice.value - ${recipe.rprice};
 												if(this.form.num${recipe.rid}.value>0) this.form.num${recipe.rid}.value= Number(this.form.num${recipe.rid}.value) - Number(1);
 												if(this.form.num${recipe.rid}.value>=0) this.form.sum${recipe.rid}.value=${recipe.rprice}*this.form.num${recipe.rid}.value;
+												$('#nm${recipe.rid}').attr('rno',this.form.num${recipe.rid}.value);
+												$('#nm${recipe.rid}').attr('sno',this.form.sum${recipe.rid}.value);
 												">
 											</div>
 											<div style="float: left; width: 40px; margin-left: 15px;">
-												<input type=text value=0 name=num${recipe.rid}>
+												<input type=text value=0 name=num${recipe.rid} >
 											</div>
 											<div style="float: left; width: 20px; font-size: 20px; margin-left: 15px;">
 												<input type=button value="+" onClick="javascript:
-												this.form.num${recipe.rid}.value= Number(this.form.num${recipe.rid}.value) + Number(1);
-												this.form.sum${recipe.rid}.value=${recipe.rprice}*this.form.num${recipe.rid}.value;
+												this.form.num${recipe.rid}.value= Number(this.form.num${recipe.rid}.value) + Number(1);												
+												this.form.sum${recipe.rid}.value=${recipe.rprice}*this.form.num${recipe.rid}.value;											
 												this.form.count.value++;
-												this.form.oprice.value =  Number(this.form.oprice.value) +  Number(${recipe.rprice});">
+												this.form.oprice.value =  Number(this.form.oprice.value) +  Number(${recipe.rprice});
+												$('#nm${recipe.rid}').attr('rno',this.form.num${recipe.rid}.value);
+												$('#nm${recipe.rid}').attr('rtotal',this.form.sum${recipe.rid}.value);
+												">
 											</div>
 										</div>
 									</td>
 								</tr>
 								</c:forEach>
 								<!-- more data -->
-								<!-- <tr>
-									<td >总计：</td>
-									<td >
-										用餐人数 
-										<div>
-										<font style="text-align:center;;font-size: 20px;float: left;">用餐人数</font>
-										</div>
-										<div>
-											<div style="float: left; width: 20px; font-size: 20px;">
-												<input type=button value="-" onClick="javascript:if(this.form.man.value>0) this.form.man.value--;this.form.people.value=this.form.man.value;">
-											</div>
-											<div style="float: left; width: 40px; margin-left: 15px;">
-												<input type=text value=0 name=man>
-											</div>
-											<div style="float: left; width: 20px; font-size: 20px; margin-left: 15px;">
-												<input type=button value="+" onClick="javascript:this.form.man.value++;this.form.people.value=this.form.man.value;">
-											</div>
-										</div>
-									</td>
-									<td >
-										数量
-										<div style="float: right; width: 40px; margin-left: 15px;">
-												<input type=text value=0 name=count>
-										</div>
-									</td>
-									<td >
-										总金额
-										<div style="float: right; width: 40px; margin-left: 15px;">
-												<input type=text value=0 name=money>
-										</div>
-									</td>
-								</tr> -->
+								
 							</tbody>
 						</table>				
 					</div>	
@@ -527,16 +583,16 @@
 						</div>																		
 						<font style="font-size: 20px;margin-left: 60px;text-align: left;float: left;">数量</font>
 						<div style="float: left; width: 40px; margin-left: 15px;">
-							<input type=text value=0 name=count>
+							<input type=text value=0 name=count >
 						</div>										
 						<font style="font-size: 20px;margin-left: 60px;text-align: left;float: left;">总金额</font>
 						<div style="float: left; width: 40px; margin-left: 15px;">
-							<input type=text value=0 name=oprice>
+							<input type=text value=0 name=oprice id="oprice">
 						</div>
 					</div>
 					<div class="am-form-group" ">
 						<div class="am-u-sm-12 am-u-sm-push-12" style="margin-top: 60px;">
-							<button type="submit"
+							<button type="submit" onclick="Order(this)"
 								class="am-btn am-btn-primary tpl-btn-bg-color-success ">下单</button>
 						</div>
 					</div>
@@ -553,21 +609,138 @@
 	<script src="<%=basePath%>assets/js/app.js"></script>
 
 	<script type="text/javascript">
-		/* $(function() {
-			var editBox = $('#calendar-edit-box');
-			$("#calendar").click(function() {
-				//  弹出框
-				editBox.modal();
-			});
-
-		}); */
 		var editBox = $('#calendar-edit-box');
+		var editBox1 = $('#calendar-edit-box1');
+		var ooid ;
+		
+		//查看订单
+		function GetDetail(_this){
+			//  弹出框
+			$('#did').val(_this.id);			
+			if (_this.name=="正在使用") {
+				$.post("<%=basePath%>order/getDetailOid.do",{
+					did : $('#did').val(),					
+					},function(data){
+						ooid = data;
+						$('#oid').val(data);
+						alert("订单ID："+ooid);
+						//getChecked();
+						$.ajax({
+							type: "post",
+							url : "<%=basePath%>detail/getDetailByOid.do",
+							//dataType: "json",
+							cache: true,
+							data:{'oid':ooid},
+							success: function (data) {
+								var t1 = document.getElementById("table_details1");
+								var rowNum = t1.rows.length;
+								var i;
+								if(rowNum>1){
+									for(i=1;i<rowNum;i++){
+										t1.deleteRow(i);
+										rowNum = rowNum - 1;
+										i = i - 1;
+									}
+								}
+								
+								$.each(data,function(key,values){
+									$("#detail").append(
+										"<tr class='gradeX'>"
+                                    	+"<td>"+values.rname+"</td>"
+                                    	+"<td>"+values.rtotal+"</td>"
+                                    	+"<td>"+values.rno+"</td>"
+                                    	+"<td>"+values.rprice+"</td></tr>"
+									);
+								});
+								editBox1.modal();
+							}						
+					   }); 				  
+					
+					   
+					}); 
+				
+			}else {				
+				window.alert("该餐位还未使用");
+				<%-- window.location.href = "<%=basePath%>desk/deskList.do"; --%>
+			} 
+		}
+		function Open() {
+			editBox1.modal();	
+		}
+		
+		//使用
 		function GetFolderId(_this){
 			//  弹出框
-			alert(_this.id);
-			$('#did').val(_this.id);
-			editBox.modal();
+			//alert(_this.id);
+			//alert(typeof(_this.name));
+			$('#did').val(_this.id);			
+			if (_this.name=="未使用") {
+				editBox.modal();
+			}else {				
+				window.alert("该餐位正在使用");
+				<%-- window.location.href = "<%=basePath%>desk/deskList.do"; --%>
+			} 
 		}
+ 		function Order(_this){	
+ 			//getChecked();
+			//  下单
+			$.post("<%=basePath%>order/addOrder.do",{
+				did : $('#did').val(),
+				oprice : $('#oprice').val(),
+				
+				},function(data){
+					ooid = data;
+					alert("订单号："+ooid);
+					getChecked();
+					$.ajax({
+						type: "post",
+						url : "<%=basePath%>detail/addDetail.do",
+						//dataType: "json",
+						cache: true,
+						data:{'detailList':JSON.stringify(array)},
+						/* contentType:"application/json", */
+						success: function (data) {
+							<%-- $.post("<%=basePath%>desk/deskList.do"); --%>
+							//alert("1111111111111");
+							window.location.href = "<%=basePath%>desk/deskList.do";
+						}						
+				   });
+				}); 
+			
+		}
+		
+ 		var array = new Array();
+		var ohjInfo = "";
+		var ohjInfoEnd = "";
+		
+		
+		function getChecked() {
+			//alert("进来了");
+			//alert("长度："+$('#table_details tbody tr').length);			
+			var rname="";
+			var rno="";
+			var rprice="";
+			var rtotal="";
+			var oid ="";
+			$('#table_details tbody tr').each(function(index){
+					rname += $(this).attr('rname') + ",";
+					rno += $(this).attr('rno') + ",";
+					rprice += $(this).attr('rprice') + ",";
+					rtotal += $(this).attr('rtotal') + ",";
+					oid += ooid + ",";				 
+					if($(this).attr('rno') != "" && $(this).attr('rno') != 0){
+						var PayObj = new Object();
+						PayObj.rname = $(this).attr('rname');
+						PayObj.rno =  $(this).attr('rno');
+						PayObj.rprice = $(this).attr('rprice');
+						PayObj.rtotal = $(this).attr('rtotal');
+						PayObj.oid = ooid;						
+						array.push(PayObj);
+					} 
+			});
+			console.log(array);
+		}	
+		
 	</script>
 
 </body>

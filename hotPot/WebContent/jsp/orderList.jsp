@@ -5,6 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -348,7 +349,7 @@
 										id="example-r">
 										<thead>
 											<tr>
-												<th>ID</th>
+												<th>订单ID</th>
 												<th>时间</th>
 												<th>餐桌</th>
 												<th>金额</th>
@@ -357,12 +358,13 @@
 											</tr>
 										</thead>
 										<tbody>
+											<c:forEach var="order" items="${orderList}">
 											<tr class="gradeX">
-												<td>1</td>
-												<td>2018-9-29</td>
-												<td>1</td>
-												<td>100</td>
-												<td>未付款</td>
+												<td>${order.oid}</td>
+												<td>${order.otime}</td>
+												<td>${order.did}</td>
+												<td>${order.oprice}</td>
+												<td>${order.ostate}</td>
 												<td>
 													<div class="tpl-table-black-operation">
 														<a href="javascript:;"> <i class="am-icon-pencil"></i>
@@ -371,77 +373,8 @@
 													</div>
 												</td>
 											</tr>
-											<tr class="even gradeC">
-												<td>1</td>
-												<td>2018-9-29</td>
-												<td>1</td>
-												<td>100</td>
-												<td>未付款</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															查看详情
-														</a> 
-													</div>
-												</td>
-											</tr>
-											<tr class="gradeX">
-												<td>1</td>
-												<td>2018-9-29</td>
-												<td>1</td>
-												<td>100</td>
-												<td>未付款</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															查看详情
-														</a> 
-													</div>
-												</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>1</td>
-												<td>2018-9-29</td>
-												<td>1</td>
-												<td>100</td>
-												<td>未付款</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															查看详情
-														</a> 
-													</div>
-												</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>1</td>
-												<td>2018-9-29</td>
-												<td>1</td>
-												<td>100</td>
-												<td>未付款</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															查看详情
-														</a> 
-													</div>
-												</td>
-											</tr>
-
-											<tr class="even gradeC">
-												<td>1</td>
-												<td>2018-9-29</td>
-												<td>1</td>
-												<td>100</td>
-												<td>未付款</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															查看详情
-														</a> 
-													</div>
-												</td>
-											</tr>
+											</c:forEach>
+																	
 											<!-- more data -->
 										</tbody>
 									</table>

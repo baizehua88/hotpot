@@ -1,5 +1,7 @@
 package com.hot.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,11 @@ public class DetailServiceImpl implements DetailService {
 	public int addDetail(Detail detail) {
 		// TODO Auto-generated method stub
 		return detailDao.addDetail(detail);
+	}
+	@Override
+	public List<Detail> getDetailByOid(int oid) {
+		// TODO Auto-generated method stub
+		return detailDao.getDetailByOid(oid);
 	}
 
 }

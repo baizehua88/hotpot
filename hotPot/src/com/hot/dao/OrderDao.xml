@@ -5,4 +5,17 @@
 		INSERT INTO hp_order(otime,did,oprice,ostate)
 		VALUES(#{otime},#{did},#{oprice},#{ostate})
 	</insert>
+	<select id="getOrders" resultType="Order">
+		SELECT * FROM hp_order;
+	</select>
+	
+	<!-- 用来创建订单 -->
+	<select id="getOrderId" parameterType="Order" resultType="Order">
+		SELECT * FROM hp_order WHERE did=#{did} AND oprice=#{oprice} AND#{otime}
+	</select>
+	
+	<!-- 用来查看订单 -->
+	<select id="getDetailOid" parameterType="Order" resultType="Order">
+		SELECT * FROM hp_order WHERE did = #{did} AND ostate = #{ostate}
+	</select>
 </mapper>

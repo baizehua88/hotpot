@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hot.model.Customer;
@@ -48,6 +49,31 @@ public class CustomerController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//可以方便地修改日期格式 yyyy/MM/dd HH:mm:ss
 		String time = dateFormat.format( now ); 
 		return time;
+	}
+	
+	//根据id查询会员
+	@RequestMapping("/getMemberById.do")
+	@ResponseBody
+	public Customer getMemberById(Customer customer){
+		System.out.println(customer.getCid());
+		Customer memberById = customerService.getMemberById(customer);
+		System.out.println(memberById);
+		return memberById;
+	}
+	
+	//修改会员资料
+	@RequestMapping("/updateMember.do")
+	public ModelAndView updateMember(Customer customer){
+		ModelAndView mv = new ModelAndView();
+		System.out.println(customer);
+		if (customerService.updateMember(customer)>0) {
+			System.out.println("修改成功");
+			mv.setViewName("redirect:/customer/customerList.do");
+		}else {
+			System.out.println("修改失败");
+			mv.setViewName("redirect:/customer/customerList.do");
+		}
+		return mv;
 	}
 	
 }

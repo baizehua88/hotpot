@@ -7,5 +7,6 @@ import com.hot.model.Customer;
 public interface CustomerDao {
 	public List<Customer> getCustomers();
 	public int addMember(Customer customer);
-	
+	public Customer getMemberById(Customer customer);
+	public int updateMember(Customer customer);
 }

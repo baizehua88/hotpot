@@ -8,4 +8,6 @@ import com.hot.model.Recipe;
 public interface CustomerService {
 	public List<Customer> getCustomers();
 	public int addMember(Customer customer);
+	public Customer getMemberById(Customer customer);
+	public int updateMember(Customer customer);
 }
