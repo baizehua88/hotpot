@@ -112,7 +112,13 @@ public class RecipeController {
 		
 		ModelAndView mv = new ModelAndView();
 		List<Recipe> recipeList = recipeService.getRecipes(recipe);
-		System.out.println(recipeList);
+		
+		if (page <= total/DingZhi.rows) {
+			mv.addObject("totalre", DingZhi.rows);
+		}else {
+			mv.addObject("totalre",total%DingZhi.rows);
+		}
+		
 		mv.addObject("recipeList", recipeList);
 		mv.addObject("pagelist",pageArr);
 		mv.addObject("page",page);

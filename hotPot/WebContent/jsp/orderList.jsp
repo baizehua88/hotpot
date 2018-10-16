@@ -245,7 +245,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/orderList.jsp" class="active"> <span
+							href="<%=basePath%>order/orderList.do" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 

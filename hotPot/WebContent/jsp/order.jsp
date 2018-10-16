@@ -245,7 +245,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/orderList.jsp"> <span
+							href="<%=basePath%>order/orderList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 
@@ -314,6 +314,7 @@
 													class="am-btn am-btn-default am-btn-success" onclick="getExcel();">
 													 生成入库单（选中行数据）
 												</button>
+												<input type="hidden" id="total" value="${totalre }"/>
 											</div>
 										</div>
 									</div>
@@ -482,8 +483,9 @@
 			var att= {};    //创建一个空的json
 			var rname,stock;
 			var Array = [];
+			var total = $("#total").val();
 			$("#mytr").each(function(){
-				for(k=1;k<9;k++){
+				for(k=1;k<total+1;k++){
 					if($("#check"+k).prop('checked')){
 						rname = document.getElementById('rname'+k).innerText;
 						stock = $('#num'+k).val();
