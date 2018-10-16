@@ -31,6 +31,7 @@ import com.hot.config.AlipayConfig;
 import com.hot.model.AlipayNotifyParam;
 import com.hot.model.Detail;
 import com.hot.model.Order;
+import com.hot.service.DeskService;
 import com.hot.service.OrderService;
 import com.hot.utils.RandomTool;
 
@@ -44,16 +45,26 @@ public class OrderController {
 	@Qualifier("orderService")
 	private OrderService orderService;
 	
+	@Autowired
+	@Qualifier("deskService")
+	private DeskService deskService;
+	
 	@RequestMapping("/addOrder.do")
-	public ModelAndView addOrder(Order order,Detail[] detail){
-		ModelAndView mv = new ModelAndView();
+	@ResponseBody
+	public int addOrder(Order order){
+		//ModelAndView mv = new ModelAndView();
 		//order.setDid(Integer.parseInt(request.getParameter("did")));
 		System.out.println(order.getDid());
 		order.setOtime(getTime());
 		order.setOstate("未支付");
 		orderService.addOrder(order);
-		mv.setViewName("redirect:/desk/deskList.do");
-		return mv;
+		//得到产生的订单id------------------------------------
+		Order order1 =  orderService.getOrderId(order);
+		//修改餐桌状态
+		deskService.updateDeskState(order.getDid());
+		System.out.println(order1.getOid());		
+		//再返回产生的订单id------------------------------------
+		return order1.getOid();
 		
 	}
 	
@@ -74,6 +85,24 @@ public class OrderController {
 		return time;
 	}
 	
+	@RequestMapping("/orderList.do")
+	public ModelAndView orderList(){
+		ModelAndView mv =  new ModelAndView();
+		List<Order> orderList = orderService.getOrders();
+		System.out.println(orderList);
+		mv.addObject("orderList", orderList);
+		mv.setViewName("orderList");
+		return mv;
+		
+	}
+	
+	@RequestMapping("getDetailOid.do")
+	@ResponseBody
+	public int getDetailOid(Order order){
+		order.setOstate("未支付");
+		Order order2 = orderService.getDetailOid(order);
+		return order2.getOid();		
+	}
 	/**
 	 * 支付完成操作,改变订单付款状态
 	 * @param request
@@ -156,7 +185,4 @@ public class OrderController {
         String json = JSON.toJSONString(params);
         return JSON.parseObject(json, AlipayNotifyParam.class);
     }
-    
-    
-    
 }

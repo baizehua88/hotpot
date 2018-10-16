@@ -4,4 +4,7 @@
 	<select id="getDesks" resultType="Desk">
 		SELECT * FROM hp_desk;
 	</select>
+	<update id="updateDeskState">
+		UPDATE hp_desk SET dstate='正在使用' WHERE did = #{did}
+	</update>
 </mapper>

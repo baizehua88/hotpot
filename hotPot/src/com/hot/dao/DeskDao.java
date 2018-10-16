@@ -7,5 +7,6 @@ import com.hot.model.Desk;
 public interface DeskDao {
 
 	public List<Desk> getDesks();
+	public int updateDeskState(int did);
 
 }

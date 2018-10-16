@@ -380,7 +380,7 @@
 	                                           				<td>${order.ostate }</td>
 	                                           				<td>
 			                                                    <div class="tpl-table-black-operation">
-			                                                        <a href="javascript:void(0);" onclick="GetDateNow(${order.oid });" target="_blank">
+			                                                        <a href="javascript:void(0);" onclick="GetDateNow(${order.oid });">
 			                                                            <i class="am-icon-pencil"></i> 结算
 			                                                        </a>
 			                                                        <a href="javascript:;" class="tpl-table-black-operation-del">

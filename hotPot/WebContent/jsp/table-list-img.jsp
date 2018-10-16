@@ -35,6 +35,7 @@
 			//获取FileUpload对象
 			var x = document.getElementById("doc-form-file").files;
 			$("#rimage").val(x[0].name);
+			document.getElementById('image').src = "<%=basePath %>assets/img/"+document.getElementById('rimage').value;
 		})
 		
 	});

@@ -20,5 +20,11 @@ public class DeskServiceImpl implements DeskService {
 	public List<Desk> getDesks() {
 		// TODO Auto-generated method stub
 		return deskDao.getDesks();
+	}
+
+	@Override
+	public int updateDeskState(int did) {
+		// TODO Auto-generated method stub
+		return deskDao.updateDeskState(did);
 	}	
 }
