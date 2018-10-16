@@ -337,7 +337,7 @@
 										<tbody>
                                             <c:forEach var="recipe" items="${recipeList}" step="1" varStatus="statu">
                                             <tr class="gradeX" id="mytr">
-											    <td><input id="check${statu.count }" name="checkitem" type="checkbox" onclick="input(${recipe.rid });"></td>
+											    <td><input id="check${statu.count }" name="checkitem" type="checkbox" onclick="input(${statu.count });"></td>
                                                 <td>
                                                     <img src="<%=basePath%>assets/img/${recipe.rimage}" style="height: 90px;width: 100%" class="tpl-table-line-img" alt="">
                                                 </td>
