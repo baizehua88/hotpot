@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hot.dao.RecipeDao">
-	<select id="getRecipes" resultType="Recipe">
-		SELECT * FROM hp_recipe;
+	<select id="getRecipes" parameterType="Recipe" resultType="Recipe">
+		SELECT * FROM hp_recipe limit #{start},#{rows};
 	</select>
+	<select id="getConunt" resultType="Integer">
+		SELECT COUNT(*) FROM hp_recipe;
+	</select>
+	
 	<insert id="addRecipe" parameterType="Recipe">
 		INSERT INTO hp_recipe(rname,rsort,rbid,rprice,rstock,rstate,rimage)
 		VALUES(#{rname},#{rsort},#{rbid},#{rprice},#{rstock},#{rstate},#{rimage})
@@ -15,5 +19,9 @@
 		UPDATE hp_recipe SET rname=#{rname},rsort=#{rsort},rbid=#{rbid},
 		rprice=#{rprice},rstock=#{rstock},rstate=#{rstate},rimage=#{rimage}
 		where rid= #{rid}
+	</update>
+	
+	<update id="addStock" parameterType="Recipe">
+		UPDATE hp_recipe SET rstock = rstock+#{stock} WHERE rname=#{rname}
 	</update>
 </mapper>

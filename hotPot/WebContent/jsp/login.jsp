@@ -59,9 +59,6 @@
                         <label for="remember-me">
        						记住密码
                         </label>
-
-
-
                     </div>
                     <div class="am-form-group">
                         <button type="submit" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">登录</button>

@@ -28,20 +28,27 @@
 	href="<%=basePath%>assets/css/amazeui.datatables.min.css" />
 <link rel="stylesheet" href="<%=basePath%>assets/css/app.css">
 <script src="<%=basePath%>assets/js/jquery.min.js"></script>
-<script type="text/javascript" >
-$(function() {
-	//点击courseimg文本框触发上传按钮
-	$("#rimage").click(function() {
-		$("#doc-form-file").trigger("click");
+<script type="text/javascript">
+	$(function() {
+		//点击courseimg文本框触发上传按钮
+		$("#rimage").click(function() {
+			$("#doc-form-file").trigger("click");
+		});
+		$("#doc-form-file").change(function() {
+			//获取FileUpload对象
+			var x = document.getElementById("doc-form-file").files;
+			$("#rimage").val(x[0].name);
+		})
 	});
-	$("#doc-form-file").change(function(){
-		//获取FileUpload对象
-		var x = document.getElementById("doc-form-file").files;
-		$("#rimage").val(x[0].name);
-	})
-	
-});
-</script> 
+	function show(f) {
+		var rd = new FileReader();//创建文件读取对象       
+		var files = f.files[0];//获取file组件中的文件        
+		rd.readAsDataURL(files);//文件读取转换为base64类型       
+		rd.onloadend = function(e) { //加载完毕之后获取结果赋值给img            
+			document.getElementById("img").src = this.result;
+		}
+	}
+</script>
 </head>
 
 <body data-type="widgets">
@@ -207,11 +214,11 @@ $(function() {
 			<!-- 菜单 -->
 			<ul class="sidebar-nav">
 				<li class="sidebar-nav-link"><a
-					href="<%=basePath%>jsp/index.jsp" class="active"> <i
+					href="<%=basePath%>jsp/index.jsp"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
 				<li class="sidebar-nav-link"><a
-					href="<%=basePath%>jsp/pay.jsp"> <i
+					href="<%=basePath%>order/getOrder.do"> <i
 						class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
 				</a></li>
 				<li class="sidebar-nav-link"><a
@@ -222,16 +229,16 @@ $(function() {
 				<li class="sidebar-nav-link"><a href="javascript:;"
 					class="sidebar-nav-sub-title"> <i
 						class="am-icon-table sidebar-nav-link-logo"></i> 菜品管理 <span
-						class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+						class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico sidebar-nav-sub-ico-rotate"></span>
 				</a>
-					<ul class="sidebar-nav sidebar-nav-sub">
+					<ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
 						<li class="sidebar-nav-link"><a
 							href="<%=basePath%>recipe/recipeList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 菜品列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/form.jsp"> <span
+							href="<%=basePath%>jsp/form.jsp" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加菜品
 						</a></li>
 					</ul></li>
@@ -242,7 +249,7 @@ $(function() {
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/members.jsp"> <span
+							href="<%=basePath%>customer/customerList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 会员列表
 						</a></li>
 
@@ -278,7 +285,7 @@ $(function() {
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/order.jsp"> <span
+							href="<%=basePath%>recipe/recipeListorder.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 在线订货
 						</a></li>
 
@@ -294,7 +301,7 @@ $(function() {
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/employees.jsp"> <span
+							href="<%=basePath%>staff/staffList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 员工列表
 						</a></li>
 
@@ -311,6 +318,7 @@ $(function() {
 			</ul>
 		</div>
 
+		<!-- 内容区域 -->
 		<!-- 内容区域 -->
 		<div class="tpl-content-wrapper">
 
@@ -329,8 +337,9 @@ $(function() {
 							</div>
 							<div class="widget-body am-fr">
 
-								<form class="am-form tpl-form-line-form" 
-								action="<%=basePath%>recipe/addRecipe.do" method="post" enctype="multipart/form-data">
+								<form class="am-form tpl-form-line-form"
+									action="<%=basePath%>recipe/addRecipe.do" method="post"
+									enctype="multipart/form-data">
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">菜品名称
 											<span class="tpl-form-line-small-title">Name</span>
@@ -349,13 +358,16 @@ $(function() {
 										<div class="am-u-sm-9">
 											<div class="am-form-group am-form-file">
 												<div class="tpl-form-file-img">
-													<img src="<%=basePath %>assets/img/image.jpg" alt="" style="width: 250px;height: 200px;">
+													<img src="" alt="" style="width: 250px; height: 200px;"
+														id="img">
 												</div>
 												<button type="button" class="am-btn am-btn-danger am-btn-sm">
 													<i class="am-icon-cloud-upload"></i> 添加封面图片
 												</button>
-												<input id="doc-form-file" type="file" name="file" multiple="">
-												<input type="hidden" id="rimage" name="rimage" style="width: 100%;height: 100%" >
+												<input id="doc-form-file" type="file" name="file"
+													multiple="" onchange="show(this)"> <input
+													type="hidden" id="rimage" name="rimage"
+													style="width: 100%; height: 100%">
 											</div>
 
 										</div>
@@ -370,7 +382,7 @@ $(function() {
 												name="rbid" laceholder="请输入进价，例如：10.0">
 										</div>
 									</div>
-									
+
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">售价
 											<span class="tpl-form-line-small-title">Price</span>
@@ -380,17 +392,30 @@ $(function() {
 												name="rprice" placeholder="请输入售价，例如：10.0">
 										</div>
 									</div>
-									
+
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">类别
 											<span class="tpl-form-line-small-title">Type</span>
 										</label>
-										<div class="am-u-sm-9">
+										<div class="am-form-group tpl-table-list-select"
+											style="margin-right: 540px;">
+											<select data-am-selected="{btnSize: 'sm'}" name="rsort">
+												<option value="请选择菜品类别">请选择菜品类别</option>
+												<option value="荤菜">荤菜</option>
+												<option value="蔬菜">蔬菜</option>
+												<option value="水果">水果</option>
+												<option value="丸子">丸子</option>
+												<option value="熟菜">熟菜</option>
+												<option value="主食">主食</option>
+											</select>
+										</div>
+										<!-- <div class="am-u-sm-9">
 											<input type="text" class="tpl-form-input" id="user-name"
 												name="rsort" placeholder="请输入菜品类别">
-										</div>
+											<div class="am-u-sm-12 am-u-md-6 am-u-lg-3"></div>
+										</div> -->
 									</div>
-									
+
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">库存
 											<span class="tpl-form-line-small-title">Inventory</span>
@@ -400,14 +425,14 @@ $(function() {
 												name="rstock" placeholder="请输入库存">
 										</div>
 									</div>
-									
+
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">热门
 											<span class="tpl-form-line-small-title">Hot</span>
 										</label>
 										<div class="am-u-sm-9">
-											<input type="radio" value="热门" name="rstate">热门
-											<input type="radio" value="普通" name="rstate">普通
+											<input type="radio" value="热门" name="rstate">热门 <input
+												type="radio" value="普通" name="rstate">普通
 										</div>
 									</div>
 

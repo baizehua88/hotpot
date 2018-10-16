@@ -36,5 +36,17 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderDao.getDetailOid(order);
 	}
+	public List<Order> getOrder() {
+		return orderDao.getOrder();
+	}
+	@Override
+	public int zhiFu(Order order) {
+		return orderDao.zhiFu(order);
+	}
+	@Override
+	public Order getOne(Integer oid) {
+		// TODO Auto-generated method stub
+		return orderDao.getOne(oid);
+	}
 
 }

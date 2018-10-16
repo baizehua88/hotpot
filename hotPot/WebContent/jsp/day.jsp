@@ -194,10 +194,10 @@
 			<!-- 菜单 -->
 			<ul class="sidebar-nav">
 				<li class="sidebar-nav-link"><a
-					href="<%=basePath%>jsp/index.jsp" class="active"> <i
+					href="<%=basePath%>jsp/index.jsp"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
-				<li class="sidebar-nav-link"><a href="<%=basePath%>jsp/pay.jsp">
+				<li class="sidebar-nav-link"><a href="<%=basePath%>order/getOrder.do">
 						<i class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
 				</a></li>
 				<li class="sidebar-nav-link"><a
@@ -228,7 +228,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/members.jsp"> <span
+							href="<%=basePath%>customer/customerList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 会员列表
 						</a></li>
 
@@ -240,16 +240,16 @@
 				<li class="sidebar-nav-link"><a href="javascript:;"
 					class="sidebar-nav-sub-title"> <i
 						class="am-icon-table sidebar-nav-link-logo"></i> 财务管理 <span
-						class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+						class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico  sidebar-nav-sub-ico-rotate"></span>
 				</a>
-					<ul class="sidebar-nav sidebar-nav-sub">
+					<ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
 						<li class="sidebar-nav-link"><a
 							href="<%=basePath%>jsp/orderList.jsp"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/day.jsp"> <span
+							href="<%=basePath%>jsp/day.jsp" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 日结算
 						</a></li>
 						<li class="sidebar-nav-link"><a
@@ -264,7 +264,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/order.jsp"> <span
+							href="<%=basePath%>recipe/recipeListorder.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 在线订货
 						</a></li>
 
@@ -280,7 +280,7 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/employees.jsp"> <span
+							href="<%=basePath%>staff/staffList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 员工列表
 						</a></li>
 
