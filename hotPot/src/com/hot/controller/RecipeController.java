@@ -68,7 +68,6 @@ public class RecipeController {
 		
 		ModelAndView mv = new ModelAndView();
 		List<Recipe> recipeList = recipeService.getRecipes(recipe);
-		System.out.println(recipeList);
 		mv.addObject("recipeList", recipeList);
 		mv.addObject("pagelist",pageArr);
 		mv.addObject("page",page);
@@ -76,6 +75,15 @@ public class RecipeController {
 		mv.setViewName("table-list-img");
 		session.setAttribute("recipeList", recipeList);
 		return mv;		
+	}
+	
+	@RequestMapping("/orderRecipe.do")
+	@ResponseBody
+	public List<Recipe> recipeList(){
+		
+		ModelAndView mv = new ModelAndView();
+		List<Recipe> recipeList = recipeService.getAllre();
+		return recipeList;		
 	}
 	
 	
@@ -165,10 +173,8 @@ public class RecipeController {
 			String fileName = file.getOriginalFilename();
 			String path = session.getServletContext().getRealPath("/assets/img/");
 			file.transferTo(new File(Constant.path+fileName));
-			System.out.println("执行了");
 		}
 		recipe.setRimage(file.getOriginalFilename());   		
-    	System.out.println(recipe.getRimage());
 		recipeService.addRecipe(recipe);
 		mv.setViewName("redirect:/recipe/recipeList.do");
 		return mv;				
@@ -180,9 +186,6 @@ public class RecipeController {
 		//ModelAndView mv = new ModelAndView();
 		System.out.println(recipe.getRid());
 		Recipe recipeById = recipeService.getRecipeById(recipe);
-		System.out.println(recipeById);
-		//mv.addObject("recipeById", recipeById);
-		//session.setAttribute("recipeById", recipeById);
 		return recipeById;
 		
 	}
@@ -194,11 +197,8 @@ public class RecipeController {
 			String fileName = file.getOriginalFilename();
 			String path = session.getServletContext().getRealPath("/assets/img/");
 			file.transferTo(new File(Constant.path+fileName));
-			System.out.println("执行了");
 		}
 		recipe.setRimage(file.getOriginalFilename());   		
-    	System.out.println(recipe.getRimage());
-    	System.out.println(recipe);
 		if(recipeService.updateRecipe(recipe)>0){
 			System.out.println("修改成功！");
 			mv.setViewName("redirect:/recipe/recipeList.do");

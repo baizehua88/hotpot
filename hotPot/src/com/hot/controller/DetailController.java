@@ -28,13 +28,11 @@ public class DetailController {
 	@ResponseBody
 	//javax.servlet.http.HttpServletRequest request
 	public String addDetail(String detailList){
-		System.out.println("前台传过来的"+detailList);
 		List<Detail> details = new ArrayList<Detail>();
 		details = jsonMap(detailList);
 		for (int i = 0; i < details.size(); i++) {
 			Detail detail = new Detail();
 			detail = details.get(i);
-			System.out.println(detail);
 			if (detail.getRno()>0) {
 				detailService.addDetail(detail);
 			}			
@@ -58,10 +56,7 @@ public class DetailController {
 	@RequestMapping("getDetailByOid.do")
 	@ResponseBody
 	public List<Detail> getDetailByOid(int oid){
-		//ModelAndView mv = new ModelAndView();
 		List<Detail> detailList = detailService.getDetailByOid(oid);
-		//mv.addObject("detailList", detailList);
-		System.out.println(detailList);
 		return detailList;
 	}
 		

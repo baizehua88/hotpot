@@ -17,4 +17,6 @@ public interface RecipeService {
 	public int updateRecipe(Recipe recipe);
 	
 	public int addStock(Recipe recipe);
+	
+	public List<Recipe> getAllre();
 }

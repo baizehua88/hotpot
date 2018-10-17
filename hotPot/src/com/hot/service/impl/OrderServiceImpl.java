@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hot.dao.OrderDao;
+import com.hot.model.Desk;
 import com.hot.model.Order;
 import com.hot.service.OrderService;
 
@@ -47,6 +48,16 @@ public class OrderServiceImpl implements OrderService {
 	public Order getOne(Integer oid) {
 		// TODO Auto-generated method stub
 		return orderDao.getOne(oid);
+	}
+	@Override
+	public int upDesk(Desk desk) {
+		// TODO Auto-generated method stub
+		return orderDao.upDesk(desk);
+	}
+	@Override
+	public Order selOrder(Order order) {
+		// TODO Auto-generated method stub
+		return orderDao.selOrder(order);
 	}
 
 }

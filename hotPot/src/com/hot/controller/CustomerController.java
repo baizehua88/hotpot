@@ -37,7 +37,6 @@ public class CustomerController {
 	public ModelAndView addMember(Customer customer){
 		ModelAndView mv = new ModelAndView();
 		customer.setCjoin(getTime());
-		System.out.println(customer.getCjoin());
 		customerService.addMember(customer);
 		mv.setViewName("redirect:/customer/customerList.do");
 		return mv;
@@ -57,7 +56,6 @@ public class CustomerController {
 	public Customer getMemberById(Customer customer){
 		System.out.println(customer.getCid());
 		Customer memberById = customerService.getMemberById(customer);
-		System.out.println(memberById);
 		return memberById;
 	}
 	
@@ -65,12 +63,9 @@ public class CustomerController {
 	@RequestMapping("/updateMember.do")
 	public ModelAndView updateMember(Customer customer){
 		ModelAndView mv = new ModelAndView();
-		System.out.println(customer);
 		if (customerService.updateMember(customer)>0) {
-			System.out.println("修改成功");
 			mv.setViewName("redirect:/customer/customerList.do");
 		}else {
-			System.out.println("修改失败");
 			mv.setViewName("redirect:/customer/customerList.do");
 		}
 		return mv;

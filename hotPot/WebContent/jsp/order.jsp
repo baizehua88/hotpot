@@ -444,15 +444,17 @@
 		function getInt() {
 			var k;
 			var att= {};    //创建一个空的json
-			var rname,stock;
+			var rname,rbid,stock;
 			var Array = [];
 			$("#mytr").each(function(){
 				for(k=1;k<9;k++){
 					if($("#check"+k).prop('checked')){
 						rname = document.getElementById('rname'+k).innerText;
+						rbid = document.getElementById('rbid'+k).innerText;
 						stock = $('#num'+k).val();
 						att = {
 								'rname':rname,
+								'rbid':rbid,
 								'stock':stock,
 							};
 						Array.push(att);

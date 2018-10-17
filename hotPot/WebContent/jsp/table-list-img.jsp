@@ -478,25 +478,6 @@
 											<input type="text" class="tpl-form-input" id="rname" name="rname" value="${recipeById.rname}">
 										</div>
 									</div>
-<%-- 
-
-									<div class="am-form-group">
-										<label for="user-weibo" class="am-u-sm-3 am-form-label">菜品缩略图
-											<span class="tpl-form-line-small-title"></span>
-										</label>
-										<div class="am-u-sm-9">
-											<div class="am-form-group am-form-file">
-												<div class="tpl-form-file-img">
-													<img src="<%=basePath %>assets/img/${recipeById.rimage}" alt="" style="width: 250px;height: 200px;">
-												</div>
-												<button type="button" class="am-btn am-btn-danger am-btn-sm">
-													<i class="am-icon-cloud-upload"></i> 添加菜品图片
-												</button>
-												<input id="doc-form-file" type="file" multiple="" name="rimage" >
-											</div>
-
-										</div>
-									</div> --%>
 									<div class="am-form-group">
 										<label for="user-weibo" class="am-u-sm-3 am-form-label">菜品缩略图
 											<span class="tpl-form-line-small-title"></span>
@@ -509,7 +490,7 @@
 												<button type="button" class="am-btn am-btn-danger am-btn-sm" style="float: left;">
 													<i class="am-icon-cloud-upload"></i> 更换菜品图片
 												</button>
-												<input id="doc-form-file" type="file" name="file" multiple="">
+												<input id="doc-form-file" type="file" name="file" accept="image/*" multiple="">
 												<input type="hidden" id="rimage" name="rimage" value="${recipeById.rimage}" style="width: 100%;height: 100%" >
 											</div>
 
@@ -575,19 +556,9 @@
     <script src="<%=basePath%>assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/jquery-1.7.2.js"></script>
     <script type="text/javascript">
-    /* $(function() {
-		var editBox = $('#calendar-edit-box');
-		$("#modify").click(function() {
-			//  弹出框
-			editBox.modal();
-		});
-
-	}); */
 	var editBox = $('#calendar-edit-box');
 	function GetRecipeId(_this){
 		//  弹出框
-		//$('#rid').val(_this.id);
-		alert(_this.id);
 		$.post("<%=basePath%>recipe/getRecipeById.do",{
 			rid : _this.id
 			},
