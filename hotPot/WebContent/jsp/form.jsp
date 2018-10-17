@@ -364,7 +364,7 @@
 												<button type="button" class="am-btn am-btn-danger am-btn-sm">
 													<i class="am-icon-cloud-upload"></i> 添加封面图片
 												</button>
-												<input id="doc-form-file" type="file" name="file"
+												<input id="doc-form-file" type="file" accept="image/*" name="file"
 													multiple="" onchange="show(this)"> <input
 													type="hidden" id="rimage" name="rimage"
 													style="width: 100%; height: 100%">

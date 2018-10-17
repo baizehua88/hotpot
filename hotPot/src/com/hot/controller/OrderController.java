@@ -29,6 +29,7 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.hot.config.AlipayConfig;
 import com.hot.model.AlipayNotifyParam;
+import com.hot.model.Desk;
 import com.hot.model.Detail;
 import com.hot.model.Finance;
 import com.hot.model.Order;
@@ -98,7 +99,6 @@ public class OrderController {
 	public ModelAndView orderList(){
 		ModelAndView mv =  new ModelAndView();
 		List<Order> orderList = orderService.getOrders();
-		System.out.println(orderList);
 		mv.addObject("orderList", orderList);
 		mv.setViewName("orderList");
 		return mv;
@@ -137,6 +137,8 @@ public class OrderController {
 				@Override
 				public void run() {
 					Order order = new Order();
+					Order order1 = new Order();
+					Desk desk = new Desk();
 					AlipayNotifyParam param = buildAlipayNotifyParam(params);
 					String trade_status = param.getTrade_status();
 					if (trade_status.equals("TRADE_SUCCESS")
@@ -154,6 +156,11 @@ public class OrderController {
 						finance.setFexpend(0);
 						finance.setFprofit(fincome);
 						financeService.addFinance(finance);
+
+						order1 = orderService.selOrder(order);
+						desk.setDid(order1.getDid());
+						desk.setDstate("未使用");
+						orderService.upDesk(desk);
 					}
 				}
 			});

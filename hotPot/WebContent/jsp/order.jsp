@@ -314,6 +314,7 @@
 													class="am-btn am-btn-default am-btn-success" onclick="getExcel();">
 													 生成入库单（选中行数据）
 												</button>
+												<input type="hidden" id="total" value="${totalre }"/>
 											</div>
 										</div>
 									</div>
@@ -337,7 +338,7 @@
 										<tbody>
                                             <c:forEach var="recipe" items="${recipeList}" step="1" varStatus="statu">
                                             <tr class="gradeX" id="mytr">
-											    <td><input id="check${statu.count }" name="checkitem" type="checkbox" onclick="input(${recipe.rid });"></td>
+											    <td><input id="check${statu.count }" name="checkitem" type="checkbox" onclick="input(${statu.count });"></td>
                                                 <td>
                                                     <img src="<%=basePath%>assets/img/${recipe.rimage}" style="height: 90px;width: 100%" class="tpl-table-line-img" alt="">
                                                 </td>
@@ -485,8 +486,9 @@
 			var att= {};    //创建一个空的json
 			var rname,stock;
 			var Array = [];
+			var total = $("#total").val();
 			$("#mytr").each(function(){
-				for(k=1;k<9;k++){
+				for(k=1;k<total+1;k++){
 					if($("#check"+k).prop('checked')){
 						rname = document.getElementById('rname'+k).innerText;
 						stock = $('#num'+k).val();

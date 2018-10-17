@@ -88,8 +88,11 @@ public class ExcelController {
 	        row = recipeService.addStock(re);
 	        fexpend += re.getRbid() * re.getStock();
 	        row++;
+
         } 
         System.out.println(fexpend);
+
+
         if (row > 0) {
         	Finance finance = new Finance();
         	finance.setFtime(getTime1());

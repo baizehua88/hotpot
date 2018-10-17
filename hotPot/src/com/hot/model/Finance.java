@@ -31,6 +31,7 @@ public class Finance {
 		public void setFprofit(int fprofit) {
 			this.fprofit = fprofit;
 		}
+
 		public int getFbalance() {
 			return fbalance;
 		}

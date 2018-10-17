@@ -4,6 +4,9 @@
 	<select id="getRecipes" parameterType="Recipe" resultType="Recipe">
 		SELECT * FROM hp_recipe limit #{start},#{rows};
 	</select>
+	<select id="getAllre" resultType="Recipe">
+		SELECT * FROM hp_recipe
+	</select>
 	<select id="getConunt" resultType="Integer">
 		SELECT COUNT(*) FROM hp_recipe;
 	</select>

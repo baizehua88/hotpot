@@ -50,4 +50,10 @@ public class RecipeServiceImpl implements RecipeService {
 		// TODO Auto-generated method stub
 		return recipeDao.addStock(recipe);
 	}
+
+	@Override
+	public List<Recipe> getAllre() {
+		// TODO Auto-generated method stub
+		return recipeDao.getAllre();
+	}
 }

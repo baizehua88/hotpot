@@ -31,7 +31,6 @@ public class StaffController {
 			session.setAttribute("staff", staff2);
 			session.setMaxInactiveInterval(-1);
 		}else {
-			
 			mv.setViewName("redirect:/jsp/login.jsp");
 		}
 		return mv;
@@ -41,7 +40,6 @@ public class StaffController {
 	public ModelAndView staffList(){
 		ModelAndView mv = new ModelAndView();
 		List<Staff> staffList = staffService.getStaff();
-		System.out.println(staffList);
 		mv.addObject("staffList", staffList);
 		mv.setViewName("employees");
 		return mv;	
