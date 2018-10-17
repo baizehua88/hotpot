@@ -246,16 +246,16 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/orderList.jsp"> <span
+							href="<%=basePath%>order/orderList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/day.jsp"> <span
+							href="<%=basePath%>finance/financeList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 日结算
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/sum.jsp"> <span
+							href="<%=basePath%>finance/sumFinanceList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 总结算
 						</a></li>
 					</ul></li>
@@ -495,7 +495,7 @@
 					<div >
 						<font style="float:left;font-size: 20px;">桌号</font>	
 						<div style="float: left; width: 20px; margin-left: 15px;">
-							<input type=text name="did" id="did">
+							<input type=text name="did" id="did1">
 						</div>
 					</div>
 					<div style="margin-top: 60px;">
@@ -518,9 +518,9 @@
 								<c:forEach var="recipe" items="${recipeList}">
 								<%-- rname="${recipe.rname}" rprice="${recipe.rprice}" rno="" rtotal="" --%>
 								<tr class="gradeX" id="nm${recipe.rid}" rname="${recipe.rname}" rprice="${recipe.rprice}" rno="" rtotal="" >
-									<td class="am-text-middle" >
+									<%-- <td class="am-text-middle" >
 										<input type="hidden" name="rid" value="${recipe.rid}">
-									</td>
+									</td> --%>
 									<td>
                                         <img src="<%=basePath%>assets/img/${recipe.rimage}" class="tpl-table-line-img" alt="">
                                     </td>
@@ -542,7 +542,7 @@
 												if(this.form.num${recipe.rid}.value>0) this.form.num${recipe.rid}.value= Number(this.form.num${recipe.rid}.value) - Number(1);
 												if(this.form.num${recipe.rid}.value>=0) this.form.sum${recipe.rid}.value=${recipe.rprice}*this.form.num${recipe.rid}.value;
 												$('#nm${recipe.rid}').attr('rno',this.form.num${recipe.rid}.value);
-												$('#nm${recipe.rid}').attr('sno',this.form.sum${recipe.rid}.value);
+												$('#nm${recipe.rid}').attr('rtotal',this.form.sum${recipe.rid}.value);
 												">
 											</div>
 											<div style="float: left; width: 40px; margin-left: 15px;">
@@ -673,7 +673,7 @@
 			//  弹出框
 			//alert(_this.id);
 			//alert(typeof(_this.name));
-			$('#did').val(_this.id);			
+			$('#did1').val(_this.id);			
 			if (_this.name=="未使用") {
 				editBox.modal();
 			}else {				
@@ -685,7 +685,7 @@
  			//getChecked();
 			//  下单
 			$.post("<%=basePath%>order/addOrder.do",{
-				did : $('#did').val(),
+				did : $('#did1').val(),
 				oprice : $('#oprice').val(),
 				
 				},function(data){

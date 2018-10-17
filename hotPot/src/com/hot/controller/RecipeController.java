@@ -78,7 +78,7 @@ public class RecipeController {
 		return mv;		
 	}
 	
-	
+	//在线订货分页显示
 	@RequestMapping("/recipeListorder.do")
 	public ModelAndView recipeListorder(HttpServletRequest request,HttpSession session,Recipe recipe){
 		
@@ -152,6 +152,7 @@ public class RecipeController {
 		return mv;
 	}
 	
+	//添加菜品
 	@RequestMapping("/addRecipe.do")
 	public ModelAndView addRecipe(Recipe recipe,MultipartFile file,HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -167,6 +168,7 @@ public class RecipeController {
 		mv.setViewName("redirect:/recipe/recipeList.do");
 		return mv;				
 	}
+	
 	
 	@RequestMapping("/getRecipeById.do")
 	@ResponseBody

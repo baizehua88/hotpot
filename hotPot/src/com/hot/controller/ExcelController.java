@@ -19,7 +19,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.hot.model.Finance;
 import com.hot.model.Recipe;
+import com.hot.service.FinanceService;
 import com.hot.service.RecipeService;
 import com.hot.utils.ExcelUtil;
 
@@ -31,6 +33,9 @@ public class ExcelController {
 	@Autowired
 	@Qualifier("recipeService")
 	private RecipeService recipeService;
+	@Autowired
+	@Qualifier("financeService")
+	private FinanceService financeService;
 	
 	//开发者数据导出功能
 	@RequestMapping("/excelStock.do")
@@ -77,19 +82,35 @@ public class ExcelController {
 		int row = 0;
         List<Recipe> recipes = new ArrayList<Recipe>();
         recipes = jsonMap(request);
-         
+        int fexpend = 0; 
         for(int i=0; i < recipes.size(); i++){ 
 	        Recipe re = recipes.get(i);
 	        row = recipeService.addStock(re);
+	        fexpend += re.getRbid() * re.getStock();
 	        row++;
         } 
+        System.out.println(fexpend);
         if (row > 0) {
+        	Finance finance = new Finance();
+        	finance.setFtime(getTime1());
+        	finance.setFexpend(fexpend);
+        	finance.setFincome(0);
+        	finance.setFbalance(0-fexpend);
+        	finance.setFprofit(0-fexpend);
+        	financeService.addFinance(finance);
+        	
 			return "OK";
 		}else {
 			return "FAIL";
 		}
 	}
 	
+	public String getTime1() {
+		Date now = new Date(); 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//可以方便地修改日期格式 yyyy/MM/dd HH:mm:ss
+		String time = dateFormat.format( now ); 
+		return time;
+	}
 	
 	public String getTime() {
 		Date now = new Date(); 

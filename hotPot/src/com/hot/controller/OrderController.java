@@ -30,8 +30,10 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.hot.config.AlipayConfig;
 import com.hot.model.AlipayNotifyParam;
 import com.hot.model.Detail;
+import com.hot.model.Finance;
 import com.hot.model.Order;
 import com.hot.service.DeskService;
+import com.hot.service.FinanceService;
 import com.hot.service.OrderService;
 import com.hot.utils.RandomTool;
 
@@ -49,6 +51,11 @@ public class OrderController {
 	@Qualifier("deskService")
 	private DeskService deskService;
 	
+	@Autowired
+	@Qualifier("financeService")
+	private FinanceService financeService;
+	
+	//下单
 	@RequestMapping("/addOrder.do")
 	@ResponseBody
 	public int addOrder(Order order){
@@ -68,6 +75,7 @@ public class OrderController {
 		
 	}
 	
+	//买单结算--查询所有未付款订单
 	@RequestMapping("/getOrder.do")
 	public ModelAndView getOrder() {
 		ModelAndView mv = new ModelAndView();
@@ -85,6 +93,7 @@ public class OrderController {
 		return time;
 	}
 	
+	//订单列表----所有订单查询
 	@RequestMapping("/orderList.do")
 	public ModelAndView orderList(){
 		ModelAndView mv =  new ModelAndView();
@@ -135,6 +144,16 @@ public class OrderController {
 						order.setOtime(param.getBody());;
 						order.setOstate("已付款");
 						orderService.zhiFu(order);
+						
+						//加入日结算表
+						Finance finance =new Finance();
+						int fincome = param.getTotal_amount().intValue();
+						finance.setFincome(fincome);
+						finance.setFtime(param.getBody());
+						finance.setFbalance(fincome);
+						finance.setFexpend(0);
+						finance.setFprofit(fincome);
+						financeService.addFinance(finance);
 					}
 				}
 			});

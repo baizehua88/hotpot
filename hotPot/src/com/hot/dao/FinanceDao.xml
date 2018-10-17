@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hot.dao.FinanceDao">
+	<select id="getFinances" parameterType="Finance" resultType="Finance">
+		<!-- SELECT * FROM hp_finance; -->
+		SELECT * FROM hp_finance 
+		WHERE ftime LIKE
+		CONCAT('%',(select SUBSTRING(#{ftime},1,10)), '%')
+	</select>
+	<insert id="addFinance" parameterType="Finance">
+		INSERT INTO hp_finance (ftime,fincome,fexpend,fprofit,fbalance)
+			VALUES(#{ftime},#{fincome},#{fexpend},#{fprofit},#{fbalance});
+	</insert>
+	<select id="getSumFinances" parameterType="Finance" resultType="Finance">
+		SELECT (select SUBSTRING(#{ftime},1,10)) ftime,
+		SUM(fincome) fincome,SUM(fexpend) fexpend,SUM(fprofit) fprofit,SUM(fbalance) fbalance
+		FROM hp_finance
+		WHERE ftime LIKE
+		CONCAT('%',(select SUBSTRING(#{ftime},1,10)), '%')
+		GROUP BY (select SUBSTRING(#{ftime},1,10))
+	</select>
+	<select id="getFtime" resultType="Finance">
+		SELECT DISTINCT (select SUBSTRING(ftime,1,10)) ftime FROM hp_finance;
+	</select>
+	
+</mapper>
