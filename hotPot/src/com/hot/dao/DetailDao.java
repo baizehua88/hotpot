@@ -7,6 +7,7 @@ import com.hot.model.Recipe;
 
 public interface DetailDao {
 	public int addDetail(Detail detail);
+	
 	public List<Detail> getDetailByOid(int oid);
 	
 	public List<Detail> getTotal();

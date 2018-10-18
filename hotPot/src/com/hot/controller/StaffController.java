@@ -2,6 +2,7 @@ package com.hot.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,8 +18,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.hot.model.Order;
 import com.hot.model.Staff;
 import com.hot.service.StaffService;
+import com.hot.utils.DingZhi;
 
 @Controller
 @RequestMapping("/staff")
@@ -37,26 +40,50 @@ public class StaffController {
 			mv.setViewName("index");
 			session.setAttribute("staff", staff2);
 			session.setMaxInactiveInterval(-1);
-<<<<<<< HEAD
 		} else {
-
-=======
-		}else {
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 			mv.setViewName("redirect:/jsp/login.jsp");
 		}
 		return mv;
 	}
 
 	@RequestMapping("/staffList.do")
-	public ModelAndView staffList() {
+	public ModelAndView staffList(Staff staff) {
 		ModelAndView mv = new ModelAndView();
 		List<Staff> staffList = staffService.getStaff();
-<<<<<<< HEAD
-		// System.out.println(staffList);
-=======
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
-		mv.addObject("staffList", staffList);
+		
+		// 分页显示
+		int page = 1;
+		int start = 0;
+		if (staff.getPage() != null) {
+			page = staff.getPage();
+		}
+		// 数据总条数
+		int total = staffList.size();
+		// 总页数
+		int totalPage = total / DingZhi.hang;
+		Vector<Integer> pageArr = new Vector<Integer>();
+		if (total % DingZhi.hang != 0) {
+			totalPage += 1;
+		}
+		if (page >= DingZhi.page) {
+			start = page / DingZhi.page * DingZhi.hang;
+		}
+		int num = start + 1;
+		// 页数列表
+		while (!(num > totalPage || num > start + DingZhi.page)) {
+			pageArr.add(new Integer(num));
+			++num;
+		}
+		start = (page - 1) * DingZhi.hang;
+		staff.setStart(start);
+		staff.setRows(DingZhi.hang);
+		List<Staff> staffs = new ArrayList<Staff>();
+		staffs = staffService.pageStaff(staff);
+		
+		mv.addObject("staffList", staffs);
+		mv.addObject("pagelist", pageArr);
+		mv.addObject("page", page);
+		mv.addObject("totalpage", totalPage);
 		mv.setViewName("employees");
 		return mv;
 	}
@@ -94,11 +121,44 @@ public class StaffController {
 	}
 
 	@RequestMapping("/payStaffList.do")
-	public ModelAndView payStaffList() {
+	public ModelAndView payStaffList(Staff staff) {
 		ModelAndView mv = new ModelAndView();
 		List<Staff> payStaffList = staffService.getPayStaff();
-		mv.addObject("payStaffList", payStaffList);
-		// System.out.println(payStaffList);
+		
+		// 分页显示
+		int page = 1;
+		int start = 0;
+		if (staff.getPage() != null) {
+			page = staff.getPage();
+		}
+		// 数据总条数
+		int total = payStaffList.size();
+		// 总页数
+		int totalPage = total / DingZhi.hang;
+		Vector<Integer> pageArr = new Vector<Integer>();
+		if (total % DingZhi.hang != 0) {
+			totalPage += 1;
+		}
+		if (page >= DingZhi.hang) {
+			start = page / DingZhi.page * DingZhi.hang;
+		}
+		int num = start + 1;
+		// 页数列表
+		while (!(num > totalPage || num > start + DingZhi.hang)) {
+			pageArr.add(new Integer(num));
+			++num;
+		}
+		start = (page - 1) * DingZhi.hang;
+		staff.setStart(start);
+		staff.setRows(DingZhi.hang);
+		List<Staff> staffs = new ArrayList<Staff>();
+		staffs = staffService.pageStaff(staff);
+		
+		mv.addObject("pagelist", pageArr);
+		mv.addObject("page", page);
+		mv.addObject("totalpage", totalPage);
+		mv.addObject("payStaffList", staffs);
+		mv.addObject("totalStaff", payStaffList.size());
 		mv.setViewName("payroll");
 		return mv;
 	}

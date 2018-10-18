@@ -6,6 +6,9 @@ public class Order {
 	private Integer did;
 	private Double oprice;
 	private String ostate;
+	private Integer start;
+	private Integer rows;
+	private Integer page;
 	public Integer getOid() {
 		return oid;
 	}
@@ -36,4 +39,23 @@ public class Order {
 	public void setOstate(String ostate) {
 		this.ostate = ostate;
 	}
+	public Integer getStart() {
+		return start;
+	}
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+	public Integer getRows() {
+		return rows;
+	}
+	public void setRows(Integer rows) {
+		this.rows = rows;
+	}
+	public Integer getPage() {
+		return page;
+	}
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+	
 }

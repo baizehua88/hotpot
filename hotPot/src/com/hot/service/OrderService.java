@@ -21,4 +21,6 @@ public interface OrderService {
 	public int upDesk(Desk desk);
 	
 	public Order selOrder(Order order);
+	
+	public List<Order> pageOrder(Order order);
 }

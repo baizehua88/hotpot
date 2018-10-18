@@ -344,13 +344,34 @@
 
 									<div class="am-fr">
 										<ul class="am-pagination tpl-pagination">
-											<li class="am-disabled"><a href="#">«</a></li>
-											<li class="am-active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#">»</a></li>
+											<c:choose>
+												<c:when test="${page == 1 }">
+													<li class="am-disabled"><a href="#">«</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a href="sumFinanceList.do?page=${page-1 }">«</a></li>
+												</c:otherwise>
+											</c:choose>
+											<c:forEach items="${pagelist }" var="item">
+												<c:choose>
+													<c:when test="${item == page }">
+														<li class="am-active"><a
+															href="sumFinanceList.do?page=${item }">${item }</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a href="sumFinanceList.do?page=${item }">${item }</a>
+														</li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+											<c:choose>
+												<c:when test="${page == totalpage }">
+													<li class="am-disabled"><a href="#">»</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a href="sumFinanceList.do?page=${page+1 }">»</a></li>
+												</c:otherwise>
+											</c:choose>
 										</ul>
 									</div>
 								</div>

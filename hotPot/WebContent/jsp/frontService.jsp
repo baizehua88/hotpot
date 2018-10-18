@@ -199,9 +199,8 @@
 					href="<%=basePath%>jsp/index.jsp"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
-				<li class="sidebar-nav-link"><a
-					href="<%=basePath%>order/getOrder.do"> <i
-						class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
+				<li class="sidebar-nav-link"><a href="<%=basePath%>order/getOrder.do">
+						<i class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
 				</a></li>
 				<li class="sidebar-nav-link"><a
 					href="<%=basePath%>desk/deskList.do" class="active"> <i
@@ -292,7 +291,7 @@
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加员工
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>staff/payStaffList.do"> <span
+							href="<%=basePath%>jsp/payroll.jsp"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 发放薪资
 						</a></li>
 					</ul></li>
@@ -310,8 +309,6 @@
 								<div class="widget-title  am-cf">前台服务</div>
 							</div>
 							<div class="widget-body  am-fr">
-<<<<<<< HEAD
-
 								<div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
 									<div class="am-form-group">
 										<div class="am-btn-toolbar">
@@ -351,9 +348,6 @@
 										</div>
 									</div>
 								</form>
-
-=======
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 								<div class="am-u-sm-12">
 									<table width="100%"
 										class="am-table am-table-compact am-table-striped tpl-table-black "
@@ -369,26 +363,6 @@
 										</thead>
 										<tbody>
 											<c:forEach var="desk" items="${deskList}">
-<<<<<<< HEAD
-												<tr class="gradeX">
-													<td>${desk.did}</td>
-													<td>${desk.dname}</td>
-													<td>${desk.dcount}</td>
-													<td>${desk.dstate}</td>
-													<td>
-														<div class="tpl-table-black-operation">
-															<a href="javascript:void(0);" id="${desk.did}"
-																name="${desk.dstate}" onClick="GetDetail(this);"> <i
-																class="am-icon-pencil"></i> 查看订单
-															</a> <a href="javascript:void(0);"
-																class="tpl-table-black-operation-del" id="${desk.did}"
-																name="${desk.dstate}" onClick="GetFolderId(this);">
-																<i class="am-icon-paint-brush"></i> 使用
-															</a>
-														</div>
-													</td>
-												</tr>
-=======
 												<tr class="gradeX" >
 												<td>${desk.did}</td>
 												<td>${desk.dname}</td>
@@ -405,38 +379,19 @@
 													</div>
 												</td>
 											</tr>							
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 											</c:forEach>
 											<!-- more data -->
 										</tbody>
 									</table>
 								</div>
-<<<<<<< HEAD
-								<div class="am-u-lg-12 am-cf">
-									<div class="am-fr">
-										<ul class="am-pagination tpl-pagination">
-											<li class="am-disabled"><a href="#">«</a></li>
-											<li class="am-active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#">»</a></li>
-										</ul>
-									</div>
-								</div>
-
-							</div>
-=======
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-<<<<<<< HEAD
-		<!-- 删除信息弹出层 -->
+	<!-- 删除信息弹出层 -->
 		<div class="am-modal am-modal-no-btn" id="calendar-edit-box-delete"
 			style="width: 100%; margin: auto;">
 			<div class="am-modal-dialog tpl-model-dialog" style="width: 40%;">
@@ -444,54 +399,6 @@
 					<a href="javascript: void(0)"
 						class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
 				</div>
-=======
-	<!-- 查看订单弹出层 -->
-
-	<div class="am-modal am-modal-no-btn" id="calendar-edit-box1"
-		style="width: 100%; margin: auto;">
-		<div class="am-modal-dialog tpl-model-dialog" style="width: 55%;">
-			<div class="am-modal-hd">
-				<a href="javascript: void(0)"
-					class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
-			</div>
-			<div class="am-modal-bd tpl-am-model-bd am-cf">
-
-				<form class="am-form tpl-form-border-form" 
-				action="javascript: void(0);" method="post" enctype="multipart/form-data">			
-					<div >
-						<font style="float:left;font-size: 20px;">桌号</font>	
-						<div style="float: left; width: 20px; margin-left: 15px;">
-							<input type=text name="did" id="did">
-							<input type="hidden" id="oid" >
-						</div>
-					</div>
-					<div style="margin-top: 60px;">
-					<font style="text-align:center;font-size: 30px;">订单详情</font>
-					</div>
-					<div class="am-u-sm-12">
-						<table width="100%" id="table_details1"
-							class="am-table am-table-compact am-table-striped tpl-table-black ">
-							<thead>
-								<tr >
-									<th style="text-align: center;">名称</th>
-									<th style="text-align: center;">单价</th>
-									<th style="text-align: center;">数量</th>
-									<th style="text-align: center;">小计</th>
-								</tr>
-							</thead>
-							<tbody id="detail">
-																
-							</tbody>
-						</table>				
-					</div>	
-				</form>
-			</div>
-		</div>
-	</div>
-	
-		<!-- 使用弹出层 -->
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
-
 				<form action="<%=basePath%>desk/delFrontService.do" method="post">
 					请输入想要删除的桌号：<input type="text" name="did"> <input
 						type="submit" value="提交" onclick="javascript:return ConfirmDel();">
@@ -500,8 +407,7 @@
 			</div>
 		</div>
 
-<<<<<<< HEAD
-		<!-- 添加信息弹出层 -->
+	<!-- 添加信息弹出层 -->
 		<div class="am-modal am-modal-no-btn" id="calendar-edit-box-add"
 			style="width: 100%; margin: auto;">
 			<div class="am-modal-dialog tpl-model-dialog" style="width: 40%;">
@@ -554,52 +460,62 @@
 			</div>
 		</div>
 
+	
+	<!-- 查看订单弹出层 -->
 
-		<!-- 查看订单弹出层 -->
+	<div class="am-modal am-modal-no-btn" id="calendar-edit-box1"
+		style="width: 100%; margin: auto;">
+		<div class="am-modal-dialog tpl-model-dialog" style="width: 55%;">
+			<div class="am-modal-hd">
+				<a href="javascript: void(0)"
+					class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd tpl-am-model-bd am-cf">
 
-		<div class="am-modal am-modal-no-btn" id="calendar-edit-box1"
-			style="width: 100%; margin: auto;">
-			<div class="am-modal-dialog tpl-model-dialog" style="width: 55%;">
-				<div class="am-modal-hd">
-					<a href="javascript: void(0)"
-						class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
-				</div>
-				<div class="am-modal-bd tpl-am-model-bd am-cf">
-
-					<form class="am-form tpl-form-border-form"
-						action="javascript: void(0);" method="post"
-						enctype="multipart/form-data">
-						<div>
-							<font style="float: left; font-size: 20px;">桌号</font>
-							<div style="float: left; width: 20px; margin-left: 15px;">
-								<input type=text name="did" id="did"> <input
-									type="hidden" id="oid">
-							</div>
+				<form class="am-form tpl-form-border-form" 
+				action="javascript: void(0);" method="post" enctype="multipart/form-data">			
+					<div >
+						<font style="float:left;font-size: 20px;">桌号</font>	
+						<div style="float: left; width: 20px; margin-left: 15px;">
+							<input type=text name="did" id="did">
+							<input type="hidden" id="oid" >
 						</div>
-						<div style="margin-top: 60px;">
-							<font style="text-align: center; font-size: 30px;">订单</font>
-						</div>
-						<div class="am-u-sm-12">
-							<table width="100%" id="table_details1"
-								class="am-table am-table-compact am-table-striped tpl-table-black ">
-								<thead>
-									<tr>
-										<th style="text-align: center;">名称</th>
-										<th style="text-align: center;">单价</th>
-										<th style="text-align: center;">数量</th>
-										<th style="text-align: center;">小计</th>
-									</tr>
-								</thead>
-								<tbody id="detail">
-									<%-- id="nm${recipe.rid}" rname="${recipe.rname}" rprice="${recipe.rprice}" rno="" rtotal="" --%>
+					</div>
+					<div style="margin-top: 60px;">
+					<font style="text-align:center;font-size: 30px;">订单详情</font>
+					</div>
+					<div class="am-u-sm-12">
+						<table width="100%" id="table_details1"
+							class="am-table am-table-compact am-table-striped tpl-table-black ">
+							<thead>
+								<tr >
+									<th style="text-align: center;">名称</th>
+									<th style="text-align: center;">单价</th>
+									<th style="text-align: center;">数量</th>
+									<th style="text-align: center;">小计</th>
+								</tr>
+							</thead>
+							<tbody id="detail">
+																
+							</tbody>
+						</table>				
+					</div>	
+				</form>
+			</div>
+		</div>
+	</div>
+	
+		<!-- 使用弹出层 -->
 
-									<!-- more data -->
+	<div class="am-modal am-modal-no-btn" id="calendar-edit-box"
+		style="width: 100%; margin: auto;">
+		<div class="am-modal-dialog tpl-model-dialog" style="width: 55%;">
+			<div class="am-modal-hd">
+				<a href="javascript: void(0)"
+					class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd tpl-am-model-bd am-cf">
 
-								</tbody>
-							</table>
-						</div>
-						<!-- <div >
-=======
 				<form class="am-form tpl-form-border-form" 
 				action="javascript: void(0);" method="post" enctype="multipart/form-data">			
 					<div style="margin-top: 60px;">
@@ -624,7 +540,6 @@
 						</table>				
 					</div>	
 					<div >
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 						<font style="font-size: 20px;float: left;">总计：</font>						
 						<font style="font-size: 20px;margin-left: 20px;text-align: left;float: left;">用餐人数</font>
 						<div style="margin-left: 20px;">
@@ -652,17 +567,12 @@
 							<button type="submit" onclick="Order(this)"
 								class="am-btn am-btn-primary tpl-btn-bg-color-success ">下单</button>
 						</div>
-					</div> -->
+					</div>
 
-					</form>
+				</form>
 
-				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-
-		<!-- 使用弹出层 -->
-=======
 	</div>
 	
 	
@@ -671,147 +581,9 @@
 	<script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
 	<script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
 	<script src="<%=basePath%>assets/js/app.js"></script>
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 
-<<<<<<< HEAD
-		<div class="am-modal am-modal-no-btn" id="calendar-edit-box"
-			style="width: 100%; margin: auto;">
-			<div class="am-modal-dialog tpl-model-dialog" style="width: 55%;">
-				<div class="am-modal-hd">
-					<a href="javascript: void(0)"
-						class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
-				</div>
-				<div class="am-modal-bd tpl-am-model-bd am-cf">
-
-					<form class="am-form tpl-form-border-form"
-						action="javascript: void(0);" method="post"
-						enctype="multipart/form-data">
-						<div>
-							<font style="float: left; font-size: 20px;">桌号</font>
-							<div style="float: left; width: 20px; margin-left: 15px;">
-								<input type=text name="did" id="did">
-							</div>
-						</div>
-						<div style="margin-top: 60px;">
-							<font style="text-align: center; font-size: 30px;">菜单</font>
-						</div>
-						<div class="am-u-sm-12">
-							<table width="100%" id="table_details"
-								class="am-table am-table-compact am-table-striped tpl-table-black ">
-								<thead>
-									<tr>
-										<th>图片</th>
-										<th>名称</th>
-										<th>类别</th>
-										<th>单价</th>
-										<th>库存</th>
-										<th>小计</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="recipe" items="${recipeList}">
-										<%-- rname="${recipe.rname}" rprice="${recipe.rprice}" rno="" rtotal="" --%>
-										<tr class="gradeX" id="nm${recipe.rid}"
-											rname="${recipe.rname}" rprice="${recipe.rprice}" rno=""
-											rtotal="">
-											<td class="am-text-middle"><input type="hidden"
-												name="rid" value="${recipe.rid}"></td>
-											<td><img src="<%=basePath%>assets/img/${recipe.rimage}"
-												class="tpl-table-line-img" alt=""></td>
-											<td class="am-text-middle">${recipe.rname}</td>
-											<td class="am-text-middle">${recipe.rsort}</td>
-											<td class="am-text-middle">${recipe.rprice}</td>
-											<td class="am-text-middle">${recipe.rstock}</td>
-											<td class="am-text-middle">
-												<div style="float: left; width: 40px; margin-left: 15px;">
-													<input type=text value=0 name=sum${recipe.rid}>
-												</div>
-											</td>
-											<td class="am-text-middle">
-												<div>
-													<div style="float: left; width: 20px; font-size: 20px;">
-														<input type=button value="-"
-															onClick="javascript:
-												if(this.form.count.value>=0 && this.form.num${recipe.rid}.value>0) this.form.count.value--;
-												if(this.form.num${recipe.rid}.value>0) this.form.oprice.value = this.form.oprice.value - ${recipe.rprice};
-												if(this.form.num${recipe.rid}.value>0) this.form.num${recipe.rid}.value= Number(this.form.num${recipe.rid}.value) - Number(1);
-												if(this.form.num${recipe.rid}.value>=0) this.form.sum${recipe.rid}.value=${recipe.rprice}*this.form.num${recipe.rid}.value;
-												$('#nm${recipe.rid}').attr('rno',this.form.num${recipe.rid}.value);
-												$('#nm${recipe.rid}').attr('sno',this.form.sum${recipe.rid}.value);
-												">
-													</div>
-													<div style="float: left; width: 40px; margin-left: 15px;">
-														<input type=text value=0 name=num${recipe.rid}>
-													</div>
-													<div
-														style="float: left; width: 20px; font-size: 20px; margin-left: 15px;">
-														<input type=button value="+"
-															onClick="javascript:
-												this.form.num${recipe.rid}.value= Number(this.form.num${recipe.rid}.value) + Number(1);												
-												this.form.sum${recipe.rid}.value=${recipe.rprice}*this.form.num${recipe.rid}.value;											
-												this.form.count.value++;
-												this.form.oprice.value =  Number(this.form.oprice.value) +  Number(${recipe.rprice});
-												$('#nm${recipe.rid}').attr('rno',this.form.num${recipe.rid}.value);
-												$('#nm${recipe.rid}').attr('rtotal',this.form.sum${recipe.rid}.value);
-												">
-													</div>
-												</div>
-											</td>
-										</tr>
-									</c:forEach>
-									<!-- more data -->
-
-								</tbody>
-							</table>
-						</div>
-						<div>
-							<font style="font-size: 20px; float: left;">总计：</font> <font
-								style="font-size: 20px; margin-left: 20px; text-align: left; float: left;">用餐人数</font>
-							<div style="margin-left: 20px;">
-								<div style="float: left; width: 20px; font-size: 20px;">
-									<input type=button value="-"
-										onClick="javascript:if(this.form.man.value>0) this.form.oprice.value =  Number(this.form.oprice.value) - Number(5);if(this.form.man.value>0) this.form.man.value--;">
-								</div>
-								<div style="float: left; width: 40px; margin-left: 15px;">
-									<input type=text value=0 name=man>
-								</div>
-								<div
-									style="float: left; width: 20px; font-size: 20px; margin-left: 15px;">
-									<input type=button value="+"
-										onClick="javascript:this.form.oprice.value =  Number(this.form.oprice.value) + Number(5);this.form.man.value++;">
-								</div>
-							</div>
-							<font
-								style="font-size: 20px; margin-left: 60px; text-align: left; float: left;">数量</font>
-							<div style="float: left; width: 40px; margin-left: 15px;">
-								<input type=text value=0 name=count>
-							</div>
-							<font
-								style="font-size: 20px; margin-left: 60px; text-align: left; float: left;">总金额</font>
-							<div style="float: left; width: 40px; margin-left: 15px;">
-								<input type=text value=0 name=oprice id="oprice">
-							</div>
-						</div>
-						<div class="am-form-group"">
-							<div class="am-u-sm-12 am-u-sm-push-12" style="margin-top: 60px;">
-								<button type="submit" onclick="Order(this)"
-									class="am-btn am-btn-primary tpl-btn-bg-color-success ">下单</button>
-							</div>
-						</div>
-
-					</form>
-
-				</div>
-			</div>
-		</div>
-
-		<script src="<%=basePath%>assets/js/amazeui.min.js"></script>
-		<script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
-		<script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
-		<script src="<%=basePath%>assets/js/app.js"></script>
-
-		<script type="text/javascript">
-		
+	<script type="text/javascript">
+	
 		function ConfirmDel() {
 			if (confirm("真的要删除吗？")){
 			    return true;
@@ -819,105 +591,32 @@
 			    return false;
 			}
 		}
-		
+	
 		//添加
 		$(function() {
 		var editBox = $('#calendar-edit-box-add');
-		$("#add").click(function() {
-			//  弹出框
-			editBox.modal();
-		});
-
-	}); 
+			$("#add").click(function() {
+				//  弹出框
+				editBox.modal();
+			});
+		}); 
 		
 		//删除
 		$(function() {
 		var editBox = $('#calendar-edit-box-delete');
-		$("#delete").click(function() {
-			//  弹出框
-			editBox.modal();
+			$("#delete").click(function() {
+				//  弹出框
+				editBox.modal();
+			});
 		});
-
-	});
-		
-=======
-	<script type="text/javascript">
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
+	
 		var editBox = $('#calendar-edit-box');
 		var editBox1 = $('#calendar-edit-box1');
 		var ooid ;
 		
 		//查看订单
 		function GetDetail(_this){
-<<<<<<< HEAD
 			//  弹出框
-			$('#did').val(_this.id);			
-			if (_this.name=="正在使用") {
-				$.post("<%=basePath%>order/getDetailOid.do",{
-					did : $('#did').val(),					
-					},function(data){
-						ooid = data;
-						$('#oid').val(data);
-						alert("订单ID："+ooid);
-						//getChecked();
-						$.ajax({
-							type: "post",
-							url : "<%=basePath%>detail/getDetailByOid.do",
-							//dataType: "json",
-							cache: true,
-							data:{'oid':ooid},
-							success: function (data) {
-								var t1 = document.getElementById("table_details1");
-								var rowNum = t1.rows.length;
-								var i;
-								if(rowNum>1){
-									for(i=1;i<rowNum;i++){
-										t1.deleteRow(i);
-										rowNum = rowNum - 1;
-										i = i - 1;
-									}
-								}
-								
-								$.each(data,function(key,values){
-									$("#detail").append(
-										"<tr class='gradeX'>"
-                                    	+"<td>"+values.rname+"</td>"
-                                    	+"<td>"+values.rtotal+"</td>"
-                                    	+"<td>"+values.rno+"</td>"
-                                    	+"<td>"+values.rprice+"</td></tr>"
-									);
-								});
-								editBox1.modal();
-							}						
-					   }); 				  
-					
-					   
-					}); 
-				
-			}else {				
-				window.alert("该餐位还未使用");
-				<%-- window.location.href = "<%=basePath%>desk/deskList.do"; --%>
-			} 
-		}
-		function Open() {
-			editBox1.modal();	
-		}
-		
-		//使用
-		function GetFolderId(_this){
-=======
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
-			//  弹出框
-<<<<<<< HEAD
-			//alert(_this.id);
-			//alert(typeof(_this.name));
-			$('#did').val(_this.id);			
-			if (_this.name=="未使用") {
-				editBox.modal();
-			}else {				
-				window.alert("该餐位正在使用");
-				<%-- window.location.href = "<%=basePath%>desk/deskList.do"; --%>
-=======
 			$('#did').val(_this.id);			
 			if (_this.name=="正在使用") {
 				$.post("<%=basePath%>order/getDetailOid.do",{
@@ -962,47 +661,8 @@
 				
 			}else {				
 				window.alert("该餐位还未使用");
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 			} 
 		}
-<<<<<<< HEAD
- 		function Order(_this){	
- 			//getChecked();
-			//  下单
-			$.post("<%=basePath%>order/addOrder.do",{
-				did : $('#did').val(),
-				oprice : $('#oprice').val(),
-				
-				},function(data){
-					ooid = data;
-					alert("订单号："+ooid);
-					getChecked();
-					$.ajax({
-						type: "post",
-						url : "<%=basePath%>detail/addDetail.do",
-						//dataType: "json",
-						cache: true,
-						data:{'detailList':JSON.stringify(array)},
-						/* contentType:"application/json", */
-						success: function (data) {
-							<%-- $.post("<%=basePath%>desk/deskList.do"); --%>
-							//alert("1111111111111");
-							window.location.href = "<%=basePath%>desk/deskList.do";
-						}						
-				   });
-				}); 
-			
-		}
-		
- 		var array = new Array();
-		var ohjInfo = "";
-		var ohjInfoEnd = "";
-		
-		
-		function getChecked() {
-			//alert("进来了");
-			//alert("长度："+$('#table_details tbody tr').length);			
-=======
 		function Open() {
 			editBox1.modal();	
 		}
@@ -1109,7 +769,6 @@
 		
 		
 		function getChecked() {
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 			var rname="";
 			var rno="";
 			var rprice="";
@@ -1135,6 +794,7 @@
 		}	
 		
 	</script>
+
 </body>
 
 </html>

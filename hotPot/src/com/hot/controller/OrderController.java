@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -39,6 +40,7 @@ import com.hot.service.CustomerService;
 import com.hot.service.DeskService;
 import com.hot.service.FinanceService;
 import com.hot.service.OrderService;
+import com.hot.utils.DingZhi;
 import com.hot.utils.RandomTool;
 
 @Controller
@@ -97,13 +99,45 @@ public class OrderController {
 		return time;
 	}
 	
-<<<<<<< HEAD
 	//订单列表----所有订单查询
 	@RequestMapping("/orderList.do")
-	public ModelAndView orderList(){
+	public ModelAndView orderList(Order order){
 		ModelAndView mv =  new ModelAndView();
 		List<Order> orderList = orderService.getOrders();
-		mv.addObject("orderList", orderList);
+		
+		// 分页显示
+		int page = 1;
+		int start = 0;
+		if (order.getPage() != null) {
+			page = order.getPage();
+		}
+		// 数据总条数
+		int total = orderList.size();
+		// 总页数
+		int totalPage = total / DingZhi.hang;
+		Vector<Integer> pageArr = new Vector<Integer>();
+		if (total % DingZhi.hang != 0) {
+			totalPage += 1;
+		}
+		if (page >= DingZhi.page) {
+			start = page / DingZhi.page * DingZhi.hang;
+		}
+		int num = start + 1;
+		// 页数列表
+		while (!(num > totalPage || num > start + DingZhi.page)) {
+			pageArr.add(new Integer(num));
+			++num;
+		}
+		start = (page - 1) * DingZhi.hang;
+		order.setStart(start);
+		order.setRows(DingZhi.hang);
+		List<Order> orders = new ArrayList<Order>();
+		orders= orderService.pageOrder(order);
+		
+		mv.addObject("orderList", orders);
+		mv.addObject("pagelist", pageArr);
+		mv.addObject("page", page);
+		mv.addObject("totalpage", totalPage);
 		mv.setViewName("orderList");
 		return mv;
 		
@@ -116,26 +150,6 @@ public class OrderController {
 		Order order2 = orderService.getDetailOid(order);
 		return order2.getOid();		
 	}
-=======
-	//订单列表----所有订单查询
-	@RequestMapping("/orderList.do")
-	public ModelAndView orderList(){
-		ModelAndView mv =  new ModelAndView();
-		List<Order> orderList = orderService.getOrders();
-		mv.addObject("orderList", orderList);
-		mv.setViewName("orderList");
-		return mv;
-		
-	}
-	
-	@RequestMapping("getDetailOid.do")
-	@ResponseBody
-	public int getDetailOid(Order order){
-		order.setOstate("未支付");
-		Order order2 = orderService.getDetailOid(order);
-		return order2.getOid();		
-	}
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	/**
 	 * 支付完成操作,改变订单付款状态
 	 * @param request
@@ -171,7 +185,6 @@ public class OrderController {
 						order.setOtime(param.getBody());;
 						order.setOstate("已付款");
 						order.setOprice(Double.parseDouble(param.getTotal_amount().toString()));
-<<<<<<< HEAD
 						orderService.zhiFu(order);
 						
 						//增加积分----------------------------------------------------------
@@ -195,31 +208,6 @@ public class OrderController {
 						desk.setDid(order1.getDid());
 						desk.setDstate("未使用");
 						orderService.upDesk(desk);
-=======
-						orderService.zhiFu(order);
-						
-						//增加积分----------------------------------------------------------
-						customer.setCphone(param.getPassback_params());
-						double price = Double.parseDouble(param.getTotal_amount().toString());
-						customer.setCintegral((int)price);
-						System.out.println("电话号码："+param.getPassback_params());
-						customerService.addCintegral(customer);
-						
-						//加入日结算表
-						Finance finance =new Finance();
-						int fincome = param.getTotal_amount().intValue();
-						finance.setFincome(fincome);
-						finance.setFtime(param.getBody());
-						finance.setFbalance(fincome);
-						finance.setFexpend(0);
-						finance.setFprofit(fincome);
-						financeService.addFinance(finance);
-
-						order1 = orderService.selOrder(order);
-						desk.setDid(order1.getDid());
-						desk.setDstate("未使用");
-						orderService.upDesk(desk);
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 					}
 				}
 			});
@@ -290,9 +278,5 @@ public class OrderController {
     private AlipayNotifyParam buildAlipayNotifyParam(Map<String, String> params) {
         String json = JSON.toJSONString(params);
         return JSON.parseObject(json, AlipayNotifyParam.class);
-<<<<<<< HEAD
     }
-=======
-    }
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 }

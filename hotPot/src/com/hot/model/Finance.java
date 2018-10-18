@@ -7,6 +7,9 @@ public class Finance {
 		public double fprofit;
 		public double fbalance;
 		public String ftime;
+		private Integer start;
+		private Integer rows;
+		private Integer page;
 		public int getFid() {
 			return fid;
 		}
@@ -44,10 +47,29 @@ public class Finance {
 		public void setFtime(String ftime) {
 			this.ftime = ftime;
 		}
+		public Integer getStart() {
+			return start;
+		}
+		public void setStart(Integer start) {
+			this.start = start;
+		}
+		public Integer getRows() {
+			return rows;
+		}
+		public void setRows(Integer rows) {
+			this.rows = rows;
+		}
+		public Integer getPage() {
+			return page;
+		}
+		public void setPage(Integer page) {
+			this.page = page;
+		}
 		@Override
 		public String toString() {
 			return "Finance [fid=" + fid + ", fincome=" + fincome + ", fexpend=" + fexpend + ", fprofit=" + fprofit
-					+ ", fbalance=" + fbalance + ", ftime=" + ftime + "]";
+					+ ", fbalance=" + fbalance + ", ftime=" + ftime + ", start=" + start + ", rows=" + rows + ", page="
+					+ page + "]";
 		}
 		
 }

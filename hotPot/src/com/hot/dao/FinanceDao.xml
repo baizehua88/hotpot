@@ -7,6 +7,11 @@
 		WHERE ftime LIKE
 		CONCAT('%',(select SUBSTRING(#{ftime},1,10)), '%')
 	</select>
+	<select id="pageFinance" parameterType="Finance" resultType="Finance">
+		SELECT * FROM hp_finance 
+		WHERE ftime LIKE
+		CONCAT('%',(select SUBSTRING(#{ftime},1,10)), '%') limit #{start},#{rows}
+	</select>
 	<insert id="addFinance" parameterType="Finance">
 		INSERT INTO hp_finance (ftime,fincome,fexpend,fprofit,fbalance)
 			VALUES(#{ftime},#{fincome},#{fexpend},#{fprofit},#{fbalance});
@@ -20,6 +25,9 @@
 		GROUP BY (select SUBSTRING(#{ftime},1,10))
 	</select>
 	<select id="getFtime" resultType="Finance">
-		SELECT DISTINCT (select SUBSTRING(ftime,1,10)) ftime FROM hp_finance;
+		SELECT DISTINCT (SUBSTRING(ftime,1,10)) ftime FROM hp_finance;
+	</select>
+	<select id="pageFtime" parameterType="Finance" resultType="Finance">
+		SELECT DISTINCT (SUBSTRING(ftime,1,10)) ftime FROM hp_finance limit #{start},#{rows}
 	</select>
 </mapper>

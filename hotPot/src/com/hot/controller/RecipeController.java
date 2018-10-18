@@ -35,7 +35,7 @@ public class RecipeController {
 	private RecipeService recipeService;
 
 	@RequestMapping("/recipeList.do")
-	public ModelAndView recipeList(HttpSession session, Recipe recipe) {
+	public ModelAndView recipeList(Recipe recipe) {
 
 		// 分页显示
 		int page = 1;
@@ -66,42 +66,22 @@ public class RecipeController {
 
 		ModelAndView mv = new ModelAndView();
 		List<Recipe> recipeList = recipeService.getRecipes(recipe);
-<<<<<<< HEAD
-		// System.out.println(recipeList);
-=======
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 		mv.addObject("recipeList", recipeList);
 		mv.addObject("pagelist", pageArr);
 		mv.addObject("page", page);
 		mv.addObject("totalpage", totalPage);
 		mv.setViewName("table-list-img");
-		session.setAttribute("recipeList", recipeList);
 		return mv;
 	}
-
 	
 	@RequestMapping("/orderRecipe.do")
 	@ResponseBody
 	public List<Recipe> recipeList(){
 		
-		ModelAndView mv = new ModelAndView();
 		List<Recipe> recipeList = recipeService.getAllre();
 		return recipeList;		
 	}
 	
-<<<<<<< HEAD
-=======
-	@RequestMapping("/orderRecipe.do")
-	@ResponseBody
-	public List<Recipe> recipeList(){
-		
-		ModelAndView mv = new ModelAndView();
-		List<Recipe> recipeList = recipeService.getAllre();
-		return recipeList;		
-	}
-	
-	//在线订货分页显示
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	@RequestMapping("/recipeListorder.do")
 	public ModelAndView recipeListorder(HttpServletRequest request, HttpSession session, Recipe recipe) {
 
@@ -134,10 +114,6 @@ public class RecipeController {
 
 		ModelAndView mv = new ModelAndView();
 		List<Recipe> recipeList = recipeService.getRecipes(recipe);
-<<<<<<< HEAD
-		// System.out.println(recipeList);
-=======
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 		
 		if (page <= total/DingZhi.rows) {
 			mv.addObject("totalre", DingZhi.rows);
@@ -188,24 +164,14 @@ public class RecipeController {
 		mv.setViewName("GRN");
 		return mv;
 	}
-<<<<<<< HEAD
-
-=======
-	
 	//添加菜品
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	@RequestMapping("/addRecipe.do")
 	public ModelAndView addRecipe(Recipe recipe, MultipartFile file, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		if (file != null) {
 			String fileName = file.getOriginalFilename();
 			String path = session.getServletContext().getRealPath("/assets/img/");
-<<<<<<< HEAD
-			file.transferTo(new File(Constant.path + fileName));
-			System.out.println("执行了");
-=======
 			file.transferTo(new File(Constant.path+fileName));
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 		}
 		recipe.setRimage(file.getOriginalFilename());
 		// System.out.println(recipe.getRimage());
@@ -214,24 +180,10 @@ public class RecipeController {
 		mv.setViewName("redirect:/recipe/recipeList.do");
 		return mv;
 	}
-<<<<<<< HEAD
-
-=======
-	
-	
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	@RequestMapping("/getRecipeById.do")
 	@ResponseBody
 	public Recipe getRecipeById(Recipe recipe, HttpSession session) {
-		// ModelAndView mv = new ModelAndView();
-		// System.out.println(recipe.getRid());
 		Recipe recipeById = recipeService.getRecipeById(recipe);
-<<<<<<< HEAD
-		// System.out.println(recipeById);
-		// mv.addObject("recipeById", recipeById);
-		// session.setAttribute("recipeById", recipeById);
-=======
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 		return recipeById;
 
 	}
@@ -242,22 +194,10 @@ public class RecipeController {
 		if (file != null) {
 			String fileName = file.getOriginalFilename();
 			String path = session.getServletContext().getRealPath("/assets/img/");
-<<<<<<< HEAD
-			file.transferTo(new File(Constant.path + fileName));
-			System.out.println("执行了");
-=======
 			file.transferTo(new File(Constant.path+fileName));
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 		}
-<<<<<<< HEAD
 		recipe.setRimage(file.getOriginalFilename());
-		// System.out.println(recipe.getRimage());
-		// System.out.println(recipe);
 		if (recipeService.updateRecipe(recipe) > 0) {
-=======
-		recipe.setRimage(file.getOriginalFilename());   		
-		if(recipeService.updateRecipe(recipe)>0){
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 			System.out.println("修改成功！");
 			mv.setViewName("redirect:/recipe/recipeList.do");
 		} else {

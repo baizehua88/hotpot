@@ -29,8 +29,6 @@ public class DeskController {
 		return mv;
 
 	}
-<<<<<<< HEAD
-
 	// 改变餐桌使用状态
 	@RequestMapping("/updateDeskState.do")
 	@ResponseBody
@@ -106,17 +104,4 @@ public class DeskController {
 
 		return mView;
 	}
-
-=======
-	
-	//改变餐桌使用状态
-	@RequestMapping("/updateDeskState.do")
-	@ResponseBody
-	public void updateDeskState(int did){
-		deskService.updateDeskState(did);
-		return;
-	}
-	
-	
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 }

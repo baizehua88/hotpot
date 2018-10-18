@@ -4,7 +4,6 @@
 $('.tpl-skiner-toggle').on('click', function() {
     $('.tpl-skiner').toggleClass('active');
 })
-
 $('.tpl-skiner-content-bar').find('span').on('click', function() {
     $('body').attr('class', $(this).attr('data-color'))
     saveSelectColor.Color = $(this).attr('data-color');
@@ -37,7 +36,6 @@ function autoLeftNav() {
             }
         }
     })
-
     if ($(window).width() < 1024) {
         $('.left-sidebar').addClass('active');
     } else {

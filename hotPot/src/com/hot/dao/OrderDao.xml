@@ -32,4 +32,8 @@
 	<select id="getOne" parameterType="Integer" resultType="Order">
 		SELECT * FROM hp_order WHERE oid = #{oid}
 	</select>
+	<select id="pageOrder" parameterType="Order" resultType="Order">
+		SELECT * FROM hp_order limit #{start},#{rows}
+	</select>
+	
 </mapper>

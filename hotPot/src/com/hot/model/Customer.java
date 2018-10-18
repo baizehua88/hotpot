@@ -8,6 +8,9 @@ public class Customer {
 	private Integer cintegral;
 	private String cbirthday;
 	private String cjoin;
+	private Integer start;
+	private Integer rows;
+	private Integer page;
 	public Integer getCid() {
 		return cid;
 	}
@@ -50,4 +53,23 @@ public class Customer {
 	public void setCjoin(String cjoin) {
 		this.cjoin = cjoin;
 	}
+	public Integer getStart() {
+		return start;
+	}
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+	public Integer getRows() {
+		return rows;
+	}
+	public void setRows(Integer rows) {
+		this.rows = rows;
+	}
+	public Integer getPage() {
+		return page;
+	}
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+	
 }

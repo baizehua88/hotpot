@@ -1,8 +1,10 @@
 package com.hot.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hot.model.Customer;
+import com.hot.model.Recipe;
 import com.hot.service.CustomerService;
+import com.hot.utils.DingZhi;
 
 @Controller
 @RequestMapping("/customer")
@@ -25,10 +29,44 @@ public class CustomerController {
 
 	// 会员列表
 	@RequestMapping("/customerList.do")
-	public ModelAndView customerList() {
+	public ModelAndView customerList(Customer customer) {
+		
 		ModelAndView mv = new ModelAndView();
 		List<Customer> customerList = customerService.getCustomers();
-		mv.addObject("customerList", customerList);
+		
+		// 分页显示
+		int page = 1;
+		int start = 0;
+		if (customer.getPage() != null) {
+			page = customer.getPage();
+		}
+		// 数据总条数
+		int total = customerList.size();
+		// 总页数
+		int totalPage = total / DingZhi.hang;
+		Vector<Integer> pageArr = new Vector<Integer>();
+		if (total % DingZhi.hang != 0) {
+			totalPage += 1;
+		}
+		if (page >= DingZhi.page) {
+			start = page / DingZhi.page * DingZhi.hang;
+		}
+		int num = start + 1;
+		// 页数列表
+		while (!(num > totalPage || num > start + DingZhi.page)) {
+			pageArr.add(new Integer(num));
+			++num;
+		}
+		start = (page - 1) * DingZhi.hang;
+		customer.setStart(start);
+		customer.setRows(DingZhi.hang);
+		
+		List<Customer> customers = new ArrayList<Customer>();
+		customers = customerService.pageMember(customer);
+		mv.addObject("customers", customers);
+		mv.addObject("pagelist", pageArr);
+		mv.addObject("page", page);
+		mv.addObject("totalpage", totalPage);
 		mv.setViewName("members");
 		return mv;
 
@@ -51,7 +89,6 @@ public class CustomerController {
 		String time = dateFormat.format(now);
 		return time;
 	}
-<<<<<<< HEAD
 
 	// 根据id查询会员
 	@RequestMapping("/getMemberById.do")
@@ -106,42 +143,4 @@ public class CustomerController {
 		return cintegral;
 
 	}
-
-=======
-	
-	//根据id查询会员
-	@RequestMapping("/getMemberById.do")
-	@ResponseBody
-	public Customer getMemberById(Customer customer){
-		System.out.println(customer.getCid());
-		Customer memberById = customerService.getMemberById(customer);
-		return memberById;
-	}
-	
-	//修改会员资料
-	@RequestMapping("/updateMember.do")
-	public ModelAndView updateMember(Customer customer){
-		ModelAndView mv = new ModelAndView();
-		if (customerService.updateMember(customer)>0) {
-			mv.setViewName("redirect:/customer/customerList.do");
-		}else {
-			mv.setViewName("redirect:/customer/customerList.do");
-		}
-		return mv;
-	}
-	
-	//输入手机号查询积分-----------没用到-------------------
-	@RequestMapping("/getCintegral.do")
-	@ResponseBody
-	public int getCintegral(Customer customer,HttpSession session){		
-		customerService.getCintegral(customer);
-		session.setAttribute("cphone", customer.getCphone());
-		int cintegral = customerService.getCintegral(customer).getCintegral();
-		System.out.println("手机号："+customer.getCphone()+"，积分："+cintegral);
-		return cintegral;
-		
-	}
-	
-	
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 }

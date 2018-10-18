@@ -48,8 +48,6 @@ public class OrderServiceImpl implements OrderService {
 	public Order getOne(Integer oid) {
 		// TODO Auto-generated method stub
 		return orderDao.getOne(oid);
-<<<<<<< HEAD
-=======
 	}
 	@Override
 	public int upDesk(Desk desk) {
@@ -60,7 +58,11 @@ public class OrderServiceImpl implements OrderService {
 	public Order selOrder(Order order) {
 		// TODO Auto-generated method stub
 		return orderDao.selOrder(order);
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
+	}
+	@Override
+	public List<Order> pageOrder(Order order) {
+		// TODO Auto-generated method stub
+		return orderDao.pageOrder(order);
 	}
 
 }

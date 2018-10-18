@@ -8,6 +8,9 @@ public class Staff {
 	private String sposition;
 	private String spassword;
 	private Integer salary;
+	private Integer start;
+	private Integer rows;
+	private Integer page;
 	public Integer getSid() {
 		return sid;
 	}
@@ -44,15 +47,35 @@ public class Staff {
 	public void setSpassword(String spassword) {
 		this.spassword = spassword;
 	}
-	@Override
-	public String toString() {
-		return "Staff [sid=" + sid + ", sname=" + sname + ", ssex=" + ssex + ", sphone=" + sphone + ", sposition="
-				+ sposition + ", spassword=" + spassword + "]";
-	}
 	public Integer getSalary() {
 		return salary;
 	}
 	public void setSalary(Integer salary) {
 		this.salary = salary;
 	}
+	public Integer getStart() {
+		return start;
+	}
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+	public Integer getRows() {
+		return rows;
+	}
+	public void setRows(Integer rows) {
+		this.rows = rows;
+	}
+	public Integer getPage() {
+		return page;
+	}
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+	@Override
+	public String toString() {
+		return "Staff [sid=" + sid + ", sname=" + sname + ", ssex=" + ssex + ", sphone=" + sphone + ", sposition="
+				+ sposition + ", spassword=" + spassword + ", salary=" + salary + ", start=" + start + ", rows=" + rows
+				+ ", page=" + page + "]";
+	}
+	
 }

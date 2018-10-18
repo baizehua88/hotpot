@@ -85,4 +85,10 @@ public class StaffServiceImpl implements StaffService {
 		return staffDao.searchByNameandPosition(staff);
 	}
 
+	@Override
+	public List<Staff> pageStaff(Staff staff) {
+		// TODO Auto-generated method stub
+		return staffDao.pageStaff(staff);
+	}
+
 }

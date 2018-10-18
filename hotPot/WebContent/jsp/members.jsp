@@ -325,23 +325,6 @@
 										</div>
 									</div>
 								</div>
-								<div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
-									<div class="am-form-group tpl-table-list-select">
-										名字：<input type="text">
-									</div>
-								</div>
-								<div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
-									<div
-										class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-										<input type="text" class="am-form-field " value="性别">
-										<span class="am-input-group-btn">
-											<button
-												class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
-												type="button"></button>
-										</span>
-									</div>
-								</div>
-
 								<div class="am-u-sm-12">
 									<table width="100%"
 										class="am-table am-table-compact am-table-striped tpl-table-black "
@@ -359,9 +342,8 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="customer" items="${customerList}">
+											<c:forEach var="customer" items="${customers }">
 												<tr class="gradeX">
-<<<<<<< HEAD
 													<td>${customer.cid}</td>
 													<td>${customer.cname}</td>
 													<td>${customer.csex}</td>
@@ -382,26 +364,6 @@
 														</div>
 													</td>
 												</tr>
-=======
-												<td>${customer.cid}</td>
-												<td>${customer.cname}</td>
-												<td>${customer.csex}</td>
-												<td>${customer.cphone}</td>
-												<td>${customer.cbirthday}</td>
-												<td>${customer.cjoin}</td>
-												<td>${customer.cintegral}</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"id="${customer.cid}"  onClick="GetMemberId(this);"> 
-														<i class="am-icon-pencil"></i>编辑
-														</a> <a href="javascript:;"
-															class="tpl-table-black-operation-del"> <i
-															class="am-icon-trash"></i> 删除
-														</a>
-													</div>
-												</td>
-											</tr>
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 											</c:forEach>
 											<!-- more data -->
 										</tbody>
@@ -411,13 +373,34 @@
 
 									<div class="am-fr">
 										<ul class="am-pagination tpl-pagination">
-											<li class="am-disabled"><a href="#">«</a></li>
-											<li class="am-active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#">»</a></li>
+											<c:choose>
+												<c:when test="${page == 1 }">
+													<li class="am-disabled"><a href="#">«</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a href="customerList.do?page=${page-1 }">«</a></li>
+												</c:otherwise>
+											</c:choose>
+											<c:forEach items="${pagelist }" var="item">
+												<c:choose>
+													<c:when test="${item == page }">
+														<li class="am-active"><a
+															href="customerList.do?page=${item }">${item }</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a href="customerList.do?page=${item }">${item }</a>
+														</li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+											<c:choose>
+												<c:when test="${page == totalpage }">
+													<li class="am-disabled"><a href="#">»</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a href="customerList.do?page=${page+1 }">»</a></li>
+												</c:otherwise>
+											</c:choose>
 										</ul>
 									</div>
 								</div>
@@ -428,91 +411,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- 弹出层 -->
-
-<<<<<<< HEAD
-	<div class="am-modal am-modal-no-btn" id="calendar-edit-box"
-		style="width: 100%; margin: auto;">
-		<div class="am-modal-dialog tpl-model-dialog" style="width: 40%;">
-			<div class="am-modal-hd">
-				<a href="javascript: void(0)"
-					class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
-			</div>
-			<div class="widget-body am-fr">
-
-				<form class="am-form tpl-form-line-form"
-					action="<%=basePath%>customer/updateMember.do" method="post"
-					enctype="multipart/form-data">
-					<div class="am-form-group">
-						<label for="user-name" class="am-u-sm-3 am-form-label">会员姓名
-							<span class="tpl-form-line-small-title"></span>
-						</label>
-						<div class="am-u-sm-9">
-							<input type="hidden" class="tpl-form-input" id="cid" name="cid"
-								value="${memberById.cid}"> <input type="text"
-								class="tpl-form-input" id="cname" name="cname"
-								value="${memberById.cname}">
-						</div>
-					</div>
-					<div class="am-form-group">
-						<label for="user-name" class="am-u-sm-3 am-form-label">性别
-							<span class="tpl-form-line-small-title"></span>
-						</label>
-						<div class="am-u-sm-9">
-							<input type="text" class="tpl-form-input" id="csex" name="csex"
-								value="${memberById.csex}">
-						</div>
-					</div>
-
-					<div class="am-form-group">
-						<label for="user-name" class="am-u-sm-3 am-form-label">电话
-							<span class="tpl-form-line-small-title"></span>
-						</label>
-						<div class="am-u-sm-9">
-							<input type="text" class="tpl-form-input" id="cphone"
-								name="cphone" value="${memberById.cphone}">
-						</div>
-					</div>
-					<div class="am-form-group">
-						<label for="user-name" class="am-u-sm-3 am-form-label">生日
-							<span class="tpl-form-line-small-title"></span>
-						</label>
-						<div class="am-u-sm-9">
-							<input type="text" class="tpl-form-input" id="cbirthday"
-								name="cbirthday" value="${memberById.cbirthday}">
-						</div>
-					</div>
-					<div class="am-form-group">
-						<label for="user-name" class="am-u-sm-3 am-form-label">办卡时间
-							<span class="tpl-form-line-small-title"></span>
-						</label>
-						<div class="am-u-sm-9">
-							<input type="text" class="tpl-form-input" id="cjoin" name="cjoin"
-								value="${memberById.cjoin}">
-						</div>
-					</div>
-					<div class="am-form-group">
-						<label for="user-name" class="am-u-sm-3 am-form-label">积分
-							<span class="tpl-form-line-small-title"></span>
-						</label>
-						<div class="am-u-sm-9">
-							<input type="text" class="tpl-form-input" id="cintegral"
-								name="cintegral" value="${memberById.cintegral}">
-						</div>
-					</div>
-
-					<div class="am-form-group">
-						<div class="am-u-sm-9 am-u-sm-push-3">
-							<button type="submit"
-								class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-=======
 		<div class="am-modal am-modal-no-btn" id="calendar-edit-box" 
 			style="width: 100%; margin: auto;">
 			<div class="am-modal-dialog tpl-model-dialog" style="width: 40%;">
@@ -585,23 +483,12 @@
 							</div>
 			</div>
 		</div>
-	
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	<script src="<%=basePath%>assets/js/amazeui.min.js"></script>
 	<script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
 	<script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
 	<script src="<%=basePath%>assets/js/app.js"></script>
-	<script type="text/javascript" src="assets/js/jquery-1.7.2.js"></script>
-<<<<<<< HEAD
+	<script src="<%=basePath%>assets/js/jquery-1.7.2.js"></script>
 	<script type="text/javascript">
-    /* $(function() {
-		var editBox = $('#calendar-edit-box');
-		$("#modify").click(function() {
-			//  弹出框
-			editBox.modal();
-		});
-
-	}); */
 	var editBox = $('#calendar-edit-box');
 	function GetMemberId(_this){
 		//  弹出框
@@ -622,39 +509,6 @@
 
 		}
 	</script>
-=======
-    <script type="text/javascript">
-    /* $(function() {
-		var editBox = $('#calendar-edit-box');
-		$("#modify").click(function() {
-			//  弹出框
-			editBox.modal();
-		});
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
-
-	}); */
-	var editBox = $('#calendar-edit-box');
-	function GetMemberId(_this){
-		//  弹出框
-		//$('#rid').val(_this.id);
-		alert(_this.id);
-		$.post("<%=basePath%>customer/getMemberById.do",{
-			cid : _this.id
-			},
-			 function(data){
-				  editBox.modal();
-				 $("#cid").val(data.cid);
-			     $("#cname").val(data.cname);
-			     $("#csex").val(data.csex);
-			     $("#cphone").val(data.cphone);
-			     $("#cintegral").val(data.cintegral);
-			     $("#cbirthday").val(data.cbirthday);
-			     $("#cjoin").val(data.cjoin);
-			   },
-			"json");
-		
-	}
-    </script>
 	
 </body>
 

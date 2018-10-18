@@ -26,4 +26,6 @@ public interface StaffService {
 	public List<Staff> searchByPosition(String sposition);
 
 	public List<Staff> searchByNameandPosition(Staff staff);
+	
+	public List<Staff> pageStaff(Staff staff);
 }

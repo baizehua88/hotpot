@@ -40,5 +40,16 @@ public class FinanceServiceImpl implements FinanceService{
 		// TODO Auto-generated method stub
 		return financeDao.getFtime();
 	}
-	
+
+	@Override
+	public List<Finance> pageFinance(Finance finance) {
+		// TODO Auto-generated method stub
+		return financeDao.pageFinance(finance);
+	}
+
+	@Override
+	public List<Finance> pageFtime(Finance finance) {
+		// TODO Auto-generated method stub
+		return financeDao.pageFtime(finance);
+	}
 }

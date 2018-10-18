@@ -8,6 +8,9 @@
 	<select id="getStaff" resultType="Staff">
 		SELECT * FROM hp_staff
 	</select>
+	<select id="pageStaff" parameterType="Staff" resultType="Staff">
+		SELECT * FROM hp_staff limit #{start},#{rows}
+	</select>
 	<insert id="addStaff" parameterType="Staff">
 		INSERT INTO
 		hp_staff(sname,ssex,sphone,sposition,spassword)
@@ -22,8 +25,7 @@
 		sid,sname,ssex,sphone,sposition FROM hp_staff
 	</select>
 	<insert id="payroll" parameterType="Staff">
-		UPDATE hp_staff set salary =
-		#{salary} where sid = #{sid}
+		UPDATE hp_staff set salary = #{salary} where sid = #{sid}
 	</insert>
 
 	<select id="getEmployeesById" parameterType="Staff"
@@ -52,5 +54,5 @@
 		select * from hp_staff where sname=#{sname} and
 		sposition=#{sposition}
 	</select>
-
+	
 </mapper>

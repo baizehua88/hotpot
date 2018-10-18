@@ -307,8 +307,9 @@
 						<div class="widget am-cf">
 						
 								<div class="widget-body  am-fr">
-
+									
 									<div class="am-u-sm-12">
+										<input type="hidden" id="totalStaff" value="${totalStaff }"> 
 										<table width="100%"
 											class="am-table am-table-compact am-table-striped tpl-table-black "
 											id="example-r">
@@ -340,16 +341,37 @@
 									<div class="am-u-lg-12 am-cf">
 
 										<div class="am-fr">
-											<ul class="am-pagination tpl-pagination">
-												<li class="am-disabled"><a href="#">«</a></li>
-												<li class="am-active"><a href="#">1</a></li>
-												<li><a href="#">2</a></li>
-												<li><a href="#">3</a></li>
-												<li><a href="#">4</a></li>
-												<li><a href="#">5</a></li>
-												<li><a href="#">»</a></li>
-											</ul>
-										</div>
+										<ul class="am-pagination tpl-pagination">
+											<c:choose>
+												<c:when test="${page == 1 }">
+													<li class="am-disabled"><a href="#">«</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a href="payStaffList.do?page=${page-1 }">«</a></li>
+												</c:otherwise>
+											</c:choose>
+											<c:forEach items="${pagelist }" var="item">
+												<c:choose>
+													<c:when test="${item == page }">
+														<li class="am-active"><a
+															href="payStaffList.do?page=${item }">${item }</a></li>
+													</c:when>
+													<c:otherwise>
+														<li><a href="payStaffList.do?page=${item }">${item }</a>
+														</li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+											<c:choose>
+												<c:when test="${page == totalpage }">
+													<li class="am-disabled"><a href="#">»</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a href="payStaffList.do?page=${page+1 }">»</a></li>
+												</c:otherwise>
+											</c:choose>
+										</ul>
+									</div>
 									</div>
 								</div>
 								<hr style="border: ridge; margin-top: 30px;">
@@ -376,8 +398,9 @@
 		var att= {};    //创建一个空的json
 		var sid,salary;
 		var Array = [];
+		var total = $("#totalStaff").val();
 		$("#payroll").each(function(){
-			for(k=1;k<5;k++){
+			for(k=1;k<=total;k++){
 				sid = document.getElementById('sid'+k).innerText;
 				salary = $('#num'+k).val();
 				att = {
@@ -397,7 +420,6 @@
 			//dataType: "json",
 			success: function(msg) {
 				if (msg == "OK") {
-					//window.location.reload();
 					window.location.href="<%=basePath %>staff/staffList.do";
 					alert("成功！");
 				}else {
