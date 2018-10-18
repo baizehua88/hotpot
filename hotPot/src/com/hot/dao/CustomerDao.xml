@@ -16,6 +16,19 @@
 		cintegral=#{cintegral},cbirthday=#{cbirthday},cjoin=#{cjoin}
 		where cid= #{cid}
 	</update>
+<<<<<<< HEAD
+	<!-- 输入手机号查询积分 -->
+	<select id="getCintegral" parameterType="Customer" resultType="Customer">
+		SELECT * FROM hp_customer WHERE cphone=#{cphone};
+	</select>
+	<update id="addCintegral" parameterType="Customer">
+		UPDATE hp_customer SET cintegral = cintegral + #{cintegral} WHERE cphone = #{cphone}
+	</update>
+	
+	<delete id="delMember" parameterType="int">
+	delete from hp_customer where cid = #{cid}
+	</delete>
+=======
 	
 	<!-- 输入手机号查询积分 -->
 	<select id="getCintegral" parameterType="Customer" resultType="Customer">
@@ -25,4 +38,5 @@
 		UPDATE hp_customer SET cintegral = cintegral + #{cintegral} WHERE cphone = #{cphone}
 	</update>
 	
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 </mapper>

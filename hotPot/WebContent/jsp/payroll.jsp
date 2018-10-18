@@ -5,6 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -197,8 +198,9 @@
 					href="<%=basePath%>jsp/index.jsp"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
-				<li class="sidebar-nav-link"><a href="<%=basePath%>order/getOrder.do">
-						<i class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
+				<li class="sidebar-nav-link"><a
+					href="<%=basePath%>order/getOrder.do"> <i
+						class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
 				</a></li>
 				<li class="sidebar-nav-link"><a
 					href="<%=basePath%>desk/deskList.do"> <i
@@ -289,7 +291,7 @@
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加员工
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/payroll.jsp" class="active"> <span
+							href="<%=basePath%>staff/payStaffList.do" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 发放薪资
 						</a></li>
 					</ul></li>
@@ -303,96 +305,58 @@
 				<div class="row">
 					<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
 						<div class="widget am-cf">
-							<div class="widget-body  am-fr">
+						
+								<div class="widget-body  am-fr">
 
-								<div class="am-u-sm-12">
-									<table width="100%"
-										class="am-table am-table-compact am-table-striped tpl-table-black "
-										id="example-r">
-										<thead>
-											<tr>
-												<th>ID</th>
-												<th>职位</th>
-												<th>名称</th>
-												<th>性别</th>
-												<th>电话</th>
-												<th>薪资</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr class="gradeX">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
-											<tr class="gradeX">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
+									<div class="am-u-sm-12">
+										<table width="100%"
+											class="am-table am-table-compact am-table-striped tpl-table-black "
+											id="example-r">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>职位</th>
+													<th>名称</th>
+													<th>性别</th>
+													<th>电话</th>
+													<th>薪资</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${payStaffList }" var="staff" step="1" varStatus="statu">
+													<tr class="gradeX" id="payroll">
+														<td class="am-text-middle" id="sid${statu.count }">${staff.sid }</td>
+														<td class="am-text-middle">${staff.sposition }</td>
+														<td class="am-text-middle">${staff.sname }</td>
+														<td class="am-text-middle">${staff.ssex }</td>
+														<td class="am-text-middle">${staff.sphone }</td>
+														<td class="am-text-middle"><input type="text" name="salary" id="num${statu.count }"></td>
+													</tr>
+												</c:forEach>
+												<!-- more data -->
+											</tbody>
+										</table>
+									</div>
+									<div class="am-u-lg-12 am-cf">
 
-											<tr class="even gradeC">
-												<td>6</td>
-												<td>经理</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>23432122</td>
-												<td>50000</td>
-											</tr>
-											<!-- more data -->
-										</tbody>
-									</table>
-								</div>
-								<div class="am-u-lg-12 am-cf">
-
-									<div class="am-fr">
-										<ul class="am-pagination tpl-pagination">
-											<li class="am-disabled"><a href="#">«</a></li>
-											<li class="am-active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#">»</a></li>
-										</ul>
+										<div class="am-fr">
+											<ul class="am-pagination tpl-pagination">
+												<li class="am-disabled"><a href="#">«</a></li>
+												<li class="am-active"><a href="#">1</a></li>
+												<li><a href="#">2</a></li>
+												<li><a href="#">3</a></li>
+												<li><a href="#">4</a></li>
+												<li><a href="#">5</a></li>
+												<li><a href="#">»</a></li>
+											</ul>
+										</div>
 									</div>
 								</div>
-							</div>
-							<hr style="border: ridge;margin-top: 30px;">
-							<div class="am-form-group">
-								<button type="button" style="float: right; margin-right: 20px;"
-									class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
-							</div>
+								<hr style="border: ridge; margin-top: 30px;">
+								<div class="am-form-group">
+									<button type="button" style="float: right; margin-right: 20px;"
+										class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="getInt();">提交</button>
+								</div>
 						</div>
 					</div>
 				</div>
@@ -403,6 +367,46 @@
 	<script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
 	<script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
 	<script src="<%=basePath%>assets/js/app.js"></script>
+	<script src="<%=basePath%>assets/js/jquery-3.1.1.min.js"></script>
+	
+	<script type="text/javascript">
+	
+	function getInt() {
+		var k;
+		var att= {};    //创建一个空的json
+		var sid,salary;
+		var Array = [];
+		$("#payroll").each(function(){
+			for(k=1;k<5;k++){
+				sid = document.getElementById('sid'+k).innerText;
+				salary = $('#num'+k).val();
+				att = {
+						'sid':sid,
+						'salary':salary,
+					};
+				Array.push(att);
+			}
+		})
+		console.log(Array);
+		$.ajax({
+			type: "POST",
+			url: "<%=basePath%>staff/payroll.do",
+			data: {
+				ds:JSON.stringify(Array)
+			},
+			//dataType: "json",
+			success: function(msg) {
+				if (msg == "OK") {
+					//window.location.reload();
+					window.location.href="<%=basePath %>staff/staffList.do";
+					alert("成功！");
+				}else {
+					alert("失败！");
+				}
+			}
+		});
+	}
+	</script>
 
 </body>
 

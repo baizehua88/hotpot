@@ -26,6 +26,8 @@ public class DetailServiceImpl implements DetailService {
 		// TODO Auto-generated method stub
 		return detailDao.getDetailByOid(oid);
 	}
+<<<<<<< HEAD
+=======
 	@Override
 	public List<Detail> getTotal() {
 		// TODO Auto-generated method stub
@@ -36,5 +38,6 @@ public class DetailServiceImpl implements DetailService {
 		// TODO Auto-generated method stub
 		return detailDao.reduceStock(recipe);
 	}
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 
 }

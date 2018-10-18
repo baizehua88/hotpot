@@ -1,10 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hot.dao.StaffDao">
-	 <select id="login" parameterType="Staff" resultType="Staff">
-	 	select * from hp_staff where sname=#{sname} and spassword=#{spassword}
-	 </select>
-	 <select id="getStaff" resultType="Staff">
-	 	SELECT * FROM hp_staff;
-	 </select>
+	<select id="login" parameterType="Staff" resultType="Staff">
+		select *
+		from hp_staff where sname=#{sname} and spassword=#{spassword}
+	</select>
+	<select id="getStaff" resultType="Staff">
+		SELECT * FROM hp_staff
+	</select>
+	<insert id="addStaff" parameterType="Staff">
+		INSERT INTO
+		hp_staff(sname,ssex,sphone,sposition,spassword)
+		VALUES(#{sname},#{ssex},#{sphone},#{sposition},#{spassword})
+	</insert>
+	<delete id="delStaff" parameterType="int">
+		delete from hp_staff where
+		sid = #{sid}
+	</delete>
+	<select id="getPayStaff" resultType="Staff">
+		SELECT
+		sid,sname,ssex,sphone,sposition FROM hp_staff
+	</select>
+	<insert id="payroll" parameterType="Staff">
+		UPDATE hp_staff set salary =
+		#{salary} where sid = #{sid}
+	</insert>
+
+	<select id="getEmployeesById" parameterType="Staff"
+		resultType="Staff">
+		SELECT * FROM hp_staff WHERE sid= #{sid} ;
+	</select>
+
+	<update id="updateEmployees" parameterType="Staff">
+		UPDATE hp_staff SET
+		sname=#{sname},ssex=#{ssex},sphone=#{sphone},
+		sposition=#{sposition},salary=#{salary}
+		where sid= #{sid}
+	</update>
+
+	<!--单参数 查找 返回list 的select 语句 -->
+	<select id="searchByName" parameterType="String" resultType="Staff">
+		SELECT * FROM hp_staff WHERE sname LIKE CONCAT(CONCAT('%',#{sname},'%'))
+	</select>
+	
+	<select id="searchByPosition" parameterType="String" resultType="Staff">
+		SELECT * FROM hp_staff WHERE sposition LIKE CONCAT(CONCAT('%',#{sposition},'%'))
+	</select>
+
+	<!-- 多参数 查找 返回list 的select 语句 -->
+	<select id="searchByNameandPosition" parameterType="Staff" resultType="Staff">
+		select * from hp_staff where sname=#{sname} and
+		sposition=#{sposition}
+	</select>
+
 </mapper>

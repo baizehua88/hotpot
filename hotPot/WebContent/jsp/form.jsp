@@ -310,7 +310,7 @@
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加员工
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/payroll.jsp"> <span
+							href="<%=basePath%>staff/payStaffList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 发放薪资
 						</a></li>
 					</ul></li>
@@ -402,6 +402,7 @@
 											<select data-am-selected="{btnSize: 'sm'}" name="rsort">
 												<option value="">请选择菜品类别</option>
 												<option value="荤菜">荤菜</option>
+												<option value="素菜">素菜</option>
 												<option value="蔬菜">蔬菜</option>
 												<option value="水果">水果</option>
 												<option value="丸子">丸子</option>

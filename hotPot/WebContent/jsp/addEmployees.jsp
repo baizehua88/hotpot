@@ -289,7 +289,7 @@
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加员工
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/payroll.jsp"> <span
+							href="<%=basePath%>staff/payStaffList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 发放薪资
 						</a></li>
 					</ul></li>
@@ -315,14 +315,14 @@
 							</div>
 							<div class="widget-body am-fr">
 
-								<form class="am-form tpl-form-line-form">
+								<form class="am-form tpl-form-line-form" action="<%=basePath%>staff/addStaff.do" method="post">
 									<div class="am-form-group">
 										<label for="user-name" class="am-u-sm-3 am-form-label">员工姓名
 											<span class="tpl-form-line-small-title">Name</span>
 										</label>
 										<div class="am-u-sm-9">
 											<input type="text" class="tpl-form-input" id="user-name"
-												placeholder="请输入员工姓名">
+												placeholder="请输入员工姓名" name="sname">
 										</div>
 									</div>
 
@@ -331,8 +331,8 @@
 											<span class="tpl-form-line-small-title">Sex</span>
 										</label>
 										<div class="am-u-sm-9">
-											<input type="radio" value="热门" name="sex">男 <input
-												type="radio" value="普通" name="sex">女
+											<input type="radio" value="男" name="ssex">男 <input
+												type="radio" value="女" name="ssex">女
 										</div>
 									</div>
 
@@ -342,7 +342,7 @@
 										</label>
 										<div class="am-u-sm-9">
 											<input type="text" class="tpl-form-input" id="user-name"
-												placeholder="请输入电话号码">
+												placeholder="请输入电话号码" name="sphone">
 										</div>
 									</div>
 
@@ -352,7 +352,7 @@
 										</label>
 										<div class="am-u-sm-9">
 											<input type="text" class="tpl-form-input" id="user-name"
-												placeholder="CEO">
+												placeholder="CEO" name="sposition">
 										</div>
 									</div>
 									<div class="am-form-group">
@@ -361,12 +361,12 @@
 										</label>
 										<div class="am-u-sm-9">
 											<input type="text" class="tpl-form-input" id="user-name"
-												placeholder="dssvsw343">
+												placeholder="dssvsw343" name="spassword">
 										</div>
 									</div>
 									<hr style="border: double;margin-top: 30px;">
 									<div class="am-form-group">
-											<button type="button" style="float: right;margin-right: 10px;"
+											<button type="submit" style="float: right;margin-right: 10px;"
 												class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
 									</div>
 								</form>

@@ -9,6 +9,10 @@ public interface CustomerDao {
 	public int addMember(Customer customer);
 	public Customer getMemberById(Customer customer);
 	public int updateMember(Customer customer);
+<<<<<<< HEAD
+	public int delMember(int id);
+=======
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	public Customer getCintegral(Customer customer);
 	public int addCintegral(Customer customer);
 }

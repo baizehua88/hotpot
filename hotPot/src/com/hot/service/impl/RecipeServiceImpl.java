@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hot.dao.RecipeDao;
 import com.hot.model.Recipe;
+import com.hot.model.Staff;
 import com.hot.service.RecipeService;
 
 @Service("recipeService")
@@ -15,7 +16,7 @@ public class RecipeServiceImpl implements RecipeService {
 	@Autowired
 	@Qualifier("recipeDao")
 	private RecipeDao recipeDao;
-	
+
 	@Override
 	public List<Recipe> getRecipes(Recipe recipe) {
 		// TODO Auto-generated method stub
@@ -52,8 +53,35 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+<<<<<<< HEAD
+	public boolean delRecipe(int id) {
+		// TODO Auto-generated method stub
+		if (recipeDao.delRecipe(id) > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<Staff> searchBySortandState(Recipe recipe) {
+		// TODO Auto-generated method stub
+		return recipeDao.searchBySortandState(recipe);
+	}
+
+	@Override
+	public List<Staff> searchBySort(String rsort) {
+		// TODO Auto-generated method stub
+		return recipeDao.searchBySort(rsort);
+	}
+
+	@Override
+	public List<Staff> searchByState(String rstate) {
+		// TODO Auto-generated method stub
+		return recipeDao.searchByState(rstate);
+=======
 	public List<Recipe> getAllre() {
 		// TODO Auto-generated method stub
 		return recipeDao.getAllre();
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	}
 }

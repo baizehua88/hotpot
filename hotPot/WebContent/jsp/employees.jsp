@@ -5,7 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -198,8 +198,9 @@
 					href="<%=basePath%>jsp/index.jsp"> <i
 						class="am-icon-home sidebar-nav-link-logo"></i> 首页
 				</a></li>
-				<li class="sidebar-nav-link"><a href="<%=basePath%>order/getOrder.do">
-						<i class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
+				<li class="sidebar-nav-link"><a
+					href="<%=basePath%>order/getOrder.do"> <i
+						class="am-icon-table sidebar-nav-link-logo"></i> 买单结算
 				</a></li>
 				<li class="sidebar-nav-link"><a
 					href="<%=basePath%>desk/deskList.do"> <i
@@ -290,7 +291,7 @@
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加员工
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/payroll.jsp"> <span
+							href="<%=basePath%>staff/payStaffList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 发放薪资
 						</a></li>
 					</ul></li>
@@ -305,30 +306,36 @@
 					<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
 						<div class="widget am-cf">
 							<div class="widget-body  am-fr">
-								<div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
-									<div class="am-form-group tpl-table-list-select">
-										<select data-am-selected="{btnSize: 'sm'}">
 
-											<option value="option1">请选择</option>
-											<option value="option2">经理</option>
-											<option value="option3">员工</option>
-											<option value="option3">CEO</option>
+								<form action="<%=basePath%>staff/search.do" method="post">
+									<div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+										<div class="am-form-group tpl-table-list-select">
+											<label style="margin-right: 136px;">员工职位</label> <select
+												data-am-selected="{btnSize: 'sm'}" name="sposition">
 
-										</select>
+												<option value="">--请选择员工职位--</option>
+												<option value="CEO">CEO</option>
+												<option value="经理">经理</option>
+												<option value="员工">员工</option>
+
+											</select>
+										</div>
 									</div>
-								</div>
-								<div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
-									<div
-										class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-										<input type="text" class="am-form-field " value="名称检索"> <span
-											class="am-input-group-btn">
-											<button
-												class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
-												type="button"></button>
-										</span>
-									</div>
-								</div>
 
+									<div class="am-u-sm-12 am-u-md-12 am-u-lg-3"
+										style="float: left;">
+										<div
+											class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+											<label>员工名称</label> <input type="text" class="am-form-field "
+												value="${sname }" name="sname"> <span
+												class="am-input-group-btn">
+												<button
+													class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
+													type="submit" style="margin-top: 29px;"></button>
+											</span>
+										</div>
+									</div>
+								</form>
 								<div class="am-u-sm-12">
 									<table width="100%"
 										class="am-table am-table-compact am-table-striped tpl-table-black "
@@ -365,23 +372,25 @@
 											</tr> -->
 											<c:forEach var="staff" items="${staffList}">
 												<tr class="gradeX">
-												<td>${staff.sid}</td>
-												<td>${staff.sname}</td>
-												<td>${staff.ssex}</td>
-												<td>${staff.sphone}</td>
-												<td>${staff.sposition}</td>												
-												<td>${staff.salary}</td>
-												<td class="am-text-middle">
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
-                                                            <i class="am-icon-pencil"></i> 编辑
-                                                        </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 删除
-                                                        </a>
-                                                    </div>
-                                                </td>
-											</tr>
+													<td>${staff.sid}</td>
+													<td>${staff.sname}</td>
+													<td>${staff.ssex}</td>
+													<td>${staff.sphone}</td>
+													<td>${staff.sposition}</td>
+													<td>${staff.salary}</td>
+													<td class="am-text-middle">
+														<div class="tpl-table-black-operation">
+															<a href="javascript:;" id="${staff.sid}"
+																onClick="GetEmployeesId(this);"> <i
+																class="am-icon-pencil"></i> 编辑
+															</a> <a
+																href="javascript:if(confirm('确实要删除吗?'))location='<%=basePath %>staff/delStaff.do?id=${staff.sid}'"
+																class="tpl-table-black-operation-del"> <i
+																class="am-icon-trash"></i> 删除
+															</a>
+														</div>
+													</td>
+												</tr>
 											</c:forEach>
 											<!-- more data -->
 										</tbody>
@@ -407,11 +416,109 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- 弹出层 -->
+
+		<div class="am-modal am-modal-no-btn" id="calendar-edit-box"
+			style="width: 100%; margin: auto;">
+			<div class="am-modal-dialog tpl-model-dialog" style="width: 40%;">
+				<div class="am-modal-hd">
+					<a href="javascript: void(0)"
+						class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
+				</div>
+				<div class="widget-body am-fr">
+
+					<form class="am-form tpl-form-line-form"
+						action="<%=basePath%>staff/updateEmployees.do" method="post"
+						enctype="multipart/form-data">
+						<div class="am-form-group">
+							<label for="user-name" class="am-u-sm-3 am-form-label">会员姓名
+								<span class="tpl-form-line-small-title"></span>
+							</label>
+							<div class="am-u-sm-9">
+								<input type="hidden" class="tpl-form-input" id="sid" name="sid"
+									value="${employeesById.sid}"> <input type="text"
+									class="tpl-form-input" id="sname" name="sname"
+									value="${employeesById.sname}">
+							</div>
+						</div>
+						<div class="am-form-group">
+							<label for="user-name" class="am-u-sm-3 am-form-label">性别
+								<span class="tpl-form-line-small-title"></span>
+							</label>
+							<div class="am-u-sm-9">
+								<input type="text" class="tpl-form-input" id="ssex" name="ssex"
+									value="${employeesById.ssex}">
+							</div>
+						</div>
+
+						<div class="am-form-group">
+							<label for="user-name" class="am-u-sm-3 am-form-label">电话
+								<span class="tpl-form-line-small-title"></span>
+							</label>
+							<div class="am-u-sm-9">
+								<input type="text" class="tpl-form-input" id="sphone"
+									name="sphone" value="${employeesById.sphone}">
+							</div>
+						</div>
+						<div class="am-form-group">
+							<label for="user-name" class="am-u-sm-3 am-form-label">职位
+								<span class="tpl-form-line-small-title"></span>
+							</label>
+							<div class="am-u-sm-9">
+								<input type="text" class="tpl-form-input" id="sposition"
+									name="sposition" value="${employeesById.sposition}">
+							</div>
+						</div>
+						<div class="am-form-group">
+							<label for="user-name" class="am-u-sm-3 am-form-label">薪资
+								<span class="tpl-form-line-small-title"></span>
+							</label>
+							<div class="am-u-sm-9">
+								<input type="text" class="tpl-form-input" id="salary"
+									name="salary" value="${employeesById.salary}">
+							</div>
+						</div>
+
+						<div class="am-form-group">
+							<div class="am-u-sm-9 am-u-sm-push-3">
+								<button type="submit"
+									class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<script src="<%=basePath%>assets/js/amazeui.min.js"></script>
 	<script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
 	<script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
 	<script src="<%=basePath%>assets/js/app.js"></script>
+
+	<script type="text/javascript"
+		src="assets/js/jquery-1.7.2.js"></script>
+	<script type="text/javascript">
+	var editBox = $('#calendar-edit-box');
+	function GetEmployeesId(_this){
+		//  弹出框
+		//$('#rid').val(_this.id);
+		//alert(_this.id);
+		$.post("<%=basePath%>staff/getEmployeesById.do", {
+				sid : _this.id
+			}, function(data) {
+				editBox.modal();
+				$("#sid").val(data.sid);
+				$("#sname").val(data.sname);
+				$("#ssex").val(data.ssex);
+				$("#sphone").val(data.sphone);
+				$("#sposition").val(data.sposition);
+				$("#salary").val(data.salary);
+			}, "json");
+
+		}
+	</script>
 
 </body>
 
