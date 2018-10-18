@@ -4,7 +4,7 @@ public class Order {
 	private Integer oid;
 	private String otime;
 	private Integer did;
-	private Integer oprice;
+	private Double oprice;
 	private String ostate;
 	public Integer getOid() {
 		return oid;
@@ -24,10 +24,10 @@ public class Order {
 	public void setDid(Integer did) {
 		this.did = did;
 	}
-	public Integer getOprice() {
+	public Double getOprice() {
 		return oprice;
 	}
-	public void setOprice(Integer oprice) {
+	public void setOprice(Double oprice) {
 		this.oprice = oprice;
 	}
 	public String getOstate() {

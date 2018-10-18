@@ -82,7 +82,7 @@ public class ExcelController {
 		int row = 0;
         List<Recipe> recipes = new ArrayList<Recipe>();
         recipes = jsonMap(request);
-        int fexpend = 0; 
+        double fexpend = 0; 
         for(int i=0; i < recipes.size(); i++){ 
 	        Recipe re = recipes.get(i);
 	        row = recipeService.addStock(re);

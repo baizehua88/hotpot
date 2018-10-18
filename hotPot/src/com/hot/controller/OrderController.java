@@ -1,5 +1,6 @@
 package com.hot.controller;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,10 +30,12 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.hot.config.AlipayConfig;
 import com.hot.model.AlipayNotifyParam;
+import com.hot.model.Customer;
 import com.hot.model.Desk;
 import com.hot.model.Detail;
 import com.hot.model.Finance;
 import com.hot.model.Order;
+import com.hot.service.CustomerService;
 import com.hot.service.DeskService;
 import com.hot.service.FinanceService;
 import com.hot.service.OrderService;
@@ -41,7 +44,7 @@ import com.hot.utils.RandomTool;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-	
+
 	private ExecutorService executorService = Executors.newFixedThreadPool(20);
 	
 	@Autowired
@@ -55,6 +58,10 @@ public class OrderController {
 	@Autowired
 	@Qualifier("financeService")
 	private FinanceService financeService;
+	
+	@Autowired
+	@Qualifier("customerService")
+	private CustomerService customerService;
 	
 	//下单
 	@RequestMapping("/addOrder.do")
@@ -115,7 +122,7 @@ public class OrderController {
 	 */
 	@RequestMapping("/zhiFu.do")
 	@ResponseBody
-	public void insertOrder(HttpServletRequest request) throws Exception{
+	public void insertOrder(HttpServletRequest request,HttpSession session) throws Exception{
 		
 		Map<String,String> params = convertRequestParamsToMap(request);
 		String paramsJson = JSON.toJSONString(params);
@@ -134,6 +141,7 @@ public class OrderController {
 				public void run() {
 					Order order = new Order();
 					Order order1 = new Order();
+					Customer customer = new Customer();
 					Desk desk = new Desk();
 					AlipayNotifyParam param = buildAlipayNotifyParam(params);
 					String trade_status = param.getTrade_status();
@@ -141,7 +149,15 @@ public class OrderController {
 						|| trade_status.equals("TRADE_FINISHED")) {
 						order.setOtime(param.getBody());;
 						order.setOstate("已付款");
+						order.setOprice(Double.parseDouble(param.getTotal_amount().toString()));
 						orderService.zhiFu(order);
+						
+						//增加积分----------------------------------------------------------
+						customer.setCphone(param.getPassback_params());
+						double price = Double.parseDouble(param.getTotal_amount().toString());
+						customer.setCintegral((int)price);
+						System.out.println("电话号码："+param.getPassback_params());
+						customerService.addCintegral(customer);
 						
 						//加入日结算表
 						Finance finance =new Finance();
@@ -191,13 +207,34 @@ public class OrderController {
     
     @RequestMapping("/test.do")
     @ResponseBody
-    public Order test(int id,HttpServletRequest request,HttpSession session) {
-    	
+    public Order test(int id,String cphone , HttpServletRequest request,HttpSession session) {
+    	Customer customer = new Customer();
+    	customer.setCphone(cphone);
     	Order order = new Order();
     	order = orderService.getOne(id);
+    	double discount = order.getOprice();      
+    	if (cphone.equals("") || cphone==null) {			
+			discount = order.getOprice();
+		}else{
+			customerService.getCintegral(customer);
+			//得到顾客积分
+			int cintegral = customerService.getCintegral(customer).getCintegral();
+			if (cintegral<100) {
+				discount = order.getOprice();
+			}else if (cintegral>=100 && cintegral<2000) {
+				discount = order.getOprice()*0.95;
+			}else if (cintegral>=2000 && cintegral<3000) {
+				discount = order.getOprice()*0.9;
+			}else if (cintegral>=3000 && cintegral<5000) {
+				discount = order.getOprice()*0.85;
+			}else {
+				discount = order.getOprice()*0.8;
+			}
+		}
     	String trade_no = RandomTool.RandomCount();
+    	session.setAttribute("cphone", cphone);
     	session.setAttribute("trade_no", trade_no);
-    	session.setAttribute("price", order.getOprice().toString());
+    	session.setAttribute("price", String.format("%.2f", discount));
     	session.setAttribute("body", order.getOtime());
     	return order;
     	

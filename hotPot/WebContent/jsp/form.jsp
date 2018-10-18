@@ -398,9 +398,9 @@
 											<span class="tpl-form-line-small-title">Type</span>
 										</label>
 										<div class="am-form-group tpl-table-list-select"
-											style="margin-right: 540px;">
+											style="margin-left: 200px;text-align: left;">
 											<select data-am-selected="{btnSize: 'sm'}" name="rsort">
-												<option value="请选择菜品类别">请选择菜品类别</option>
+												<option value="">请选择菜品类别</option>
 												<option value="荤菜">荤菜</option>
 												<option value="蔬菜">蔬菜</option>
 												<option value="水果">水果</option>

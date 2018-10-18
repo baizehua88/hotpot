@@ -349,7 +349,8 @@
 	                                           				<td>${order.ostate }</td>
 	                                           				<td>
 			                                                    <div class="tpl-table-black-operation">
-			                                                        <a href="javascript:void(0);" onclick="GetDateNow(${order.oid });">
+			                                                        <%-- <a href="javascript:void(0);" onclick="GetDateNow(${order.oid});"> --%>
+			                                                        <a href="javascript:void(0);" onclick="GoToPay(${order.oid});">
 			                                                            <i class="am-icon-pencil"></i> 结算
 			                                                        </a>
 			                                                        <a href="javascript:void(0);" class="tpl-table-black-operation-del" onClick="GetDetail(${order.oid });">
@@ -372,11 +373,45 @@
         </div>
     </div>
     
-    <!-- 查看订单弹出层 -->
+    <!-- 支付弹出层 -->
 
+	<div class="am-modal am-modal-no-btn" id="calendar-edit-box2"
+		style="width: 100%; margin: auto;">
+		<div class="am-modal-dialog tpl-model-dialog" style="width: 45%;">
+			<div class="am-modal-hd">
+				<a href="javascript: void(0)"
+					class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd tpl-am-model-bd am-cf">
+				<form class="am-form tpl-form-border-form" 
+				action="javascript: void(0);" method="post" enctype="multipart/form-data">	
+					<div style="margin-top: 10px;">
+						<div style="float:center; width: 20px; margin-left: 15px;">
+							<input type="hidden" id="ooid" >
+						</div>
+					</div>		
+					<div align="center">
+						<font style="font-size: 20px;">
+						手机号
+						</font>	 
+						<input type=text name="cphone" id="cphone"style="width: 250px;">	
+					</div>
+					<div class="tpl-table-black-operation" style="margin-top: 50px;">
+                        <a href="javascript:void(0);" id="id" onclick="GetDateNow(this);">
+                            <i class="am-icon-pencil"></i> 结算
+                        </a>
+                    </div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 查看订单弹出层 -->
+	
 	<div class="am-modal am-modal-no-btn" id="calendar-edit-box1"
 		style="width: 100%; margin: auto;">
-		<div class="am-modal-dialog tpl-model-dialog" style="width: 55%;">
+		<div class="am-modal-dialog tpl-model-dialog" style="width: 45%;">
 			<div class="am-modal-hd">
 				<a href="javascript: void(0)"
 					class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
@@ -386,16 +421,16 @@
 				<form class="am-form tpl-form-border-form" 
 				action="javascript: void(0);" method="post" enctype="multipart/form-data">			
 					<div >
-						<font style="float:left;font-size: 20px;">桌号</font>	
+						<!-- <font style="float:left;font-size: 20px;">桌号</font>	 -->
 						<div style="float: left; width: 20px; margin-left: 15px;">
-							<input type=text name="did" id="did">
+							<!-- <input type=text name="did" id="did"> -->
 							<input type="hidden" id="oid" >
 						</div>
 					</div>
-					<div style="margin-top: 60px;">
+					<div style="margin-top: 10px;">
 					<font style="text-align:center;font-size: 30px;">订单详情</font>
 					</div>
-					<div class="am-u-sm-12">
+					<div class="am-u-sm-12" style="margin-top: 40px;">
 						<table width="100%" id="table_details1"
 							class="am-table am-table-compact am-table-striped tpl-table-black ">
 							<thead>
@@ -421,11 +456,11 @@
     <script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
     <script src="<%=basePath%>assets/js/app.js"></script>
 	<script type="text/javascript">
-		function GetDateNow(data) {
+		function GetDateNow(data) {	
 			$.ajax({
 				types: "POST",
 				url: "test.do",
-				data: "id="+data,
+				data: {'id':$('#ooid').val(),'cphone':$('#cphone').val()},
 				success: function (msg) {
 					window.location.href = "<%=basePath%>jsp/alipay.trade.page.pay.jsp";
 				}
@@ -433,9 +468,11 @@
 		}
 		
 		var editBox1 = $('#calendar-edit-box1');
+		var editBox2 = $('#calendar-edit-box2');
 		
 		//查看订单
 		function GetDetail(data){
+			
 			$.ajax({
 				type: "post",
 				url : "<%=basePath%>detail/getDetailByOid.do",
@@ -466,6 +503,12 @@
 					editBox1.modal();
 				}						
 		   }); 				  
+		}
+		
+		//输入会员信息
+		function GoToPay(data){
+			$('#ooid').val(data);
+			editBox2.modal();				  
 		}
 		
 	</script>

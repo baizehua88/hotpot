@@ -21,7 +21,7 @@
 		SELECT * FROM hp_order
 	</select>
 	<update id="zhiFu" parameterType="Order">
-		UPDATE hp_order SET ostate=#{ostate} WHERE otime=#{otime}
+		UPDATE hp_order SET ostate=#{ostate},oprice=#{oprice} WHERE otime=#{otime}
 	</update>
 	<update id="upDesk" parameterType="Desk">
 		UPDATE hp_desk SET dstate=#{dstate} WHERE did=#{did} 

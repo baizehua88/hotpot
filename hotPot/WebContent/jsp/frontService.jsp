@@ -426,9 +426,7 @@
 								</tr>
 							</thead>
 							<tbody id="orderRecipe">								
-
-								<!-- more data -->
-								
+								<!-- more data -->								
 							</tbody>
 						</table>				
 					</div>	
