@@ -48,13 +48,11 @@ public class FinanceController {
 		ModelAndView mv = new ModelAndView();
 		List<Finance> ftimeList = financeService.getFtime();
 		List<Finance> sumFinanceList = new ArrayList<>();
-<<<<<<< HEAD
-=======
+
 		double sumFexpend=0;
 		double sumFincome=0;
 		double sumFprofit=0;
 		double sumFbalance=0;
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 		for (int i = 0; i < ftimeList.size(); i++) {
 			Finance finance = new Finance();
             finance.setFtime(ftimeList.get(i).getFtime());
@@ -67,14 +65,11 @@ public class FinanceController {
             sumFbalance += financeService.getSumFinances(finance).getFbalance();
             
 		}
-<<<<<<< HEAD
-=======
 		System.out.println(sumFinanceList);
 		mv.addObject("sumFexpend",sumFexpend );
 		mv.addObject("sumFincome",sumFincome );
 		mv.addObject("sumFprofit",sumFprofit );
 		mv.addObject("sumFbalance",sumFbalance );
->>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 		mv.addObject("sumFinanceList", sumFinanceList);
 		mv.setViewName("sum");
 		return mv;
@@ -89,8 +84,8 @@ public class FinanceController {
 	@ResponseBody
 	public ListFinance getSumFinances1(){
 		List<String> tList = new ArrayList<String>();
-		List<Integer> iList = new ArrayList<Integer>();
-		List<Integer> eList = new ArrayList<Integer>();
+		List<Double> iList = new ArrayList<Double>();
+		List<Double> eList = new ArrayList<Double>();
 		List<Finance> ftimeList = financeService.getFtime();
 		List<Finance> sumFinanceList = new ArrayList<>();
 		ListFinance listFinance = new ListFinance();

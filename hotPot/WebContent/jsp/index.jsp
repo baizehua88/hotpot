@@ -384,7 +384,7 @@
 
 							<div class="widget-body  am-fr">
 								<div class="am-scrollable-horizontal ">
-									<video src="https://outin-f41c28f1b0dc11e89f4700163e1c955c.oss-cn-shanghai.aliyuncs.com/4f267abdd4c744fa86db7701c9ed678c/1849d8c1eb584552bc6fb2d7b6912023-74ff1929f4d2520f6bf83d87cef973d3-ld.mp4?Expires=1539778927&OSSAccessKeyId=LTAInFumgYEtNMvC&Signature=uk11fXMZvaAN36Gj3F0QxK5l2os%3D" width=100% height=300% loop="loop" autoplay="autoplay">
+									<video src="https://outin-f41c28f1b0dc11e89f4700163e1c955c.oss-cn-shanghai.aliyuncs.com/4f267abdd4c744fa86db7701c9ed678c/1849d8c1eb584552bc6fb2d7b6912023-74ff1929f4d2520f6bf83d87cef973d3-ld.mp4?Expires=1539831766&OSSAccessKeyId=LTAInFumgYEtNMvC&Signature=V3hJ3z%2FpI6iaK8HXMXESVWMOM%2BM%3D" width=100% height=300% loop="loop" autoplay="autoplay">
 	 								</video>
 								</div>
 							</div>
