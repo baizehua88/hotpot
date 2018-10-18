@@ -305,7 +305,7 @@
 				<div class="row">
 					<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
 						<div class="widget am-cf">
-							<form action="<%=basePath %>staff/payroll.do" method="post">
+						
 								<div class="widget-body  am-fr">
 
 									<div class="am-u-sm-12">
@@ -323,14 +323,14 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${payStaffList }" var="staff">
-													<tr class="gradeX">
-														<td>${staff.sid }</td>
-														<td>${staff.sposition }</td>
-														<td>${staff.sname }</td>
-														<td>${staff.ssex }</td>
-														<td>${staff.sphone }</td>
-														<td><input type="text" name="salary"></td>
+												<c:forEach items="${payStaffList }" var="staff" step="1" varStatus="statu">
+													<tr class="gradeX" id="payroll">
+														<td class="am-text-middle" id="sid${statu.count }">${staff.sid }</td>
+														<td class="am-text-middle">${staff.sposition }</td>
+														<td class="am-text-middle">${staff.sname }</td>
+														<td class="am-text-middle">${staff.ssex }</td>
+														<td class="am-text-middle">${staff.sphone }</td>
+														<td class="am-text-middle"><input type="text" name="salary" id="num${statu.count }"></td>
 													</tr>
 												</c:forEach>
 												<!-- more data -->
@@ -354,10 +354,9 @@
 								</div>
 								<hr style="border: ridge; margin-top: 30px;">
 								<div class="am-form-group">
-									<button type="submit" style="float: right; margin-right: 20px;"
-										class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+									<button type="button" style="float: right; margin-right: 20px;"
+										class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="getInt();">提交</button>
 								</div>
-							</form>
 						</div>
 					</div>
 				</div>
@@ -368,6 +367,46 @@
 	<script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
 	<script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
 	<script src="<%=basePath%>assets/js/app.js"></script>
+	<script src="<%=basePath%>assets/js/jquery-3.1.1.min.js"></script>
+	
+	<script type="text/javascript">
+	
+	function getInt() {
+		var k;
+		var att= {};    //创建一个空的json
+		var sid,salary;
+		var Array = [];
+		$("#payroll").each(function(){
+			for(k=1;k<5;k++){
+				sid = document.getElementById('sid'+k).innerText;
+				salary = $('#num'+k).val();
+				att = {
+						'sid':sid,
+						'salary':salary,
+					};
+				Array.push(att);
+			}
+		})
+		console.log(Array);
+		$.ajax({
+			type: "POST",
+			url: "<%=basePath%>staff/payroll.do",
+			data: {
+				ds:JSON.stringify(Array)
+			},
+			//dataType: "json",
+			success: function(msg) {
+				if (msg == "OK") {
+					//window.location.reload();
+					window.location.href="<%=basePath %>staff/staffList.do";
+					alert("成功！");
+				}else {
+					alert("失败！");
+				}
+			}
+		});
+	}
+	</script>
 
 </body>
 

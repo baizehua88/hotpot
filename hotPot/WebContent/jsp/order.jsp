@@ -290,7 +290,7 @@
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加员工
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/payroll.jsp"> <span
+							href="<%=basePath%>staff/payStaffList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 发放薪资
 						</a></li>
 					</ul></li>
@@ -310,6 +310,7 @@
 									<div class="am-form-group">
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
+												<input type="hidden" id="total" value="${totalre }"/>
 												<button type="button"
 													class="am-btn am-btn-default am-btn-success" onclick="getExcel();">
 													 生成入库单（选中行数据）
@@ -337,7 +338,7 @@
 										<tbody>
                                             <c:forEach var="recipe" items="${recipeList}" step="1" varStatus="statu">
                                             <tr class="gradeX" id="mytr">
-											    <td><input id="check${statu.count }" name="checkitem" type="checkbox" onclick="input(${recipe.rid });"></td>
+											    <td><input id="check${statu.count }" name="checkitem" type="checkbox" onclick="input(${statu.count });"></td>
                                                 <td>
                                                     <img src="<%=basePath%>assets/img/${recipe.rimage}" style="height: 90px;width: 100%" class="tpl-table-line-img" alt="">
                                                 </td>
@@ -482,8 +483,9 @@
 			var att= {};    //创建一个空的json
 			var rname,stock;
 			var Array = [];
+			var total = $("#total").val();
 			$("#mytr").each(function(){
-				for(k=1;k<9;k++){
+				for(k=1;k<total+1;k++){
 					if($("#check"+k).prop('checked')){
 						rname = document.getElementById('rname'+k).innerText;
 						stock = $('#num'+k).val();

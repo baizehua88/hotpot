@@ -24,4 +24,23 @@
 	<update id="addStock" parameterType="Recipe">
 		UPDATE hp_recipe SET rstock = rstock+#{stock} WHERE rname=#{rname}
 	</update>
+	
+	<delete id="delRecipe" parameterType="int">
+	    delete from hp_recipe where rid = #{rid}
+	</delete>
+	
+	<!--单参数 查找 返回list 的select 语句 -->
+	<select id="searchBySort" parameterType="String" resultType="Recipe">
+		SELECT * FROM hp_recipe WHERE rsort LIKE CONCAT(CONCAT('%',#{rsort},'%'))
+	</select>
+	
+	<select id="searchByState" parameterType="String" resultType="Recipe">
+		SELECT * FROM hp_recipe WHERE rstate LIKE CONCAT(CONCAT('%',#{rstate},'%'))
+	</select>
+
+	<!-- 多参数 查找 返回list 的select 语句 -->
+	<select id="searchBySortandState" parameterType="Recipe" resultType="Recipe">
+		select * from hp_recipe where rsort=#{rsort} and
+		rstate=#{rstate}
+	</select>
 </mapper>

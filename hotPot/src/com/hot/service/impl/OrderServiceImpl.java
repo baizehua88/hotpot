@@ -22,6 +22,20 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.addOrder(order);
 	}
 	@Override
+	public List<Order> getOrders() {
+		// TODO Auto-generated method stub
+		return orderDao.getOrders();
+	}
+	@Override
+	public Order getOrderId(Order order) {
+		// TODO Auto-generated method stub
+		return orderDao.getOrderId(order);
+	}
+	@Override
+	public Order getDetailOid(Order order) {
+		// TODO Auto-generated method stub
+		return orderDao.getDetailOid(order);
+	}
 	public List<Order> getOrder() {
 		return orderDao.getOrder();
 	}

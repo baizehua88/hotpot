@@ -50,9 +50,39 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public int payroll(int salary) {
+	public int payroll(Staff staff) {
 		// TODO Auto-generated method stub
-		return staffDao.payroll(salary);
+		return staffDao.payroll(staff);
+	}
+
+	@Override
+	public Staff getEmployeesById(Staff staff) {
+		// TODO Auto-generated method stub
+		return staffDao.getEmployeesById(staff);
+	}
+
+	@Override
+	public int updateEmployees(Staff staff) {
+		// TODO Auto-generated method stub
+		return staffDao.updateEmployees(staff);
+	}
+
+	@Override
+	public List<Staff> searchByName(String sname) {
+		// TODO Auto-generated method stub
+		return staffDao.searchByName(sname);
+	}
+
+	@Override
+	public List<Staff> searchByPosition(String sposition) {
+		// TODO Auto-generated method stub
+		return staffDao.searchByPosition(sposition);
+	}
+
+	@Override
+	public List<Staff> searchByNameandPosition(Staff staff) {
+		// TODO Auto-generated method stub
+		return staffDao.searchByNameandPosition(staff);
 	}
 
 }

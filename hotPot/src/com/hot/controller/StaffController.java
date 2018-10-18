@@ -1,15 +1,22 @@
 package com.hot.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.hot.model.Staff;
 import com.hot.service.StaffService;
 
@@ -83,19 +90,111 @@ public class StaffController {
 	public ModelAndView payStaffList() {
 		ModelAndView mv = new ModelAndView();
 		List<Staff> payStaffList = staffService.getPayStaff();
-		// System.out.println(staffList);
 		mv.addObject("payStaffList", payStaffList);
+		// System.out.println(payStaffList);
 		mv.setViewName("payroll");
 		return mv;
 	}
 
 	@RequestMapping("/payroll.do")
-	public ModelAndView payroll(int salary) {
-		ModelAndView mView = new ModelAndView();
+	@ResponseBody
+	public String payroll(HttpServletRequest request) {
 
-		if (staffService.payroll(salary) > 0) {
-			mView.setViewName("redirect:/staff/staffList.do");
+		List<Staff> staffs = jsonMap(request);
+		int row = 0;
+		for (int i = 0; i < staffs.size(); i++) {
+			Staff staff = new Staff();
+			staff = staffs.get(i);
+			row = staffService.payroll(staff);
+			row++;
 		}
+		if (row > 0) {
+			return "OK";
+		} else {
+			return "FALL";
+		}
+	}
+
+	public List<Staff> jsonMap(HttpServletRequest request) {
+		String ds = request.getParameter("ds");
+		JsonParser parser = new JsonParser();
+		JsonArray jsonArray = parser.parse(ds).getAsJsonArray();
+		Gson gson = new Gson();
+		List<Staff> staffs = new ArrayList<Staff>();
+		for (JsonElement staff : jsonArray) {
+			Staff recipeBean = gson.fromJson(staff, Staff.class);
+			staffs.add(recipeBean);
+		}
+		return staffs;
+	}
+
+	/**
+	 * 根据id查询员工数据
+	 * 
+	 * @param staff
+	 * @return
+	 */
+	@RequestMapping("/getEmployeesById.do")
+	@ResponseBody
+	public Staff getEmployeesById(Staff staff) {
+		// System.out.println(staff.getSid());
+		Staff employeesById = staffService.getEmployeesById(staff);
+		// System.out.println(employeesById);
+		return employeesById;
+	}
+
+	/**
+	 * 编辑员工资料
+	 * 
+	 * @param staff
+	 * @return
+	 */
+	@RequestMapping("/updateEmployees.do")
+	public ModelAndView updateEmployees(Staff staff) {
+		ModelAndView mv = new ModelAndView();
+		// System.out.println(staff);
+		if (staffService.updateEmployees(staff) > 0) {
+			System.out.println("修改成功");
+			mv.setViewName("redirect:/staff/staffList.do");
+		} else {
+			System.out.println("修改失败");
+			mv.setViewName("redirect:/staff/staffList.do");
+		}
+		return mv;
+	}
+
+	/**
+	 * 查询
+	 * 
+	 * @param staff
+	 * @return
+	 */
+	@RequestMapping("/search.do")
+	public ModelAndView search(Staff staff) {
+
+		ModelAndView mView = new ModelAndView();
+		// System.out.println(staff.getSname() + staff.getSposition());
+		if (staff.getSname() != null && staff.getSname() != "") {
+			if (staff.getSposition() != null && staff.getSposition() != "") {
+				List<Staff> staffList = staffService.searchByNameandPosition(staff);
+				mView.addObject("staffList", staffList);
+				mView.setViewName("employees");
+			} else {
+				List<Staff> staffList = staffService.searchByName(staff.getSname());
+				mView.addObject("staffList", staffList);
+				mView.setViewName("employees");
+			}
+		} else {
+			if (staff.getSposition() != null && staff.getSposition() != "") {
+				List<Staff> staffList = staffService.searchByPosition(staff.getSposition());
+				mView.addObject("staffList", staffList);
+				mView.setViewName("employees");
+			} else {
+				mView.setViewName("redirect:/staff/staffList.do");
+			}
+		}
+
 		return mView;
 	}
+
 }

@@ -38,6 +38,7 @@
 			//获取FileUpload对象
 			var x = document.getElementById("doc-form-file").files;
 			$("#rimage").val(x[0].name);
+			document.getElementById('image').src = "<%=basePath%>assets/img/"+document.getElementById('rimage').value;
 		})
 		
 	});
@@ -311,7 +312,7 @@
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加员工
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/payroll.jsp"> <span
+							href="<%=basePath%>staff/payStaffList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 发放薪资
 						</a></li>
 					</ul></li>
@@ -331,39 +332,45 @@
 
 							</div>
 							<div class="widget-body  am-fr">
-
-								<div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
-									<div class="am-form-group">
-										<div class="am-btn-toolbar">
-											<div class="am-btn-group am-btn-group-xs"></div>
+								<form action="<%=basePath %>recipe/searchRecipe.do">
+									<div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+										<div class="am-form-group">
+											<div class="am-btn-toolbar">
+												<div class="am-btn-group am-btn-group-xs"></div>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
-									<div class="am-form-group tpl-table-list-select">
-										<select data-am-selected="{btnSize: 'sm'}">
-											<option value="option1">所有类别</option>
-											<option value="option2">荤菜</option>
-											<option value="option3">蔬菜</option>
-											<option value="option3">水果</option>
-											<option value="option3">丸子</option>
-											<option value="option3">熟菜</option>
-											<option value="option3">蘸酱</option>
-										</select>
+									<div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+										<div class="am-form-group tpl-table-list-select">
+											<span style="margin-right: 136px;">菜品类别</span> <select
+												data-am-selected="{btnSize: 'sm'}" name="rsort">
+												<option value="">所有类别</option>
+												<option value="荤菜">荤菜</option>
+												<option value="素菜">素菜</option>
+												<option value="蔬菜">蔬菜</option>
+												<option value="水果">水果</option>
+												<option value="丸子">丸子</option>
+												<option value="熟">熟菜</option>
+												<option value="蘸酱">蘸酱</option>
+											</select>
+										</div>
 									</div>
-								</div>
-								<div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
-									<div
-										class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-										<input type="text" class="am-form-field "> <span
-											class="am-input-group-btn">
-											<button
-												class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
-												type="button"></button>
-										</span>
+									<div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+										<div
+											class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+											<span>是否热门</span> <select data-am-selected="{btnSize: 'sm'}"
+												name="rstate">
+												<option value="">是否热门</option>
+												<option value="热门" >热门</option>
+												<option value="一般">一般</option>
+											</select> <span class="am-input-group-btn">
+												<button style="margin-top: 24px;"
+													class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
+													type="submit"></button>
+											</span>
+										</div>
 									</div>
-								</div>
-
+								</form>
 								<div class="am-u-sm-12">
 									<table width="100%"
 										class="am-table am-table-compact am-table-striped tpl-table-black ">
@@ -398,7 +405,8 @@
 															<a href="javascript:void(0);" id="${recipe.rid}"
 																onClick="GetRecipeId(this);"> <i
 																class="am-icon-pencil"></i> 编辑
-															</a> <a href="javascript:;"
+															</a> <a
+																href="javascript:if(confirm('确定要删除吗？'))location='<%=basePath %>recipe/delRecipe.do?id=${recipe.rid }'"
 																class="tpl-table-black-operation-del"> <i
 																class="am-icon-trash"></i> 删除
 															</a>
@@ -512,9 +520,10 @@
 									style="float: left;">
 									<i class="am-icon-cloud-upload"></i> 更换菜品图片
 								</button>
-								<input id="doc-form-file" type="file" name="file" multiple="" onchange="show(this)">
-								<input type="hidden" id="rimage" name="rimage"
-									value="${recipeById.rimage}" style="width: 100%; height: 100%">
+								<input id="doc-form-file" type="file" name="file" multiple=""
+									onchange="show(this)"> <input type="hidden" id="rimage"
+									name="rimage" value="${recipeById.rimage}"
+									style="width: 100%; height: 100%">
 							</div>
 
 						</div>

@@ -8,4 +8,16 @@
 		INSERT INTO hp_customer(cname,csex,cphone,cintegral,cbirthday,cjoin)
 		VALUES(#{cname},#{csex},#{cphone},#{cintegral},#{cbirthday},#{cjoin})
 	</insert>
+		<select id="getMemberById" parameterType="Customer" resultType="Customer">
+		SELECT * FROM hp_customer WHERE cid= #{cid} ;
+	</select>
+	<update id="updateMember" parameterType="Customer">
+		UPDATE hp_customer SET cname=#{cname},csex=#{csex},cphone=#{cphone},
+		cintegral=#{cintegral},cbirthday=#{cbirthday},cjoin=#{cjoin}
+		where cid= #{cid}
+	</update>
+	
+	<delete id="delMember" parameterType="int">
+	delete from hp_customer where cid = #{cid}
+	</delete>
 </mapper>

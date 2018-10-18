@@ -5,4 +5,7 @@
 		INSERT INTO hp_detail(rname,rno,rprice,rtotal,oid)
 		VALUES(#{rname},#{rno},#{rprice},#{rtotal},#{oid})
 	</insert>
+	<select id="getDetailByOid" resultType="Detail">
+		SELECT * FROM hp_detail WHERE oid=#{oid};
+	</select>
 </mapper>
