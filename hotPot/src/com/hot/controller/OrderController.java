@@ -60,9 +60,6 @@ public class OrderController {
 	@RequestMapping("/addOrder.do")
 	@ResponseBody
 	public int addOrder(Order order){
-		//ModelAndView mv = new ModelAndView();
-		//order.setDid(Integer.parseInt(request.getParameter("did")));
-		System.out.println(order.getDid());
 		order.setOtime(getTime());
 		order.setOstate("未支付");
 		orderService.addOrder(order);
@@ -70,7 +67,6 @@ public class OrderController {
 		Order order1 =  orderService.getOrderId(order);
 		//修改餐桌状态
 		deskService.updateDeskState(order.getDid());
-		System.out.println(order1.getOid());		
 		//再返回产生的订单id------------------------------------
 		return order1.getOid();
 		

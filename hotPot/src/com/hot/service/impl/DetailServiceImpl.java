@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hot.dao.DetailDao;
 import com.hot.model.Detail;
+import com.hot.model.Recipe;
 import com.hot.service.DetailService;
 @Service("detailService")
 public class DetailServiceImpl implements DetailService {
@@ -24,6 +25,16 @@ public class DetailServiceImpl implements DetailService {
 	public List<Detail> getDetailByOid(int oid) {
 		// TODO Auto-generated method stub
 		return detailDao.getDetailByOid(oid);
+	}
+	@Override
+	public List<Detail> getTotal() {
+		// TODO Auto-generated method stub
+		return detailDao.getTotal();
+	}
+	@Override
+	public int reduceStock(Recipe recipe) {
+		// TODO Auto-generated method stub
+		return detailDao.reduceStock(recipe);
 	}
 
 }

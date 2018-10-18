@@ -3,16 +3,17 @@ package com.hot.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hot.model.Finance;
+import com.hot.model.ListFinance;
 import com.hot.service.FinanceService;
 
 @Controller
@@ -28,9 +29,7 @@ public class FinanceController {
 		ModelAndView mv = new ModelAndView();
 		Finance finance = new Finance();
 		finance.setFtime(getTime());
-		System.out.println(getTime());
 		List<Finance> financeList = financeService.getFinances(finance);
-		System.out.println(financeList);
 		mv.addObject("financeList", financeList);
 		mv.setViewName("day");
 		return mv;
@@ -49,23 +48,44 @@ public class FinanceController {
 		ModelAndView mv = new ModelAndView();
 		List<Finance> ftimeList = financeService.getFtime();
 		List<Finance> sumFinanceList = new ArrayList<>();
-		 /*Iterator<Finance> it1 = ftimeList.iterator();
-	        while(it1.hasNext()){
-	            System.out.println("遍历时间："+it1.next().getFtime());
-	            Finance finance = new Finance();
-	            finance.setFtime(it1.next().getFtime());
-	            sumFinanceList = financeService.getSumFinances(finance);
-	        }*/
 		for (int i = 0; i < ftimeList.size(); i++) {
 			Finance finance = new Finance();
-			System.out.println("遍历时间："+ftimeList.get(i).getFtime());
             finance.setFtime(ftimeList.get(i).getFtime());
             sumFinanceList.add(financeService.getSumFinances(finance));
 		}
-		System.out.println(sumFinanceList);
 		mv.addObject("sumFinanceList", sumFinanceList);
 		mv.setViewName("sum");
 		return mv;
+	}
+	
+	
+	/**
+	 * echarts图标数据
+	 * @return
+	 */
+	@RequestMapping("/echarts.do")
+	@ResponseBody
+	public ListFinance getSumFinances1(){
+		List<String> tList = new ArrayList<String>();
+		List<Integer> iList = new ArrayList<Integer>();
+		List<Integer> eList = new ArrayList<Integer>();
+		List<Finance> ftimeList = financeService.getFtime();
+		List<Finance> sumFinanceList = new ArrayList<>();
+		ListFinance listFinance = new ListFinance();
+		for (int i = 0; i < ftimeList.size(); i++) {
+			Finance finance = new Finance();
+            finance.setFtime(ftimeList.get(i).getFtime());
+            sumFinanceList.add(financeService.getSumFinances(finance));
+		}
+		for(int j = sumFinanceList.size()-5;j <sumFinanceList.size();j++) {
+			tList.add(sumFinanceList.get(j).getFtime());
+			iList.add(sumFinanceList.get(j).getFincome());
+			eList.add(sumFinanceList.get(j).getFexpend());
+		}
+		listFinance.settList(tList);
+		listFinance.setiList(iList);
+		listFinance.seteList(eList);
+		return listFinance;
 	}
 	
 }
