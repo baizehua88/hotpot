@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -70,5 +72,18 @@ public class CustomerController {
 		}
 		return mv;
 	}
+	
+	//输入手机号查询积分-----------没用到-------------------
+	@RequestMapping("/getCintegral.do")
+	@ResponseBody
+	public int getCintegral(Customer customer,HttpSession session){		
+		customerService.getCintegral(customer);
+		session.setAttribute("cphone", customer.getCphone());
+		int cintegral = customerService.getCintegral(customer).getCintegral();
+		System.out.println("手机号："+customer.getCphone()+"，积分："+cintegral);
+		return cintegral;
+		
+	}
+	
 	
 }

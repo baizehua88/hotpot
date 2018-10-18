@@ -40,4 +40,16 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDao.updateMember(customer);
 	}
 
+	@Override
+	public Customer getCintegral(Customer customer) {
+		// TODO Auto-generated method stub
+		return customerDao.getCintegral(customer);
+	}
+
+	@Override
+	public int addCintegral(Customer customer) {
+		// TODO Auto-generated method stub
+		return customerDao.addCintegral(customer);
+	}
+
 }

@@ -328,7 +328,14 @@
 												<td>${sumFinance.fprofit}</td>
 												<td>${sumFinance.fbalance}</td>
 											</tr>
-										</c:forEach>										
+										</c:forEach>
+											<tr class="gradeX">
+												<td>总计</td>
+												<td>${sumFincome}</td>
+												<td>${sumFexpend}</td>
+												<td>${sumFprofit}</td>
+												<td>${sumFbalance}</td>
+											</tr>									
 											<!-- more data -->
 										</tbody>
 									</table>

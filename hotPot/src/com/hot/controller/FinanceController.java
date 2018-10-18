@@ -49,20 +49,28 @@ public class FinanceController {
 		ModelAndView mv = new ModelAndView();
 		List<Finance> ftimeList = financeService.getFtime();
 		List<Finance> sumFinanceList = new ArrayList<>();
-		 /*Iterator<Finance> it1 = ftimeList.iterator();
-	        while(it1.hasNext()){
-	            System.out.println("遍历时间："+it1.next().getFtime());
-	            Finance finance = new Finance();
-	            finance.setFtime(it1.next().getFtime());
-	            sumFinanceList = financeService.getSumFinances(finance);
-	        }*/
+		double sumFexpend=0;
+		double sumFincome=0;
+		double sumFprofit=0;
+		double sumFbalance=0;
 		for (int i = 0; i < ftimeList.size(); i++) {
 			Finance finance = new Finance();
 			System.out.println("遍历时间："+ftimeList.get(i).getFtime());
             finance.setFtime(ftimeList.get(i).getFtime());
+            
+            //总计
             sumFinanceList.add(financeService.getSumFinances(finance));
+            sumFexpend += financeService.getSumFinances(finance).getFexpend();
+            sumFincome += financeService.getSumFinances(finance).getFincome();
+            sumFprofit += financeService.getSumFinances(finance).getFprofit();
+            sumFbalance += financeService.getSumFinances(finance).getFbalance();
+            
 		}
 		System.out.println(sumFinanceList);
+		mv.addObject("sumFexpend",sumFexpend );
+		mv.addObject("sumFincome",sumFincome );
+		mv.addObject("sumFprofit",sumFprofit );
+		mv.addObject("sumFbalance",sumFbalance );
 		mv.addObject("sumFinanceList", sumFinanceList);
 		mv.setViewName("sum");
 		return mv;
