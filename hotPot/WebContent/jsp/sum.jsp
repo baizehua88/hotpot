@@ -5,6 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -244,16 +245,16 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/orderList.jsp"> <span
+							href="<%=basePath%>order/orderList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/day.jsp"> <span
+							href="<%=basePath%>finance/financeList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 日结算
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/sum.jsp" class="active"> <span
+							href="<%=basePath%>finance/sumFinanceList.do" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 总结算
 						</a></li>
 					</ul></li>
@@ -319,49 +320,22 @@
 											</tr>
 										</thead>
 										<tbody>
+										<c:forEach var="sumFinance" items="${sumFinanceList}">
 											<tr class="gradeX">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
+												<td>${sumFinance.ftime}</td>
+												<td>${sumFinance.fincome}</td>
+												<td>${sumFinance.fexpend}</td>
+												<td>${sumFinance.fprofit}</td>
+												<td>${sumFinance.fbalance}</td>
 											</tr>
-											<tr class="even gradeC">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
+										</c:forEach>
 											<tr class="gradeX">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
-
-											<tr class="even gradeC">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
+												<td>总计</td>
+												<td>${sumFincome}</td>
+												<td>${sumFexpend}</td>
+												<td>${sumFprofit}</td>
+												<td>${sumFbalance}</td>
+											</tr>									
 											<!-- more data -->
 										</tbody>
 									</table>

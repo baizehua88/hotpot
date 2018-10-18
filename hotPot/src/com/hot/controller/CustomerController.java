@@ -51,6 +51,7 @@ public class CustomerController {
 		String time = dateFormat.format(now);
 		return time;
 	}
+<<<<<<< HEAD
 
 	// 根据id查询会员
 	@RequestMapping("/getMemberById.do")
@@ -106,4 +107,41 @@ public class CustomerController {
 
 	}
 
+=======
+	
+	//根据id查询会员
+	@RequestMapping("/getMemberById.do")
+	@ResponseBody
+	public Customer getMemberById(Customer customer){
+		System.out.println(customer.getCid());
+		Customer memberById = customerService.getMemberById(customer);
+		return memberById;
+	}
+	
+	//修改会员资料
+	@RequestMapping("/updateMember.do")
+	public ModelAndView updateMember(Customer customer){
+		ModelAndView mv = new ModelAndView();
+		if (customerService.updateMember(customer)>0) {
+			mv.setViewName("redirect:/customer/customerList.do");
+		}else {
+			mv.setViewName("redirect:/customer/customerList.do");
+		}
+		return mv;
+	}
+	
+	//输入手机号查询积分-----------没用到-------------------
+	@RequestMapping("/getCintegral.do")
+	@ResponseBody
+	public int getCintegral(Customer customer,HttpSession session){		
+		customerService.getCintegral(customer);
+		session.setAttribute("cphone", customer.getCphone());
+		int cintegral = customerService.getCintegral(customer).getCintegral();
+		System.out.println("手机号："+customer.getCphone()+"，积分："+cintegral);
+		return cintegral;
+		
+	}
+	
+	
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 }

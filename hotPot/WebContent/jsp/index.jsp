@@ -249,11 +249,11 @@
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/day.jsp"> <span
+							href="<%=basePath%>finance/financeList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 日结算
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/sum.jsp"> <span
+							href="<%=basePath%>finance/sumFinanceList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 总结算
 						</a></li>
 					</ul></li>
@@ -300,52 +300,19 @@
 
 		<!-- 内容区域 -->
 		<div class="tpl-content-wrapper">
-
-			<div class="container-fluid am-cf">
-				<div class="row">
-					<div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
-						<div class="page-header-heading">
-							<span class="am-icon-home page-header-heading-icon"></span> 首页 <small>好辣火锅</small>
-						</div>
-						<p class="page-header-description" id="title">好辣火锅，汤底味美，醇厚，配菜种类多样，菜品新鲜可口！</p>
-					</div>
-					<div class="am-u-lg-3 tpl-index-settings-button">
-						<button type="button" class="page-header-button" id="set">
-							<span class="am-icon-paint-brush"></span> 设置
-						</button>
-					</div>
-				</div>
-
-			</div>
-
 			<div class="row-content am-cf">
 				<div class="row  am-cf">
 					<div class="am-u-sm-12 am-u-md-12 am-u-lg-4">
-						<div class="widget am-cf">
-							<div class="widget-head am-cf">
-								<div class="widget-title am-fl">月度财务收支计划</div>
-								<div class="widget-function am-fr">
-									<a href="javascript:;" class="am-icon-cog"></a>
+						<div class="widget widget-primary am-cf">
+							<div class="widget-statistic-header">本季度利润</div>
+							<div class="widget-statistic-body">
+								<div class="widget-statistic-value">￥27,294</div>
+								<div class="widget-statistic-description">
+									本季度比去年多收入 <strong>2593元</strong> 人民币
 								</div>
-							</div>
-							<div class="widget-body am-fr">
-								<div class="am-fl">
-									<div class="widget-fluctuation-period-text">
-										￥61746.45
-										<button class="widget-fluctuation-tpl-btn">
-											<i class="am-icon-calendar"></i> 更多月份
-										</button>
-									</div>
-								</div>
-								<div class="am-fr am-cf">
-									<div class="widget-fluctuation-description-amount text-success"
-										am-cf>+￥30420.56</div>
-									<div class="widget-fluctuation-description-text am-text-right">
-										8月份收入</div>
-								</div>
+								<span class="widget-statistic-icon am-icon-home"></span>
 							</div>
 						</div>
-
 					</div>
 					<div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
 						<div class="widget widget-primary am-cf">
@@ -360,7 +327,7 @@
 						</div>
 					</div>
 					<div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
-						<div class="widget widget-purple am-cf">
+						<div class="widget widget-primary am-cf">
 							<div class="widget-statistic-header">本季度利润</div>
 							<div class="widget-statistic-body">
 								<div class="widget-statistic-value">￥27,294</div>
@@ -376,15 +343,8 @@
 				<div class="row am-cf">
 					<div class="am-u-sm-12 am-u-md-8">
 						<div class="widget am-cf">
-							<div class="widget-head am-cf">
-								<div class="widget-title am-fl">月度财务收支计划</div>
-								<div class="widget-function am-fr">
-									<a href="javascript:;" class="am-icon-cog"></a>
-								</div>
+							<div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="main" style="height: 300px;">
 							</div>
-							<div
-								class="widget-body-md widget-body tpl-amendment-echarts am-fr"
-								id="tpl-echarts"></div>
 						</div>
 					</div>
 
@@ -408,142 +368,24 @@
 
 				<div class="row am-cf">
 
-					<div class="am-u-sm-12 am-u-md-4">
+					<div class="am-u-sm-12 am-u-md-6">
 						<div class="widget am-cf">
-							<div class="widget-head am-cf">
-								<div class="widget-title am-fl">商家推荐菜品</div>
-								<div class="widget-function am-fr">
-									<a href="javascript:;" class="am-icon-cog"></a>
-								</div>
-							</div>
-							<div class="widget-body widget-body-md am-fr">
-
-								<div class="am-progress-title">
-									羊肉卷 <span class="am-fr am-progress-title-more">28% /
-										100%</span>
-								</div>
-								<div class="am-progress">
-									<div class="am-progress-bar" style="width: 15%"></div>
-								</div>
-								<div class="am-progress-title">
-									肥牛卷 <span class="am-fr am-progress-title-more">28% /
-										100%</span>
-								</div>
-								<div class="am-progress">
-									<div class="am-progress-bar  am-progress-bar-warning"
-										style="width: 75%"></div>
-								</div>
-								<div class="am-progress-title">
-									生菜 <span class="am-fr am-progress-title-more">28% / 100%</span>
-								</div>
-								<div class="am-progress">
-									<div class="am-progress-bar am-progress-bar-danger"
-										style="width: 35%"></div>
-								</div>
+							<div class="widget-body widget-body-md am-fr" id = "tuijian"  style="height: 300px;">
+								
 							</div>
 						</div>
 					</div>
 
 
 					<div
-						class="am-u-sm-12 am-u-md-12 am-u-lg-8 widget-margin-bottom-lg">
+						class="am-u-sm-12 am-u-md-12 am-u-lg-6 widget-margin-bottom-lg">
 
 						<div class="widget am-cf widget-body-lg">
 
 							<div class="widget-body  am-fr">
 								<div class="am-scrollable-horizontal ">
-									<table width="100%"
-										class="am-table am-table-compact am-text-nowrap tpl-table-black "
-										id="example-r">
-										<thead>
-											<tr>
-												<th>热门菜品</th>
-												<th>推荐指数</th>
-												<th>客户评价</th>
-												<th>操作</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr class="gradeX">
-												<td>冻豆腐</td>
-												<td>5颗星</td>
-												<td>非常满意</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															编辑
-														</a> <a href="javascript:;"
-															class="tpl-table-black-operation-del"> <i
-															class="am-icon-trash"></i> 删除
-														</a>
-													</div>
-												</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>冻豆腐</td>
-												<td>5颗星</td>
-												<td>非常满意</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															编辑
-														</a> <a href="javascript:;"
-															class="tpl-table-black-operation-del"> <i
-															class="am-icon-trash"></i> 删除
-														</a>
-													</div>
-												</td>
-											</tr>
-											<tr class="gradeX">
-												<td>冻豆腐</td>
-												<td>5颗星</td>
-												<td>非常满意</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															编辑
-														</a> <a href="javascript:;"
-															class="tpl-table-black-operation-del"> <i
-															class="am-icon-trash"></i> 删除
-														</a>
-													</div>
-												</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>冻豆腐</td>
-												<td>5颗星</td>
-												<td>非常满意</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															编辑
-														</a> <a href="javascript:;"
-															class="tpl-table-black-operation-del"> <i
-															class="am-icon-trash"></i> 删除
-														</a>
-													</div>
-												</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>冻豆腐</td>
-												<td>5颗星</td>
-												<td>非常满意</td>
-												<td>
-													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
-															编辑
-														</a> <a href="javascript:;"
-															class="tpl-table-black-operation-del"> <i
-															class="am-icon-trash"></i> 删除
-														</a>
-													</div>
-												</td>
-											</tr>
-
-
-											<!-- more data -->
-										</tbody>
-									</table>
+									<video src="https://outin-f41c28f1b0dc11e89f4700163e1c955c.oss-cn-shanghai.aliyuncs.com/4f267abdd4c744fa86db7701c9ed678c/1849d8c1eb584552bc6fb2d7b6912023-74ff1929f4d2520f6bf83d87cef973d3-ld.mp4?Expires=1539778927&OSSAccessKeyId=LTAInFumgYEtNMvC&Signature=uk11fXMZvaAN36Gj3F0QxK5l2os%3D" width=100% height=300% loop="loop" autoplay="autoplay">
+	 								</video>
 								</div>
 							</div>
 						</div>
@@ -588,21 +430,158 @@
 	<script src="<%=basePath%>assets/js/amazeui.min.js"></script>
 	<script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
 	<script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
+	<script src="<%=basePath%>assets/js/echarts.min.js"></script>
 	<script src="<%=basePath%>assets/js/app.js"></script>
-
-	<script>
-		$(function() {
-			var editBox = $('#calendar-edit-box');
-			//var title = $("#title");
-			$("#set").click(function() {
-				//$('.calendar-edit-box-title').val(title)
-				//  弹出框
-				editBox.modal();
+	
+	<script type="text/javascript">
+		// 基于准备好的dom，初始化echarts实例
+	    var myChart = echarts.init(document.getElementById('main'));
+	    // 指定图表的配置项和数据
+	    myChart.setOption (
+		{
+			title:{
+				text: '好辣火锅门店五天收支情况',
+				left: 'center'
+			},
+		    tooltip : {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:['收入','支出'],
+		        left: 'right',
+		        top: 'top'
+		    },
+		    calculable: true,
+		    xAxis : [
+		        {
+		        	boundaryGap:false,
+		        	data:[]
+		        }
+		    ],
+		    yAxis : {},
+		    series : [
+		        {
+		            name:'收入',
+		            type: 'line',
+		            itemStyle:{
+		            	normal:{
+		            		color: 'blue',
+		            		lineStyle:{
+		            			color: 'blue'
+		            		}
+		        		}
+		        	},
+		            data:[]
+		        },
+		        {
+		            name:'支出',
+		            type: 'line',
+		            itemStyle:{
+		            	normal:{
+		            		color: 'red',
+		            		lineStyle:{
+		            			color: 'red'
+		            		}
+		        		}
+		        	},
+		            data:[]
+		        }
+		    ]
+		}); 
+		//设置定时器加载数据
+		myChart.showLoading({text:'数据正在加载中...'});
+		
+		setTimeout(function() {
+			$.ajax({
+				url:"<%=basePath%>finance/echarts.do",
+				dataType:"json",
+				success:function(jsonData){
+					myChart.setOption({
+						xAxis:{
+							data:jsonData.tList
+						},
+						series:[{
+							name:'收入',
+							data:jsonData.iList
+						},
+						{
+							name:'支出',
+							data:jsonData.eList
+						}
+						]
+					});
+					myChart.hideLoading();
+				}
 			});
-
-		});
+		},1000);
+		
+		
+		//饼图
+		var tjChart = echarts.init(document.getElementById("tuijian"));
+     	
+		tjChart.setOption (
+		{
+			title:{
+				text:'菜品推荐（TOP5）',
+				left:'center'
+			},
+     		tooltip: {
+     			trigger: 'item',
+     			formatter: "{a} <br/>{b} : {c} ({d}%)"
+     		},
+     		legend: {
+	            orient : 'vertical',
+	            x : 'left',
+	            data:[]
+	        },
+     		calculable: true,
+     		series: [
+     			{
+     				name: '菜品名称',
+     				type: 'pie',
+     				radius: '55%',
+     				center: ['50%','50%'],
+     				data:[].sort(function (a, b) { return a.value - b.value; }),
+					animationType: 'scale',
+					animationEasing: 'elasticOut',
+					animationDelay: function(idx) {
+						return Math.random() * 100;
+					}
+     			}
+     		]
+   		});
+     	
+		tjChart.showLoading({text:'数据正在加载中...'});
+		
+		setTimeout(function() {
+			$.ajax({
+				url:"<%=basePath%>detail/getTotal.do",
+				dataType:"json",
+				cache: false,
+				success:function(jsonData1){
+					var nums = [];
+					var names = [];
+					$.each(jsonData1,function(key,values){ //此处我返回的是list<String,map<String,String>>循环map
+	                      names.push(values.rname);
+	                      var obj = new Object();
+	                      obj.name = values.rname;
+	                      obj.value = values.totapno;
+	                      nums.push(obj);
+	                   });
+					tjChart.setOption({
+						legend: {
+							data: names
+						},
+						series:{
+							name:'菜品名称',
+							data:nums
+						}
+					});
+					tjChart.hideLoading();
+				}
+			});
+		},1000);
 	</script>
-
 </body>
 
 </html>

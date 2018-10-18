@@ -7,6 +7,7 @@ public class Detail {
 	private Integer rprice;
 	private Integer rtotal;
 	private Integer oid;
+	private Integer totapno;
 	public Integer getId() {
 		return id;
 	}
@@ -43,9 +44,16 @@ public class Detail {
 	public void setOid(Integer oid) {
 		this.oid = oid;
 	}
+	public Integer getTotapno() {
+		return totapno;
+	}
+	public void setTotapno(Integer totapno) {
+		this.totapno = totapno;
+	}
 	@Override
 	public String toString() {
 		return "Detail [id=" + id + ", rname=" + rname + ", rno=" + rno + ", rprice=" + rprice + ", rtotal=" + rtotal
-				+ ", oid=" + oid + "]";
+				+ ", oid=" + oid + ", totapno=" + totapno + "]";
 	}
+	
 }

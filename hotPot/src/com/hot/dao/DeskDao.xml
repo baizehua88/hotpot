@@ -7,6 +7,7 @@
 	<update id="updateDeskState">
 		UPDATE hp_desk SET dstate='正在使用' WHERE did = #{did}
 	</update>
+<<<<<<< HEAD
 	
 	<insert id="addFrontService" parameterType="Desk">
 		INSERT INTO hp_desk(dname,dcount,dstate)
@@ -32,4 +33,6 @@
 		dstate=#{dstate}
 	</select>
 	
+=======
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 </mapper>

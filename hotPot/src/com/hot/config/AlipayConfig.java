@@ -27,10 +27,16 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAshA6EwrDc1dwlcHObSg6M7bSG4T9gHxs7/7gi4vcH/a05V8yJZcESnhgAbffHaqEolF8UyYX/Ym/qaLWtG4xqypGJfeZ42KhhfKo7eDGYZKed/ELLbW28JRlg6+LhYCHmG3RrBxhJ4nciMeaz0iixkoMxfxyrVxBSaEHQ796w1EfGZFb9QdRl75WCVYs3jOD1gQIOo67xyGSektlXaO8ODr1pEVruUXponjKMm7EjDQlKVk6KV6K9Htq7mqIU9BlYdcmtJU/x1sTYgd/hfEtNcKF44TiZ+YbGy+k9egT2H9thLEgZIFzTca10qIVNZ/Bx9AVOr1mvFZ40WT0JK3NQwIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://i4ct75.natappfree.cc/hotPot/order/zhiFu.do";
 
+<<<<<<< HEAD
+	public static String notify_url = "http://33j2eq.natappfree.cc/hotPot/order/zhiFu.do";
+=======
+	public static String notify_url = "http://9aw2bc.natappfree.cc/hotPot/order/zhiFu.do";
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
+
+    
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "http://i4ct75.natappfree.cc/hotPot/order/getOrder.do";
+	public static String return_url = "http://localhost:8080/hotPot/order/getOrder.do";
 
 	// 签名方式
 	public static String sign_type = "RSA2";

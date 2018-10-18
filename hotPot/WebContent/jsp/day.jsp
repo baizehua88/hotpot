@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -244,16 +245,16 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/orderList.jsp"> <span
+							href="<%=basePath%>order/orderList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/day.jsp" class="active"> <span
+							href="<%=basePath%>finance/financeList.do" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 日结算
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/sum.jsp"> <span
+							href="<%=basePath%>finance/sumFinanceList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 总结算
 						</a></li>
 					</ul></li>
@@ -319,49 +320,16 @@
 											</tr>
 										</thead>
 										<tbody>
+										<c:forEach var="finance" items="${financeList}">
 											<tr class="gradeX">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
+												<td>${finance.ftime}</td>
+												<td>${finance.fincome}</td>
+												<td>${finance.fexpend}</td>
+												<td>${finance.fprofit}</td>
+												<td>${finance.fbalance}</td>
 											</tr>
-											<tr class="even gradeC">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
-											<tr class="gradeX">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
-											<tr class="even gradeC">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
-
-											<tr class="even gradeC">
-												<td>2018-9-29</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-												<td>100</td>
-											</tr>
+										</c:forEach>
+											
 											<!-- more data -->
 										</tbody>
 									</table>

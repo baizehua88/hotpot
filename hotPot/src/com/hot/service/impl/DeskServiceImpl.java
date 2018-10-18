@@ -27,6 +27,7 @@ public class DeskServiceImpl implements DeskService {
 	public int updateDeskState(int did) {
 		// TODO Auto-generated method stub
 		return deskDao.updateDeskState(did);
+<<<<<<< HEAD
 	}
 
 	@Override
@@ -65,4 +66,7 @@ public class DeskServiceImpl implements DeskService {
 		return false;
 	}
 
+=======
+	}	
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 }

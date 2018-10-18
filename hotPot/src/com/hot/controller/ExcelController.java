@@ -82,17 +82,29 @@ public class ExcelController {
 		int row = 0;
         List<Recipe> recipes = new ArrayList<Recipe>();
         recipes = jsonMap(request);
+<<<<<<< HEAD
         double fexpend = 0; 
+=======
+        double fexpend = 0; 
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
         for(int i=0; i < recipes.size(); i++){ 
 	        Recipe re = recipes.get(i);
 	        row = recipeService.addStock(re);
 	        fexpend += re.getRbid() * re.getStock();
 	        row++;
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
         } 
         System.out.println(fexpend);
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
         if (row > 0) {
         	Finance finance = new Finance();
         	finance.setFtime(getTime1());

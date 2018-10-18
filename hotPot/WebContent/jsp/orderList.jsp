@@ -245,16 +245,16 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/orderList.jsp" class="active"> <span
+							href="<%=basePath%>order/orderList.do" class="active"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/day.jsp"> <span
+							href="<%=basePath%>finance/financeList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 日结算
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/sum.jsp"> <span
+							href="<%=basePath%>finance/sumFinanceList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 总结算
 						</a></li>
 					</ul></li>
@@ -306,50 +306,15 @@
 						<div class="widget am-cf">
 							<div class="widget-head am-cf">
 								<div class="widget-title  am-cf">订单列表</div>
-
-
 							</div>
 							<div class="widget-body  am-fr">
-
-								<div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
-									<div class="am-form-group">
-										<div class="am-btn-toolbar">
-											<div class="am-btn-group am-btn-group-xs">
-												<button type="button"
-													class="am-btn am-btn-default am-btn-success">
-													<span class="am-icon-plus"></span> 新增
-												</button>
-												<button type="button"
-													class="am-btn am-btn-default am-btn-danger">
-													<span class="am-icon-trash-o"></span> 删除
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
-									<div class="am-form-group tpl-table-list-select">
-									</div>
-								</div>
-								<div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
-									<div
-										class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-										<input type="text" class="am-form-field " value="状态"> <span
-											class="am-input-group-btn">
-											<button
-												class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
-												type="button"></button>
-										</span>
-									</div>
-								</div>
-
 								<div class="am-u-sm-12">
 									<table width="100%"
 										class="am-table am-table-compact am-table-striped tpl-table-black "
 										id="example-r">
 										<thead>
 											<tr>
-												<th>ID</th>
+												<th>订单ID</th>
 												<th>时间</th>
 												<th>餐桌</th>
 												<th>金额</th>
@@ -367,7 +332,7 @@
 												<td>${order.ostate}</td>
 												<td>
 													<div class="tpl-table-black-operation">
-														<a href="javascript:;"> <i class="am-icon-pencil"></i>
+														<a href="javascript: void(0);" onclick="GetDetail(${order.oid})"> <i class="am-icon-pencil"></i>
 															查看详情
 														</a> 
 													</div>
@@ -400,11 +365,92 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 查看订单弹出层 -->
+
+	<div class="am-modal am-modal-no-btn" id="calendar-edit-box1"
+		style="width: 100%; margin: auto;">
+		<div class="am-modal-dialog tpl-model-dialog" style="width: 55%;">
+			<div class="am-modal-hd">
+				<a href="javascript: void(0)"
+					class="am-close edit-box-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd tpl-am-model-bd am-cf">
+
+				<form class="am-form tpl-form-border-form" 
+				action="javascript: void(0);" method="post" enctype="multipart/form-data">			
+					<div >
+						<font style="float:left;font-size: 20px;">桌号</font>	
+						<div style="float: left; width: 20px; margin-left: 15px;">
+							<input type=text name="did" id="did">
+							<input type="hidden" id="oid" >
+						</div>
+					</div>
+					<div style="margin-top: 60px;">
+					<font style="text-align:center;font-size: 30px;">订单详情</font>
+					</div>
+					<div class="am-u-sm-12">
+						<table width="100%" id="table_details1"
+							class="am-table am-table-compact am-table-striped tpl-table-black ">
+							<thead>
+								<tr >
+									<th style="text-align: center;">名称</th>
+									<th style="text-align: center;">单价</th>
+									<th style="text-align: center;">数量</th>
+									<th style="text-align: center;">小计</th>
+								</tr>
+							</thead>
+							<tbody id="detail">
+																
+							</tbody>
+						</table>				
+					</div>	
+				</form>
+			</div>
+		</div>
+	</div>
+	
 	<script src="<%=basePath%>assets/js/amazeui.min.js"></script>
 	<script src="<%=basePath%>assets/js/amazeui.datatables.min.js"></script>
 	<script src="<%=basePath%>assets/js/dataTables.responsive.min.js"></script>
 	<script src="<%=basePath%>assets/js/app.js"></script>
-
+	<script type="text/javascript">
+		var editBox1 = $('#calendar-edit-box1');
+		
+		//查看订单
+		function GetDetail(data){
+			$.ajax({
+				type: "post",
+				url : "<%=basePath%>detail/getDetailByOid.do",
+				dataType: "json",
+				cache: true,
+				data:{'oid':data},
+				success: function (data) {
+					var t1 = document.getElementById("table_details1");
+					var rowNum = t1.rows.length;
+					var i;
+					if(rowNum>1){
+						for(i=1;i<rowNum;i++){
+							t1.deleteRow(i);
+							rowNum = rowNum - 1;
+							i = i - 1;
+						}
+					}
+					
+					$.each(data,function(key,values){
+						$("#detail").append(
+							"<tr class='gradeX'>"
+	                       	+"<td>"+values.rname+"</td>"
+	                       	+"<td>"+values.rtotal+"</td>"
+	                       	+"<td>"+values.rno+"</td>"
+	                       	+"<td>"+values.rprice+"</td></tr>"
+	                      	);
+					});
+					editBox1.modal();
+				}						
+		   }); 				  
+		}
+	</script>
 </body>
 
 </html>

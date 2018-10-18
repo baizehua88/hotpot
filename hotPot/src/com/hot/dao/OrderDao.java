@@ -16,7 +16,11 @@ public interface OrderDao {
 	
 	public int zhiFu(Order order);
 	
+<<<<<<< HEAD
 	public Order getOne(Integer oid);
+=======
+	public Order getOne(Integer oid);
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	
 	public int upDesk(Desk desk);
 	

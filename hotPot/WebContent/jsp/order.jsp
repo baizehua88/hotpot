@@ -245,16 +245,16 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/orderList.jsp"> <span
+							href="<%=basePath%>order/orderList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/day.jsp"> <span
+							href="<%=basePath%>finance/financeList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 日结算
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/sum.jsp"> <span
+							href="<%=basePath%>finance/sumFinanceList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 总结算
 						</a></li>
 					</ul></li>
@@ -315,6 +315,7 @@
 													class="am-btn am-btn-default am-btn-success" onclick="getExcel();">
 													 生成入库单（选中行数据）
 												</button>
+												<input type="hidden" id="total" value="${totalre }"/>
 											</div>
 										</div>
 									</div>
@@ -444,15 +445,17 @@
 		function getInt() {
 			var k;
 			var att= {};    //创建一个空的json
-			var rname,stock;
+			var rname,rbid,stock;
 			var Array = [];
 			$("#mytr").each(function(){
 				for(k=1;k<9;k++){
 					if($("#check"+k).prop('checked')){
 						rname = document.getElementById('rname'+k).innerText;
+						rbid = document.getElementById('rbid'+k).innerText;
 						stock = $('#num'+k).val();
 						att = {
 								'rname':rname,
+								'rbid':rbid,
 								'stock':stock,
 							};
 						Array.push(att);
@@ -469,8 +472,9 @@
 				//dataType: "json",
 				success: function(msg) {
 					if (msg == "OK") {
-						window.location.reload();
 						alert("入库成功！");
+						window.location.reload();
+						
 					}else {
 						alert("入库失败！");
 					}

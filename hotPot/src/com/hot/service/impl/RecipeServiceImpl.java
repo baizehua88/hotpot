@@ -53,6 +53,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public boolean delRecipe(int id) {
 		// TODO Auto-generated method stub
 		if (recipeDao.delRecipe(id) > 0) {
@@ -77,5 +78,10 @@ public class RecipeServiceImpl implements RecipeService {
 	public List<Staff> searchByState(String rstate) {
 		// TODO Auto-generated method stub
 		return recipeDao.searchByState(rstate);
+=======
+	public List<Recipe> getAllre() {
+		// TODO Auto-generated method stub
+		return recipeDao.getAllre();
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	}
 }

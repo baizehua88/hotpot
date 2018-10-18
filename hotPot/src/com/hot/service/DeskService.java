@@ -8,6 +8,7 @@ import com.hot.model.Staff;
 public interface DeskService {
 
 	public List<Desk> getDesks();
+	public int updateDeskState(int did);
 
 	public int updateDeskState(int did);
 

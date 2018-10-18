@@ -265,16 +265,16 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/orderList.jsp"> <span
+							href="<%=basePath%>order/orderList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/day.jsp"> <span
+							href="<%=basePath%>finance/financeList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 日结算
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/sum.jsp"> <span
+							href="<%=basePath%>finance/sumFinanceList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 总结算
 						</a></li>
 					</ul></li>
@@ -364,7 +364,7 @@
 												<button type="button" class="am-btn am-btn-danger am-btn-sm">
 													<i class="am-icon-cloud-upload"></i> 添加封面图片
 												</button>
-												<input id="doc-form-file" type="file" name="file"
+												<input id="doc-form-file" type="file" accept="image/*" name="file"
 													multiple="" onchange="show(this)"> <input
 													type="hidden" id="rimage" name="rimage"
 													style="width: 100%; height: 100%">
@@ -398,9 +398,9 @@
 											<span class="tpl-form-line-small-title">Type</span>
 										</label>
 										<div class="am-form-group tpl-table-list-select"
-											style="margin-right: 540px;">
+											style="margin-left: 200px;text-align: left;">
 											<select data-am-selected="{btnSize: 'sm'}" name="rsort">
-												<option value="请选择菜品类别">请选择菜品类别</option>
+												<option value="">请选择菜品类别</option>
 												<option value="荤菜">荤菜</option>
 												<option value="素菜">素菜</option>
 												<option value="蔬菜">蔬菜</option>

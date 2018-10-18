@@ -42,12 +42,24 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public boolean delMember(int id) {
 		// TODO Auto-generated method stub
 		if (customerDao.delMember(id) > 0) {
 			return true;
 		}
 		return false;
+=======
+	public Customer getCintegral(Customer customer) {
+		// TODO Auto-generated method stub
+		return customerDao.getCintegral(customer);
+	}
+
+	@Override
+	public int addCintegral(Customer customer) {
+		// TODO Auto-generated method stub
+		return customerDao.addCintegral(customer);
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	}
 
 }

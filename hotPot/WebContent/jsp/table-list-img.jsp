@@ -38,7 +38,11 @@
 			//获取FileUpload对象
 			var x = document.getElementById("doc-form-file").files;
 			$("#rimage").val(x[0].name);
+<<<<<<< HEAD
 			document.getElementById('image').src = "<%=basePath%>assets/img/"+document.getElementById('rimage').value;
+=======
+			document.getElementById('image').src = "<%=basePath %>assets/img/"+document.getElementById('rimage').value;
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 		})
 		
 	});
@@ -213,7 +217,11 @@
 				</div>
 			</div>
 
+<<<<<<< HEAD
 			<!-- 菜单 -->
+=======
+            <!-- 菜单 -->
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 			<ul class="sidebar-nav">
 				<li class="sidebar-nav-link"><a
 					href="<%=basePath%>jsp/index.jsp"> <i
@@ -267,16 +275,16 @@
 				</a>
 					<ul class="sidebar-nav sidebar-nav-sub">
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/orderList.jsp"> <span
+							href="<%=basePath%>order/orderList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 订单列表
 						</a></li>
 
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/day.jsp"> <span
+							href="<%=basePath%>finance/financeList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 日结算
 						</a></li>
 						<li class="sidebar-nav-link"><a
-							href="<%=basePath%>jsp/sum.jsp"> <span
+							href="<%=basePath%>finance/sumFinanceList.do"> <span
 								class="am-icon-angle-right sidebar-nav-link-logo"></span> 总结算
 						</a></li>
 					</ul></li>
@@ -340,6 +348,7 @@
 											</div>
 										</div>
 									</div>
+<<<<<<< HEAD
 									<div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
 										<div class="am-form-group tpl-table-list-select">
 											<span style="margin-right: 136px;">菜品类别</span> <select
@@ -524,6 +533,78 @@
 									onchange="show(this)"> <input type="hidden" id="rimage"
 									name="rimage" value="${recipeById.rimage}"
 									style="width: 100%; height: 100%">
+=======
+									<div class="am-form-group">
+										<label for="user-weibo" class="am-u-sm-3 am-form-label">菜品缩略图
+											<span class="tpl-form-line-small-title"></span>
+										</label>
+										<div class="am-u-sm-9">
+											<div class="am-form-group am-form-file">
+												<div class="tpl-form-file-img" style="vertical-align: left;text-align: left;">
+													<img src="<%=basePath %>assets/img/${recipeById.rimage}" id="image" alt="" style="width: 250px;height: 200px;">
+												</div>
+												<button type="button" class="am-btn am-btn-danger am-btn-sm" style="float: left;">
+													<i class="am-icon-cloud-upload"></i> 更换菜品图片
+												</button>
+												<input id="doc-form-file" type="file" name="file" accept="image/*" multiple="">
+												<input type="hidden" id="rimage" name="rimage" value="${recipeById.rimage}" style="width: 100%;height: 100%" >
+											</div>
+
+										</div>
+									</div>
+									<div class="am-form-group">
+										<label for="user-name" class="am-u-sm-3 am-form-label">进价
+											<span class="tpl-form-line-small-title"></span>
+										</label>
+										<div class="am-u-sm-9">
+											<input type="text" class="tpl-form-input" id="rbid" name="rbid" value="${recipeById.rbid}">
+										</div>
+									</div>
+									
+									<div class="am-form-group">
+										<label for="user-name" class="am-u-sm-3 am-form-label">售价
+											<span class="tpl-form-line-small-title"></span>
+										</label>
+										<div class="am-u-sm-9">
+											<input type="text" class="tpl-form-input" id="rprice" name="rprice" value="${recipeById.rprice}">
+										</div>
+									</div>
+									
+									<div class="am-form-group">
+										<label for="user-name" class="am-u-sm-3 am-form-label">类别
+											<span class="tpl-form-line-small-title"></span>
+										</label>
+										<div class="am-u-sm-9">
+											<input type="text" class="tpl-form-input" id="rsort" name="rsort" value="${recipeById.rsort}">
+										</div>
+									</div>
+									
+									<div class="am-form-group">
+										<label for="user-name" class="am-u-sm-3 am-form-label">库存
+											<span class="tpl-form-line-small-title"></span>
+										</label>
+										<div class="am-u-sm-9">
+											<input type="text" class="tpl-form-input" id="rstock" name="rstock" value="${recipeById.rstock}">
+										</div>
+									</div>
+									
+									<div class="am-form-group" hidden>
+										<label for="user-name" class="am-u-sm-3 am-form-label">热销
+											<span class="tpl-form-line-small-title"></span>
+										</label>
+										<div class="am-u-sm-9">
+										<input type="text" class="tpl-form-input" id="rstate" name="rstate" value="${recipeById.rstate}">										
+										</div>
+									</div>
+
+									<div class="am-form-group">
+										<div class="am-u-sm-9 am-u-sm-push-3">
+											<button type="submit"
+												class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+										</div>
+									</div>
+								</form>
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 							</div>
 
 						</div>
@@ -587,6 +668,7 @@
 				</form>
 			</div>
 		</div>
+<<<<<<< HEAD
 	</div>
 
 	<script src="<%=basePath%>assets/js/amazeui.min.js"></script>
@@ -601,11 +683,16 @@
 		});
 
 	}); */
+=======
+    
+    <script src="<%=basePath%>assets/js/amazeui.min.js"></script>
+    <script src="<%=basePath%>assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-1.7.2.js"></script>
+    <script type="text/javascript">
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 	var editBox = $('#calendar-edit-box');
 	function GetRecipeId(_this){
 		//  弹出框
-		//$('#rid').val(_this.id);
-		alert(_this.id);
 		$.post("<%=basePath%>recipe/getRecipeById.do",{
 			rid : _this.id
 			},

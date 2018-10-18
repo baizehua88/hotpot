@@ -18,6 +18,7 @@ public interface RecipeService {
 	public int updateRecipe(Recipe recipe);
 
 	public int addStock(Recipe recipe);
+<<<<<<< HEAD
 
 	public boolean delRecipe(int id);
 
@@ -26,4 +27,8 @@ public interface RecipeService {
 	public List<Staff> searchBySort(String rsort);
 
 	public List<Staff> searchByState(String rstate);
+=======
+	
+	public List<Recipe> getAllre();
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 }

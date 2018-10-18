@@ -37,8 +37,12 @@ public class StaffController {
 			mv.setViewName("index");
 			session.setAttribute("staff", staff2);
 			session.setMaxInactiveInterval(-1);
+<<<<<<< HEAD
 		} else {
 
+=======
+		}else {
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 			mv.setViewName("redirect:/jsp/login.jsp");
 		}
 		return mv;
@@ -48,7 +52,10 @@ public class StaffController {
 	public ModelAndView staffList() {
 		ModelAndView mv = new ModelAndView();
 		List<Staff> staffList = staffService.getStaff();
+<<<<<<< HEAD
 		// System.out.println(staffList);
+=======
+>>>>>>> branch 'master' of https://github.com/baizehua88/hotpot.git
 		mv.addObject("staffList", staffList);
 		mv.setViewName("employees");
 		return mv;
