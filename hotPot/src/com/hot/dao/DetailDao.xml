@@ -8,4 +8,10 @@
 	<select id="getDetailByOid" resultType="Detail">
 		SELECT * FROM hp_detail WHERE oid=#{oid};
 	</select>
+	<select id="getTotal" resultType="Detail">
+		SELECT rname,SUM(rno) AS totapno FROM hp_detail GROUP BY rname ORDER BY SUM(rno) DESC LIMIT 5
+	</select>
+	<update id="reduceStock" parameterType="Recipe">
+		UPDATE hp_recipe SET rstock = rstock-#{stock} WHERE rname=#{rname}
+	</update>
 </mapper>

@@ -2,6 +2,7 @@ package com.hot.dao;
 
 import java.util.List;
 
+import com.hot.model.Desk;
 import com.hot.model.Order;
 
 public interface OrderDao {
@@ -16,4 +17,8 @@ public interface OrderDao {
 	public int zhiFu(Order order);
 	
 	public Order getOne(Integer oid);
+	
+	public int upDesk(Desk desk);
+	
+	public Order selOrder(Order order);
 }

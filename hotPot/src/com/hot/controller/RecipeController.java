@@ -2,6 +2,7 @@ package com.hot.controller;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -75,6 +76,16 @@ public class RecipeController {
 		return mv;
 	}
 
+	
+	@RequestMapping("/orderRecipe.do")
+	@ResponseBody
+	public List<Recipe> recipeList(){
+		
+		ModelAndView mv = new ModelAndView();
+		List<Recipe> recipeList = recipeService.getAllre();
+		return recipeList;		
+	}
+	
 	@RequestMapping("/recipeListorder.do")
 	public ModelAndView recipeListorder(HttpServletRequest request, HttpSession session, Recipe recipe) {
 
@@ -108,6 +119,13 @@ public class RecipeController {
 		ModelAndView mv = new ModelAndView();
 		List<Recipe> recipeList = recipeService.getRecipes(recipe);
 		// System.out.println(recipeList);
+		
+		if (page <= total/DingZhi.rows) {
+			mv.addObject("totalre", DingZhi.rows);
+		}else {
+			mv.addObject("totalre",total%DingZhi.rows);
+		}
+		
 		mv.addObject("recipeList", recipeList);
 		mv.addObject("pagelist", pageArr);
 		mv.addObject("page", page);
@@ -163,6 +181,7 @@ public class RecipeController {
 		}
 		recipe.setRimage(file.getOriginalFilename());
 		// System.out.println(recipe.getRimage());
+		recipe.setRimage(file.getOriginalFilename());   		
 		recipeService.addRecipe(recipe);
 		mv.setViewName("redirect:/recipe/recipeList.do");
 		return mv;
